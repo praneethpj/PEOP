@@ -3,13 +3,15 @@ version: 0.2
 phases:
   install:
     runtime-versions:
-      java: corretto11
+      java: corretto8
   build:
     commands:
-      - ./gradlew bootJar
+      - echo Build started on `date`
+      - mvn test
   post_build:
     commands:
       - echo Build completed
+      - mvn package
 artifacts:
   files:
     - build/libs/*.jar
