@@ -5,6 +5,9 @@ import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router';
 import ProductList from './ProductList'
 import {selectUser} from '../../features/userActivities'
+ 
+import Loading from './Loading';
+import  { loadingVisibility } from '../../features/configurationsActivity';
 const Products =() =>{
 
     const [data, setData] = useState([]);
@@ -25,15 +28,20 @@ const Products =() =>{
     //     console.log(error);
     //     });
     //     };
+
      useEffect(async () => {
         //getAllData();
+       try{
+        dispatch(loadingVisibility({visibility:"true"}));
        
-      
         let result=await fetch("http://localhost:5000/api/professional/");
         
         result = await result.json();
         setData(result);
-       
+        dispatch(loadingVisibility({visibility:false}));
+       }catch(e){
+        console.log(e);
+       }
      }, [])
      //console.warn("resilt ",data);
  
@@ -48,6 +56,7 @@ const Products =() =>{
             
                  
                 <main className="col-md-9">
+                       <Loading />
                <header className="border-bottom mb-4 pb-3">
                        <div className="form-inline">
                            <span className="mr-md-auto">32 Items found </span>

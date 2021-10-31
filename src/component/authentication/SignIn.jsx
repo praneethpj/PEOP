@@ -4,8 +4,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
 import styled from 'styled-components';
 import {signedUser } from '../../features/authenticationActivities';
+import { loadingVisibility } from '../../features/configurationsActivity';
  
 import Headers from '../Home-Page/Header';
+import Loading from '../Home-Page/Loading';
+import ReactNotification from 'react-notifications-component'
+import 'react-notifications-component/dist/theme.css'
+import { store } from 'react-notifications-component';
 
 export default function SignIn() {
 
@@ -19,11 +24,26 @@ export default function SignIn() {
 
     const  dispatch = useDispatch();
 
-    if(selectUser!=null){
+    if(localStorage.getItem("token")!=null && selectUser!=null){
         history.push(`/dashboard`);
     }
     
 
+    const addNotify=(t,e)=> {
+        store.addNotification({
+            title: t,
+            message: e,
+            type: "success",
+            insert: "top",
+            container: "top-right",
+            animationIn: ["animate__animated", "animate__fadeIn"],
+            animationOut: ["animate__animated", "animate__fadeOut"],
+            dismiss: {
+              duration: 5000,
+              onScreen: true
+            }
+          });
+      }
 //     const Layout=styled.div`
 //       margin: auto;
 //   width: 80%;
@@ -40,7 +60,7 @@ useEffect(async () => {
 
  const handleLoginSubmit=(e)=>{
      e.preventDefault();
-
+     dispatch(loadingVisibility({visibility:"true"}));
      const loginData={
          "usernameOrEmail":login.username,
          "password":login.password
@@ -63,11 +83,12 @@ useEffect(async () => {
              // console.log(error.response.status);
              // console.log(error.response.headers);
          });
+         dispatch(loadingVisibility({visibility:"false"}));
  }
 
     const handleSubmit=(e)=>{
        e.preventDefault();
-
+       dispatch(loadingVisibility({visibility:"true"}));
 
  
        const signUp={
@@ -82,9 +103,9 @@ useEffect(async () => {
         "headers": {
           'Content-Type': 'application/json',
         }})
-        .then(response => console.log(response))
+        .then(response => {console.log(response);addNotify("Success",JSON.stringify(response.data.message));})
         .catch(error => {
-     
+             addNotify("Error",JSON.stringify(error.response.data.message));
             console.log(error.response.data);
             // console.log(error.response.status);
             // console.log(error.response.headers);
@@ -98,7 +119,7 @@ useEffect(async () => {
         // }));
 
         
-
+        dispatch(loadingVisibility({visibility:"false"}));
         // console.log(selectUser);
     }
 
@@ -107,6 +128,8 @@ useEffect(async () => {
     return (
         <>
         <Headers/>
+        <ReactNotification />
+        <Loading />
         <div className="login">
         <div class="d-flex p-2">
         <div className="col-md-8 ">

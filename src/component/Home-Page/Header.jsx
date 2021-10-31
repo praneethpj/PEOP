@@ -1,21 +1,39 @@
 import Button from '@restart/ui/esm/Button';
 import React, { Component } from 'react'
+import { Spinner } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
 import { logout } from '../../features/authenticationActivities';
+import Loading from './Loading';
 
 const Headers = ()=> {
     const history = useHistory();
     const selectUser=useSelector((state)=>state.authActivity.user)
-    //console.log("user "+selectUser);
+ 
     const  dispatch = useDispatch();
   const handleLogout=()=>{
         dispatch(logout({}));
-    
+
+
+        
+  }
+
+
+  const handleLogin=()=>{
+    history.push(`/signin`)
+}
+  const handleDashboard=()=>{
+    history.push(`/dashboard`)
   }
 
         return (
             <div>
+               
+                <div class="clearfix">
+  <div   role="status">
+ 
+  </div>
+</div>
                  <header className="section-header">
                <section className="header-main border-bottom">
                    <div className="container">
@@ -47,15 +65,16 @@ const Headers = ()=> {
                                <a href="#" className="icon icon-sm rounded-circle border"><i className="fa fa-user"></i></a>
                                <div className="text">
                                    {/* <span className="text-muted">Welcome!</span> */}
-                                   <div> 
-                                       {
-                                          (selectUser!=null)?
-                                          <div>Hi <a href="#"  onClick={()=>{ history.push(`/dashboard`)}}>{selectUser.user}</a> 
+                                     
+                                       {   
+                                          ((localStorage.getItem("token")!=null) && (selectUser!=null ))?
+                                      
+                                          <div>Hi <a href="#"  onClick={()=>{ handleDashboard()}}>{selectUser.user}</a> 
                                           <Button className="btn btn-danger" onClick={()=>{handleLogout()}}>Log out</Button>
-                                          </div>:<a href="#"  onClick={()=>{ history.push(`/signin`)}}>Sign in</a>  
+                                          </div>:<Button  onClick={()=>{ handleLogin()}}>Sign in</Button>  
                                        
                                     }
-                                   </div>
+                                   
                                </div>
                            </div>
                        </div> 

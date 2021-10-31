@@ -15,7 +15,10 @@ import PaymentPay from './component/Profiles/PaymentPay';
 import Room from './component/VideoCall/Containers/RoomPage'
 import { VideoCallMainPage } from './component/VideoCall/Containers/VideoCallMainPage';
 import SignIn from './component/authentication/SignIn';
-import Dashboard from './component/dashboard/Dashboard';
+import Dashboard from './component/dashboard/Appinments';
+import DashboardProfile from './component/dashboard/DashboardProfile';
+import DashboardHistory from './component/dashboard/DashboardHistory';
+import ApplyProfession from './component/dashboard/ApplyProfession';
  
 function App() {
   return (
@@ -53,6 +56,15 @@ function App() {
           </Route>
           <Route path="/dashboard">
             <Dashboard/>
+            </Route>
+            <Route path="/profile">
+            <DashboardProfile/>
+            </Route>
+            <Route path="/history">
+            <DashboardHistory/>
+            </Route>
+            <Route path="/applyprofession">
+            <ApplyProfession/>
             </Route>
           <Route path="/r/:room" component={Room} />
 				{/* <Route path="*" component={NotFound} /> */}

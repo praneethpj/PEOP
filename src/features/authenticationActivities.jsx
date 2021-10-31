@@ -13,6 +13,7 @@ export const authenticationActivities=createSlice({
         },
         logout:(state)=>{
             state.user=null
+            localStorage.setItem("token","");
         }
       
     }

@@ -10,6 +10,9 @@ import Select from 'react-select'
 import PaymentPay from './PaymentPay';
 import moment from 'moment';
 import { useSelector } from 'react-redux';
+import Loading from '../Home-Page/Loading';
+import { useDispatch } from 'react-redux';
+import { loadingVisibility } from '../../features/configurationsActivity';
  
 export default function ProfileView() {
     const [date, setDate] = useState(new Date());
@@ -26,16 +29,17 @@ export default function ProfileView() {
 
     console.log("userid "+selectUser.userid);
 
- 
+    const dispatch = useDispatch();
+
     useEffect(async () => {
         //getAllData();
-       
+        dispatch(loadingVisibility({visibility:"true"}));
       
         let result=await fetch("http://localhost:5000/api/professional/get/"+selectUser.userid);
         
         result = await result.json();
         setData(result);
-     
+        dispatch(loadingVisibility({visibility:"false"}));
      }, [])
 
     const Wrapper = styled.section`
@@ -48,12 +52,13 @@ export default function ProfileView() {
   `;
 
 const paymentBtnHandler=()=>{
+    dispatch(loadingVisibility({visibility:"true"}));
    // alert(id+ " "+time.value);
     let modify=moment(date).format("DD/MM/YYYY")
     setSubmitData({"pid":id,"date":modify,"timeid":time.value,"time":time.label,"uid":data.uid,"name":data.name})
     setSubmit(true);
 
-    
+    dispatch(loadingVisibility({visibility:"false"}));
     // let path = `/payment`; 
     // history.push(path);
 }
@@ -63,6 +68,7 @@ setDate(date);
  
 // console.log(date.getDay());
 try{
+    dispatch(loadingVisibility({visibility:"true"}));
     let time=data.timeSlot.timeSlot[date.getDay()].times;
     
     let dec=time;
@@ -92,6 +98,7 @@ try{
      
        ]);
        setAvtime(true);
+       dispatch(loadingVisibility({visibility:"false"}));
 }catch(v){
     setAvtime(false);
     setOptions({"value":"Not Available","label":"Not Available"})
@@ -120,6 +127,7 @@ const makeCall=()=>{
         <>
         
             <Headers/>
+            <Loading />
             {console.log(data)}
             {!submit? 
           
