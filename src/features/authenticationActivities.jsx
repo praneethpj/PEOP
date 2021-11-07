@@ -8,6 +8,7 @@ export const authenticationActivities=createSlice({
     initialState:{user:initialState},
     reducers:{
 
+        
         signedUser:(state,actions)=>{
             state.user=actions.payload
         },

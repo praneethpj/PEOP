@@ -37,7 +37,9 @@ export default function ApplyProfession() {
     const [thursedayTime, setThursedayTime] = useState([]);
     const [fridayTime, setFridayTime] = useState([]);
     const [saturdayTime, setSaturdayTime] = useState([]);
-    const [sundayTime, setSundayTime] = useState([]);
+   const [sundayTime, setSundayTime] = useState([]);
+   //let sundayTime=new Object();
+   
     let next = false;
     let nextwedneday = false;
 
@@ -122,9 +124,14 @@ export default function ApplyProfession() {
         // currentSelect,setCurrentSelect
         if (selectId == 0) {
             console.log("details " + sundayTime + " " + selecttime + " " + selectday + " " + selectId)
-            sundayTime.push("{time:"+selecttime + "availability:true},");
+            
+            //Object.assign(sundayTime, {"time":selecttime,"availability":true});
+           
+           sundayTime.push(`{"time":"`+selecttime+`"}`);
 
-            // setSundayTime(...sundayTime,selecttime)
+          //sundayTime.set(...sundayTime,"time",selecttime);
+          //Object.assign(sundayTime, {"time": selecttime});
+            // setSundayTime({"time":selecttime,"availability":true})
             // setCurrentSelect(selectId);
 
             if (next === true) {
@@ -156,7 +163,7 @@ export default function ApplyProfession() {
             }
         } else if (selectId == 1) {
             console.log("details " + sundayTime + " " + selecttime + " " + selectday + " " + selectId)
-            mondayTime.push("{time:"+selecttime + "availability:true},");
+            mondayTime.push("{time:"+selecttime + ",availability:true},");
 
             // setSundayTime(...sundayTime,selecttime)
             // setCurrentSelect(selectId);
@@ -426,23 +433,37 @@ export default function ApplyProfession() {
           rv[i] = arr[i];
         return rv;
       }
+
+      function update(obj, key, newVal) {
+        for(var i in obj) {
+            if(typeof obj[i] == 'object') {
+                update(obj[i], key, newVal);
+            } else if(i === key) {
+                obj[i] = newVal;
+            }
+        }
+        return obj;
+    }
     const registernewprofession = (e) => {
         e.preventDefault();
         dispatch(loadingVisibility({visibility: "true"}));
 
-        
-        delete sundayTime.keyname;
+        // var obj = Object.assign(...sundayTime.map(([key, val]) => ({[key]: val})))
+        // console.log(obj);
+        // let sunval = Object.assign(...sundayTime.map(k => ({ [k]: 0 })));
+         console.log(sundayTime);
+   //     let object = {...sundayTime};
         const registerProfession = {
 
             "professionName": details.professionName,
             "description": details.description,
             "chargesperHour": details.chargesperHour,
-            "timeSlot": [{
+            "timeSlot": {
 
-                "timeSlot": [
-                    {
-                        "dayname": "0",
-                        "times": toObject(sundayTime),
+                "timeSlot": 
+                    [{
+                        "dayname": "0",//[JSON.parse(sundayTime[0])]
+                        "times":[JSON.parse(JSON.stringify(sundayTime))],
                         "available": "true"
                     },
                     // {
@@ -473,11 +494,17 @@ export default function ApplyProfession() {
                     //     "available": "true"
                     // }
 
-                ]
-            }]
+                
+                     ] }
         };
+ //sundayTime
+        //var parsedobj =  JSON.parse( JSON.stringify(registerProfession));
+         var level = "registerProfession.timeSlot.timeSlot.times";
+        //console.log("sun "+sundayTime[0]);
+        // console.log("val "+JSON.stringify(update(registerProfession,"times",JSON.parse(sundayTime[0]))));
+//         var obj = JSON.parse(level);
+// obj['times'].push({"time":"10"});
 
-        delete registerProfession.keyname;
 
         axios.post('http://localhost:5000/api/professional/addProfession', registerProfession, {
             "headers": {
@@ -486,9 +513,9 @@ export default function ApplyProfession() {
             }
         }).then(response => {
             console.log(response);
-            addNotify("Success", JSON.stringify(response.data.message));
+          //  addNotify("Success", JSON.stringify(response));
         }).catch(error => {
-            addNotify("Error", JSON.stringify(error.response.data.message));
+           // addNotify("Error", JSON.stringify(error));
             console.log(error.response.data);
             // console.log(error.response.status);
             // console.log(error.response.headers);
