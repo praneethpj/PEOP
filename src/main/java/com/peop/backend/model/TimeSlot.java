@@ -1,5 +1,6 @@
 package com.peop.backend.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import org.hibernate.annotations.NaturalId;
 
 import javax.persistence.*;
@@ -53,6 +54,8 @@ public class TimeSlot extends  DateAudit{
 
     @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     @JoinColumn(name = "wd_id")
+    @JsonFormat(with = JsonFormat.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY)
     private List<WeekDays> timeSlot;
+
 
 }

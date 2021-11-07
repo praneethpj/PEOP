@@ -1,35 +1,25 @@
-package com.peop.backend.model;
+package com.peop.backend.payload.wrapper;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * @author Praneethpj
  */
-@Entity
+
 public class WeekDays {
 
    public WeekDays(){
 
    }
 
-   @Id
-   @GeneratedValue(strategy = GenerationType.IDENTITY)
-   private Long id;
-
 
    private String dayname;
-
-   public Long getId() {
-      return id;
-   }
-
-   public void setId(Long id) {
-      this.id = id;
-   }
 
    public List<TimeFields> getTimes() {
       return times;
@@ -39,10 +29,7 @@ public class WeekDays {
       this.times = times;
    }
 
-   @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-   @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
-   @JoinColumn(name = "tf_id")
-   @JsonFormat(with = JsonFormat.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY)
+
    private List<TimeFields> times;
 
 

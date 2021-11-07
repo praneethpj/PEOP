@@ -10,6 +10,8 @@ import com.peop.backend.security.CurrentUser;
 import com.peop.backend.security.UserPrincipal;
 import com.peop.backend.service.ProfessionService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
@@ -52,7 +54,10 @@ public class ProfessionalController {
         //Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 //        String username="";
 
+        registerProfession.getTimeSlot().getTimeSlot().get(0).getTimes();
+
         ProfessionalProfile professionalProfile=new ProfessionalProfile();
+
 
         professionalProfile.setUserid(currentUser.getId());
         professionalProfile.setName(currentUser.getName());
@@ -65,7 +70,8 @@ public class ProfessionalController {
         professionService.registerNewProfession(professionalProfile);
 
 
-        return ResponseEntity.ok().body(professionalProfile);
+        return new ResponseEntity(new ApiResponse(false, "Register Succesed"),
+                HttpStatus.BAD_REQUEST);
 
 
 
