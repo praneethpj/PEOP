@@ -1,9 +1,8 @@
 package com.peop.backend.repository;
 
 import com.peop.backend.model.TimeFields;
+import com.peop.backend.model.WeekDays;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
@@ -12,10 +11,9 @@ import java.util.Optional;
  * @author Praneethpj
  */
 @Repository
-public interface TimeFieldRepository extends JpaRepository<TimeFields,Long> {
+public interface WeekDaysRepository extends JpaRepository<WeekDays,Long> {
 //    @Query("SELECT 1 FROM timefields where id =:id")
      // findById(@Param("id") Long id);
 
 
-    Optional<TimeFields>  findByIdAndTime(Long id, String time);;
 }

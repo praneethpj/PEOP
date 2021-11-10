@@ -5,12 +5,15 @@ import com.peop.backend.model.TimeFields;
 import com.peop.backend.model.TimeSlot;
 import com.peop.backend.model.WeekDays;
 import com.peop.backend.repository.ProfessionRepository;
+import com.peop.backend.repository.TimeFieldRepository;
 import com.peop.backend.repository.UserRepository;
+import com.peop.backend.repository.WeekDaysRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.sql.Time;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * @author Praneethpj
@@ -28,41 +31,65 @@ public class ProfessionService {
 
     public ProfessionalProfile registerNewProfession(ProfessionalProfile professionalProfile){
 
-        if(professionRepository.existsById(professionalProfile.getUserid())){
+        if(professionRepository.existsByUserid(professionalProfile.getUserid())){
             ProfessionalProfile professionalProfile1=professionRepository.findByUserid(professionalProfile.getUserid());
-            //professionalProfile1.setId(professionalProfile.getId());
+           // professionalProfile1.setId(professionalProfile.getId());
 
+            TimeFieldRepository timeFieldsRepo=null;
+            WeekDaysRepository weekDaysRepository=null;
             professionalProfile1.setProfession_name(professionalProfile.getProfession_name());
             professionalProfile1.setName(professionalProfile.getName());
             professionalProfile1.setChargesperHour(professionalProfile.getChargesperHour());
             professionalProfile1.setDescription(professionalProfile.getDescription());
             professionalProfile1.setActivate(professionalProfile.getActivate());
+            professionalProfile1.setTimeSlot(professionalProfile.getTimeSlot());
+
+
             TimeSlot timeSlot=professionalProfile.getTimeSlot();
             timeSlot.setUserId(professionalProfile.getUserid().intValue());
             timeSlot.setUpdatedAt(professionalProfile.getUpdatedAt());
-           // List<WeekDays> weekDays=professionalProfile1.getTimeSlot().getTimeSlot();
-            WeekDays weekDays1=null;
-            TimeFields timeFields1=null;
-//            for(int i=0;i< weekDays.size();i++)
-//            {
-//                weekDays1=new WeekDays();
-//                weekDays1.setUid(professionalProfile1.getUserid());
-//                weekDays.set(i,weekDays1);
-//
-////                for(int j=0;j<weekDays.get(j).getTimes().size();j++){
-////                    timeFields1.setUid(professionalProfile1.getUserid());
-////                    weekDays.get(i).getTimes().get(j).setUid(professionalProfile1.getUserid());
-////                }
-//
-//          }
+            List<WeekDays> weekDays=professionalProfile1.getTimeSlot().getTimeSlot();
+            //WeekDays weekDays1=null;
+
+
+            for(int i=0;i< weekDays.size();i++)
+            {
+               // weekDays1=weekDays.get(i);
+
+
+                weekDays.get(i).setUid(professionalProfile.getUserid());
+                weekDays.get(i).setTimes(weekDays.get(i).getTimes());
+                weekDays.get(i).setDayname(weekDays.get(i).getDayname());
+                weekDays.get(i).setAvailable(weekDays.get(i).isAvailable());
+
+
+                weekDays.set(i,weekDays.get(i));
+                List <TimeFields> timeFields=weekDays.get(i).getTimes();
+
+
+                if(timeFields!=null)
+                {
+                    for(int j=0;j<timeFields.size();j++)
+                    {
+                       //Optional<TimeFields> t1= timeFieldsRepo.findById(timeFields.get(j).getId());
+
+                      // TimeFields tmp=t1.get();
+
+                      // if(tmp!=null)
+                       //tmp.setUid(professionalProfile1.getUserid());
+
+                         timeFields.get(j).setUid(Long.valueOf(professionalProfile1.getUserid().toString()));
+                    }
 
 
 
 
-//            timeSlot.setTimeSlot(weekDays);
+                }
+
+            }
 
             professionalProfile1.setTimeSlot(timeSlot);
-            professionalProfile1.setCreatedAt(professionalProfile.getCreatedAt());
+            //professionalProfile1.setCreatedAt(professionalProfile.getCreatedAt());
             professionalProfile1.setUpdatedAt(professionalProfile.getUpdatedAt());
 
             return professionRepository.save(professionalProfile1);
@@ -70,32 +97,34 @@ public class ProfessionService {
             TimeSlot timeSlot=professionalProfile.getTimeSlot();
             timeSlot.setUserId(professionalProfile.getUserid().intValue());
             timeSlot.setUpdatedAt(professionalProfile.getUpdatedAt());
-            //List<WeekDays> weekDays=professionalProfile.getTimeSlot().getTimeSlot();
+            List<WeekDays> weekDays=professionalProfile.getTimeSlot().getTimeSlot();
             WeekDays weekDays1=null;
 
-//            for(int i=0;i< weekDays.size();i++)
-//            {
-//                weekDays1=new WeekDays();
-//                weekDays1.setUid(professionalProfile.getUserid());
-//                weekDays1.setTimes(weekDays.get(i).getTimes());
-//                weekDays1.setDayname(weekDays.get(i).getDayname());
-//                weekDays1.setAvailable(weekDays.get(i).isAvailable());
-//
-//
-//                weekDays.set(i,weekDays1);
-//               // List <TimeFields> timeFields=weekDays.get(i).getTimes();
-////               if(timeFields!=null)
-////               {
-////                   for(int j=0;j<timeFields.size();j++)
-////                   {
-////
-////                       timeFields.get(j).setUid(professionalProfile.getUserid());
-////                   }
-////
-////                   weekDays.get(i).setTimes(timeFields);
-////               }
-//
-//            }
+
+            for(int i=0;i< weekDays.size();i++)
+            {
+                weekDays1=new WeekDays();
+                weekDays1.setUid(professionalProfile.getUserid());
+                weekDays1.setTimes(weekDays.get(i).getTimes());
+                weekDays1.setDayname(weekDays.get(i).getDayname());
+                weekDays1.setAvailable(weekDays.get(i).isAvailable());
+
+
+                weekDays.set(i,weekDays1);
+                List <TimeFields> timeFields=weekDays.get(i).getTimes();
+
+               if(timeFields!=null)
+               {
+                   for(int j=0;j<timeFields.size();j++)
+                   {
+
+                       timeFields.get(j).setUid(Long.valueOf(professionalProfile.getUserid().toString()));
+                   }
+
+                   weekDays.get(i).setTimes(timeFields);
+               }
+
+            }
             professionalProfile.setTimeSlot(timeSlot);
             return professionRepository.save(professionalProfile);
         }

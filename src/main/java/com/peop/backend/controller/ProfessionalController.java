@@ -51,7 +51,7 @@ public class ProfessionalController {
     @PreAuthorize("hasRole('USER')")
     public ResponseEntity<?> addProfession(@CurrentUser UserPrincipal currentUser, @Valid @RequestBody RegisterProfession registerProfession){
         System.out.println("USER "+currentUser.getUsername());
-        //Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 //        String username="";
 
         registerProfession.getTimeSlot().getTimeSlot().get(0).getTimes();

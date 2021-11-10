@@ -1,5 +1,7 @@
 package com.peop.backend.model;
 
+import org.springframework.security.core.context.SecurityContextHolder;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
@@ -32,6 +34,7 @@ public class TimeFields {
     private Long id;
 
     @NotBlank
+    //@Column(unique=true)
     private String time;
 
 
@@ -50,6 +53,7 @@ public class TimeFields {
     }
 
     public void setUid(Long uid) {
+
         this.uid = uid;
     }
 
