@@ -164,8 +164,8 @@ export default function ApplyProfession() {
             }
         } else if (selectId == 1) {
             console.log("details " + sundayTime + " " + selecttime + " " + selectday + " " + selectId)
-            mondayTime.push("{time:"+selecttime + ",availability:true},");
-
+            //mondayTime.push("{time:"+selecttime + ",availability:true},");
+            mondayTime.push(`{"time":"`+selecttime+`"}`);
             // setSundayTime(...sundayTime,selecttime)
             // setCurrentSelect(selectId);
 
@@ -198,8 +198,8 @@ export default function ApplyProfession() {
             }
         } else if (selectId == 2) {
             console.log("details " + tuesdayTime + " " + selecttime + " " + selectday + " " + selectId)
-            tuesdayTime.push(selecttime + ",");
-
+            //tuesdayTime.push(selecttime + ",");
+            tuesdayTime.push(`{"time":"`+selecttime+`"}`);
             // setSundayTime(...sundayTime,selecttime)
             // setCurrentSelect(selectId);
 
@@ -235,7 +235,8 @@ export default function ApplyProfession() {
 
         if (selectId == 3) {
 
-            wednsedayTime.push(selecttime + ",");
+            //wednsedayTime.push(selecttime + ",");
+            wednsedayTime.push(`{"time":"`+selecttime+`"}`);
             console.log("details " + wednsedayTime + " " + selecttime + " " + selectday + " " + selectId)
             // setSundayTime(...sundayTime,selecttime)
             // setCurrentSelect(selectId);
@@ -258,8 +259,8 @@ export default function ApplyProfession() {
 
         if (selectId == 4) {
             console.log("details " + sundayTime + " " + selecttime + " " + selectday + " " + selectId)
-            thursedayTime.push(selecttime + ",");
-
+           // thursedayTime.push(selecttime + ",");
+            thursedayTime.push(`{"time":"`+selecttime+`"}`);
             // setSundayTime(...sundayTime,selecttime)
             // setCurrentSelect(selectId);
 
@@ -295,8 +296,8 @@ export default function ApplyProfession() {
 
         if (selectId == 5) {
             console.log("details " + sundayTime + " " + selecttime + " " + selectday + " " + selectId)
-            fridayTime.push(selecttime + ",");
-
+            //fridayTime.push(selecttime + ",");
+            fridayTime.push(`{"time":"`+selecttime+`"}`);
             // setSundayTime(...sundayTime,selecttime)
             // setCurrentSelect(selectId);
 
@@ -331,8 +332,8 @@ export default function ApplyProfession() {
 
         if (selectId == 6) {
             console.log("details " + sundayTime + " " + selecttime + " " + selectday + " " + selectId)
-            saturdayTime.push(selecttime + ",");
-
+           // saturdayTime.push(selecttime + ",");
+           saturdayTime.push(`{"time":"`+selecttime+`"}`);
             // setSundayTime(...sundayTime,selecttime)
             // setCurrentSelect(selectId);
 
