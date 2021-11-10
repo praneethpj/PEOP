@@ -126,7 +126,8 @@ export default function ApplyProfession() {
             console.log("details " + sundayTime + " " + selecttime + " " + selectday + " " + selectId)
             
             //Object.assign(sundayTime, {"time":selecttime,"availability":true});
-           
+       // console.log(JSON.parse('[{"name":"Pizza","price":"10","quantity":"7"}, {"name":"Cerveja","price":"12","quantity":"5"}, {"name":"Hamburguer","price":"10","quantity":"2"}, {"name":"Fraldas","price":"6","quantity":"2"}]'));
+        
            sundayTime.push(`{"time":"`+selecttime+`"}`);
 
           //sundayTime.set(...sundayTime,"time",selecttime);
@@ -450,8 +451,11 @@ export default function ApplyProfession() {
 
         // var obj = Object.assign(...sundayTime.map(([key, val]) => ({[key]: val})))
         // console.log(obj);
-        // let sunval = Object.assign(...sundayTime.map(k => ({ [k]: 0 })));
-         console.log(sundayTime);
+         let sunval = `[`+sundayTime.toString()+`]`;
+       
+       
+        
+       
    //     let object = {...sundayTime};
         const registerProfession = {
 
@@ -460,43 +464,44 @@ export default function ApplyProfession() {
             "chargesperHour": details.chargesperHour,
             "timeSlot": {
 
-                "timeSlot": 
-                    [{
+                "timeSlot": [
+                    {
                         "dayname": "0",//[JSON.parse(sundayTime[0])]
-                        "times":[JSON.parse(JSON.stringify(sundayTime))],
+                        "times":JSON.parse(`[`+sundayTime+`]`),
                         "available": "true"
                     },
-                    // {
-                    //     "dayname": "1",
-                    //     "times": toObject(mondayTime),
-                    //     "available": "true"
-                    // },
-                    // {
-                    //     "dayname": "2",
-                    //     "times": tuesdayTime,
-                    //     "available": "true"
-                    // },
-                    // {
-                    //     "dayname": "3",
-                    //     "times": wednsedayTime,
-                    //     "available": "true"
-                    // }, {
-                    //     "dayname": "4",
-                    //     "times": thursedayTime,
-                    //     "available": "true"
-                    // }, {
-                    //     "dayname": "5",
-                    //     "times": fridayTime,
-                    //     "available": "true"
-                    // }, {
-                    //     "dayname": "6",
-                    //     "times": saturdayTime,
-                    //     "available": "true"
-                    // }
+                    {
+                        "dayname": "1",
+                        "times": JSON.parse(`[`+mondayTime+`]`),
+                        "available": "true"
+                    },
+                    {
+                        "dayname": "2",
+                        "times": JSON.parse(`[`+tuesdayTime+`]`),
+                        "available": "true"
+                    },
+                    {
+                        "dayname": "3",
+                        "times": JSON.parse(`[`+wednsedayTime+`]`),
+                        "available": "true"
+                    }, {
+                        "dayname": "4",
+                        "times": JSON.parse(`[`+thursedayTime+`]`),
+                        "available": "true"
+                    }, {
+                        "dayname": "5",
+                        "times": JSON.parse(`[`+fridayTime+`]`),
+                        "available": "true"
+                    }, {
+                        "dayname": "6",
+                        "times": JSON.parse(`[`+saturdayTime+`]`),
+                        "available": "true"
+                    }
 
                 
-                     ] }
+                ]}
         };
+        console.log(JSON.parse('[{"name":"Pizza","price":"10","quantity":"7"}, {"name":"Cerveja","price":"12","quantity":"5"}, {"name":"Hamburguer","price":"10","quantity":"2"}, {"name":"Fraldas","price":"6","quantity":"2"}]'));
  //sundayTime
         //var parsedobj =  JSON.parse( JSON.stringify(registerProfession));
          var level = "registerProfession.timeSlot.timeSlot.times";
