@@ -11,6 +11,8 @@ import styled from 'styled-components'
 import {InputTags} from 'react-bootstrap-tagsinput'
 import moment from 'moment';
 import Loading from '../Home-Page/Loading';
+import  { useEffect } from "react";
+import ProfileHistory from './ProfileHistory';
 
 export default function ApplyProfession() {
     const [details, setDetails] = useState({professionName: "", description: "", chargesperHour: ""})
@@ -38,6 +40,7 @@ export default function ApplyProfession() {
     const [fridayTime, setFridayTime] = useState([]);
     const [saturdayTime, setSaturdayTime] = useState([]);
    const [sundayTime, setSundayTime] = useState([]);
+   const [profilehistory,setProfilehistory]=useState([]);
    //let sundayTime=new Object();
    
     let next = false;
@@ -47,6 +50,34 @@ export default function ApplyProfession() {
     //      "Paris", "Marseille", "Lille", "Lyon",
 
     // ];
+
+    useEffect(() => {
+        const getProfession = {
+
+            "userid": selectUser.user,
+        
+            
+        
+            };
+
+            console.log(selectUser.user);
+
+        axios.post('http://localhost:5000/api/professional/getProfession', getProfession, {
+            "headers": {
+                'Content-Type': 'application/json',
+                Authorization: 'Bearer ' + localStorage.getItem("token")
+            }
+        }).then(response => {
+            console.log(response.data);
+            setProfilehistory(response.data);
+          //  addNotify("Success", JSON.stringify(response));
+        }).catch(error => {
+           // addNotify("Error", JSON.stringify(error));
+            console.log(error.response);
+            // console.log(error.response.status);
+            // console.log(error.response.headers);
+        });
+    }, [])
 
     const dispatch = useDispatch();
     const changeDay = (e) => {
@@ -551,7 +582,7 @@ export default function ApplyProfession() {
             <Sidebar active="applyprofession"/>
             <>
 
-
+                {profilehistory!=null?<ProfileHistory details={profilehistory}/>:
                 <Centerdiv>
                     <form className="login_form"
                         onSubmit={
@@ -838,6 +869,7 @@ export default function ApplyProfession() {
                         </button>
                     </form>
                 </Centerdiv>
+                }
             </>
         </div>
     )
