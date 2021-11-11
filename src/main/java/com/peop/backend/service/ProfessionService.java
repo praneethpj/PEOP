@@ -28,6 +28,12 @@ public class ProfessionService {
 
 
 
+    public ProfessionalProfile getProfessionProfile(String userid){
+        if(professionRepository.existsByName(userid)){
+            return professionRepository.findByName(userid);
+        }
+        return null;
+    }
 
     public ProfessionalProfile registerNewProfession(ProfessionalProfile professionalProfile){
 

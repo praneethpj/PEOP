@@ -5,6 +5,7 @@ import com.peop.backend.model.TimeSlot;
 import com.peop.backend.model.User;
 import com.peop.backend.payload.ApiResponse;
 import com.peop.backend.payload.RegisterProfession;
+import com.peop.backend.payload.UserDetails;
 import com.peop.backend.repository.ProfessionRepository;
 import com.peop.backend.security.CurrentUser;
 import com.peop.backend.security.UserPrincipal;
@@ -16,7 +17,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -76,4 +76,12 @@ public class ProfessionalController {
 
 
     }
-}
+
+    @PostMapping("/getProfession")
+    @PreAuthorize("hasRole('USER')")
+
+    public ProfessionalProfile getProfession(@CurrentUser UserPrincipal currentUser, @Valid @RequestBody UserDetails userid) {
+
+        return professionService.getProfessionProfile(userid.getUserid());
+    }
+    }
