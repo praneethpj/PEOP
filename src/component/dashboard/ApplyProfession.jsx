@@ -12,7 +12,7 @@ import {InputTags} from 'react-bootstrap-tagsinput'
 import moment from 'moment';
 import Loading from '../Home-Page/Loading';
 import  { useEffect } from "react";
-import ProfileHistory from './ProfileHistory';
+import ProfileHistory from './appoinment-sub/ProfileHistory';
 
 export default function ApplyProfession() {
     const [details, setDetails] = useState({professionName: "", description: "", chargesperHour: ""})
@@ -496,7 +496,7 @@ export default function ApplyProfession() {
             "chargesperHour": details.chargesperHour,
             "timeSlot": {
 
-                "timeSlot": [
+                "timeWeekDays": [
                     {
                         "dayname": "0",//[JSON.parse(sundayTime[0])]
                         "times":JSON.parse(`[`+sundayTime+`]`),

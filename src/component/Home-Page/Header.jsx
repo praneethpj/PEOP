@@ -4,12 +4,14 @@ import { Spinner } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
 import { logout } from '../../features/authenticationActivities';
+import {viewProfileAs} from '../../features/profileActivities';
 import Loading from './Loading';
 
 const Headers = ()=> {
     const history = useHistory();
     const selectUser=useSelector((state)=>state.authActivity.user)
- 
+    const viewUserAs=useSelector((state)=>state.profileActivity.viewas)
+
     const  dispatch = useDispatch();
   const handleLogout=()=>{
         dispatch(logout({}));
@@ -24,6 +26,10 @@ const Headers = ()=> {
 }
   const handleDashboard=()=>{
     history.push(`/dashboard`)
+  }
+  const handleView=(type)=>{
+       
+    dispatch(viewProfileAs({viewas:type}));
   }
 
         return (
@@ -71,6 +77,8 @@ const Headers = ()=> {
                                       
                                           <div>Hi <a href="#"  onClick={()=>{ handleDashboard()}}>{selectUser.user}</a> 
                                           <Button className="btn btn-danger" onClick={()=>{handleLogout()}}>Log out</Button>
+                                          {viewUserAs.viewas=="1"?      <Button className="btn btn-warning" onClick={()=>{handleView("2")}}>View as Professional</Button>:      <Button className="btn btn-warning" onClick={()=>{handleView("1")}}>View as User</Button>}
+                                    
                                           </div>:<Button  onClick={()=>{ handleLogin()}}>Sign in</Button>  
                                        
                                     }

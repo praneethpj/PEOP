@@ -1,9 +1,13 @@
 import React from 'react'
 import { useHistory } from 'react-router';
 import'./Dashboard.css';
+import {viewProfileAs} from '../../features/profileActivities';
+import { useSelector } from 'react-redux';
 
 export default function Sidebar(props) {
     const history = useHistory();
+
+
     const handleDashboard=()=>{
         history.push(`/dashboard`)
       }
@@ -16,13 +20,28 @@ export default function Sidebar(props) {
       const handleApplyProfile=()=>{
         history.push(`/applyprofession`)
       }
+
+  //     {if(viewUserAs.viewas=="1"){
+  //       return (
+  //         <div>
+  //                  <div class="sidebar">
+ 
+  //   <a   class={props.active=="history"?"active":""}  onClick={()=>handleHistory()}>Appoinments History</a>
+  //   <a   class={props.active=="profile"?"active":""}  onClick={()=>handleProfile()}>Payments</a>
+  //   <a   class={props.active=="profile"?"active":""}  onClick={()=>handleProfile()}>My Profile</a>
+  //   <a   class={props.active=="applyprofession"?"active":""}  onClick={()=>handleApplyProfile()}>Apply Profession</a>
+  //   {/* <a href="#profile">My Profile</a> */}
+  // </div> 
+  //         </div>
+  //     )
+  //     }}
     return (
         <div>
                  <div class="sidebar">
   <a class={props.active=="dashboard"?"active":""} onClick={()=>handleDashboard()}>Appoinments</a>
   <a   class={props.active=="history"?"active":""}  onClick={()=>handleHistory()}>History</a>
   <a   class={props.active=="profile"?"active":""}  onClick={()=>handleProfile()}>My Profile</a>
-  <a   class={props.active=="applyprofession"?"active":""}  onClick={()=>handleApplyProfile()}>Apply Profession</a>
+  <a   class={props.active=="applyprofession"?"active":""}  onClick={()=>handleApplyProfile()}>Profession</a>
   {/* <a href="#profile">My Profile</a> */}
 </div> 
         </div>

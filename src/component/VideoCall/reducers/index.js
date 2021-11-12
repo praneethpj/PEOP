@@ -6,6 +6,7 @@ import videoReducer from './video-reducer';
 import userActivityReducer from '../../../features/userActivities';
 import authenticationActivities from '../../../features/authenticationActivities';
 import   configurationActivity   from '../../../features/configurationsActivity';
+import profileActivities from '../../../features/profileActivities';
 
 // Combine Reducers
 const reducers = combineReducers({
@@ -15,5 +16,6 @@ const reducers = combineReducers({
   userActivity:userActivityReducer,
   authActivity:authenticationActivities,
   configActivity:configurationActivity,
+  profileActivity:profileActivities,
 });
 export default reducers;
