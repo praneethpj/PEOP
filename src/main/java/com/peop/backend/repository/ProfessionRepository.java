@@ -16,6 +16,7 @@ import java.util.Optional;
 @Repository
 public interface ProfessionRepository extends JpaRepository<ProfessionalProfile,Long> {
 
+
     ProfessionalProfile findByUserid(Long aLong);
     Boolean existsByUserid(Long userId);
     Boolean existsByName(String name);

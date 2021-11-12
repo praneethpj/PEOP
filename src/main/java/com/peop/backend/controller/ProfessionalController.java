@@ -1,9 +1,6 @@
 package com.peop.backend.controller;
 
-import com.peop.backend.model.PaymentSheduled;
-import com.peop.backend.model.ProfessionalProfile;
-import com.peop.backend.model.TimeSlot;
-import com.peop.backend.model.User;
+import com.peop.backend.model.*;
 import com.peop.backend.payload.ApiResponse;
 import com.peop.backend.payload.RegisterProfession;
 import com.peop.backend.payload.UserDetails;
@@ -13,11 +10,9 @@ import com.peop.backend.security.CurrentUser;
 import com.peop.backend.security.UserPrincipal;
 import com.peop.backend.service.ProfessionService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
@@ -100,5 +95,27 @@ public class ProfessionalController {
     public List<PaymentSheduled> getAllAppoinmentsByUserId(@CurrentUser UserPrincipal currentUser) {
 
         return professionService.getPaymentSheduled(currentUser.getId());
+    }
+
+    @PutMapping("/updatePaymentSheduled")
+    @PreAuthorize("hasRole('USER')")
+    public PaymentSheduled UpdatePaymentSheduled(@CurrentUser UserPrincipal currentUser,@Valid @RequestBody PaymentSheduleStatusUpdate userid) {
+
+        return professionService.updatePaymentSheduledStatus(currentUser.getId(),userid.getId(),userid.getStatus(), userid.getTimeid());
+    }
+
+    @GetMapping("/getAllUpdatedAppoinmentsByUser")
+    @PreAuthorize("hasRole('USER')")
+    public List<PaymentSheduled> getAllUpdatedAppoinmentsByUser(@CurrentUser UserPrincipal currentUser) {
+        System.out.println("user "+currentUser.getId());
+        List<PaymentSheduled> paymentSheduled=paymentRepository.findByUserId(currentUser.getId());
+        return paymentSheduled;
+    }
+    @GetMapping("/getAllUpdatedAppoinmentsByProfession")
+    @PreAuthorize("hasRole('USER')")
+    public List<PaymentSheduled> getAllUpdatedAppoinmentsByProfession(@CurrentUser UserPrincipal currentUser) {
+        System.out.println(currentUser.getId());
+        List<PaymentSheduled> paymentSheduled=paymentRepository.findByProfessionIdAll(currentUser.getId());
+        return paymentSheduled;
     }
     }

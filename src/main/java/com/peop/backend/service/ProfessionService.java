@@ -23,6 +23,9 @@ public class ProfessionService {
     @Autowired
     PaymentRepository paymentRepository;
 
+    @Autowired
+    TimeFieldRepository timeFieldRepository;
+
 
     public ProfessionalProfile getProfessionProfile(String userid){
         if(professionRepository.existsByName(userid)){
@@ -41,6 +44,27 @@ public class ProfessionService {
 
 
             return paymentRepository.findByUserId(userid);
+
+    }
+
+    public PaymentSheduled updatePaymentSheduledStatus(Long userid,Long id, int status,Long timeid){
+
+        System.out.println(paymentRepository.existsByIdAndProfessionId(id,userid));
+        if(paymentRepository.existsByIdAndProfessionId(id,userid)){
+            Optional<PaymentSheduled>  tmppayment= paymentRepository.findById(id);
+            PaymentSheduled paymentSheduled=tmppayment.get();
+            paymentSheduled.setStatus(status);
+
+            if(status==99) {
+                Optional<TimeFields> tf = timeFieldRepository.findById(timeid);
+                TimeFields timeFields = tf.get();
+                timeFields.setAvailability(true);
+            }
+
+            return paymentRepository.save(paymentSheduled);
+        }
+
+        return null;
 
     }
 

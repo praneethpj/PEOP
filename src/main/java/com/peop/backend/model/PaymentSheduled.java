@@ -73,4 +73,14 @@ public class PaymentSheduled extends DateAudit{
 
     private Long timeid;
 
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
+    private int status;
+
 }
