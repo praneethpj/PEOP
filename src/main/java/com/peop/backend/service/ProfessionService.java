@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.sql.Time;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -46,6 +47,12 @@ public class ProfessionService {
             return paymentRepository.findByUserId(userid);
 
     }
+    public User getUserIdByName(String userid){
+
+
+        return userRepository.findByUsername(userid).get();
+
+    }
 
     public PaymentSheduled updatePaymentSheduledStatus(Long userid,Long id, int status,Long timeid){
 
@@ -66,6 +73,40 @@ public class ProfessionService {
 
         return null;
 
+    }
+
+    public  List<PaymentSheduledDetails> getAllAvailableSheduledUser(Long user){
+        List<PaymentSheduledDetails> paymentSheduledDetailsList= new ArrayList<>();
+        List<PaymentSheduled> paymentSheduled= paymentRepository.getAllAvailableSheduledUser(user);
+        for(PaymentSheduled paymentSheduled1:paymentSheduled){
+            PaymentSheduledDetails paymentSheduledDetails=new PaymentSheduledDetails();
+            paymentSheduledDetails.setSheduledDate(paymentSheduled1.getSheduledDate());
+            paymentSheduledDetails.setId(paymentSheduled1.getId());
+            paymentSheduledDetails.setUserId(paymentSheduled1.getUserId());
+            paymentSheduledDetails.setStatus(paymentSheduled1.getStatus());
+            paymentSheduledDetails.setProfessionId(paymentSheduled1.getProfessionId());
+            paymentSheduledDetails.setTime(paymentSheduled1.getTime());
+            paymentSheduledDetails.setName(userRepository.getById(paymentSheduled1.getProfessionId()).getName());
+            paymentSheduledDetailsList.add(paymentSheduledDetails);
+        }
+        return paymentSheduledDetailsList;
+    }
+
+    public  List<PaymentSheduledDetails> getAllAvailableSheduledProfession(Long user){
+        List<PaymentSheduledDetails> paymentSheduledDetailsList= new ArrayList<>();
+        List<PaymentSheduled> paymentSheduled= paymentRepository.getAllAvailableSheduledProfession(user);
+        for(PaymentSheduled paymentSheduled1:paymentSheduled){
+            PaymentSheduledDetails paymentSheduledDetails=new PaymentSheduledDetails();
+            paymentSheduledDetails.setSheduledDate(paymentSheduled1.getSheduledDate());
+            paymentSheduledDetails.setId(paymentSheduled1.getId());
+            paymentSheduledDetails.setUserId(paymentSheduled1.getUserId());
+            paymentSheduledDetails.setStatus(paymentSheduled1.getStatus());
+            paymentSheduledDetails.setProfessionId(paymentSheduled1.getProfessionId());
+            paymentSheduledDetails.setTime(paymentSheduled1.getTime());
+            paymentSheduledDetails.setName(userRepository.getById(paymentSheduled1.getUserId()).getName());
+            paymentSheduledDetailsList.add(paymentSheduledDetails);
+        }
+        return paymentSheduledDetailsList;
     }
 
     public ProfessionalProfile registerNewProfession(ProfessionalProfile professionalProfile){
@@ -167,5 +208,7 @@ public class ProfessionService {
             professionalProfile.setTimeSlot(timeSlot);
             return professionRepository.save(professionalProfile);
         }
+
+
     }
 }

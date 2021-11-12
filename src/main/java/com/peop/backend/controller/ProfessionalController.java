@@ -118,4 +118,25 @@ public class ProfessionalController {
         List<PaymentSheduled> paymentSheduled=paymentRepository.findByProfessionIdAll(currentUser.getId());
         return paymentSheduled;
     }
+
+
+    @PostMapping("/getAllAvailableAppoinmentsByProfessionId")
+    @PreAuthorize("hasRole('USER')")
+    public List<PaymentSheduledDetails> getAllAvailableAppoinmentsByProfessionId(@CurrentUser UserPrincipal currentUser, @Valid @RequestBody UserDetails userid) {
+        User user=professionService.getUserIdByName(userid.getUserid());
+        return professionService.getAllAvailableSheduledProfession(user.getId());
+    }
+    @GetMapping("/getAllAvailableAppoinmentsByUserId")
+    @PreAuthorize("hasRole('USER')")
+    public List<PaymentSheduledDetails> getAllAvailableAppoinmentsByUserId(@CurrentUser UserPrincipal currentUser) {
+
+        return professionService.getAllAvailableSheduledUser(currentUser.getId());
+    }
+
+    @PostMapping("/getUserIdByName")
+    @PreAuthorize("hasRole('USER')")
+    public String getUserIdByName(@CurrentUser UserPrincipal currentUser, @Valid @RequestBody UserDetails userid) {
+        User user=professionService.getUserIdByName(userid.getUserid());
+        return user.getName();
+    }
     }
