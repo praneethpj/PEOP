@@ -3,12 +3,17 @@ import React, { useState } from 'react'
 import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
 import styled from 'styled-components';
+import ReactNotification from 'react-notifications-component'
+import 'react-notifications-component/dist/theme.css'
+import { store } from 'react-notifications-component';
+import { useDispatch } from 'react-redux';
 
 export default function PaymentPay(props) {
   const history=useHistory();
   const [paymentdata,SetPaymentdata]=useState({"profession":"","time":"","date":"","timeid":""});
   const selectUser=useSelector((state)=>state.userActivity.value)
-
+    const  dispatch = useDispatch();
+    
   //console.log("userid "+selectUser.userid);
     console.log(props.Submitdata)
     const PaymentDetails = styled.section`
@@ -21,7 +26,21 @@ export default function PaymentPay(props) {
   const NameText=styled.h1`
   color: aquamarine;
   `;
-
+  const addNotify=(t,e)=> {
+        store.addNotification({
+            title: t,
+            message: e,
+            type: "success",
+            insert: "top",
+            container: "top-right",
+            animationIn: ["animate__animated", "animate__fadeIn"],
+            animationOut: ["animate__animated", "animate__fadeOut"],
+            dismiss: {
+              duration: 5000,
+              onScreen: true
+            }
+          });
+      }
   const handlePayment=(e)=>{
 
     e.preventDefault();
@@ -44,6 +63,7 @@ export default function PaymentPay(props) {
     axios.post('http://localhost:5000/api/payment/payment', paymentBody, config)
         .then(response =>  {
           console.log(response);
+        //  addNotify("Success","Success")
       //       localStorage.setItem("token",response.data.accessToken);
       //        dispatch(signedUser({
       //      user:loginData.usernameOrEmail 
@@ -51,6 +71,8 @@ export default function PaymentPay(props) {
        })
 
   };
+
+   
 
     return (
      

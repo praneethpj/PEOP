@@ -49,8 +49,11 @@ export default function Dashboard() {
                 Authorization: 'Bearer ' + localStorage.getItem("token")
             }
         }).then(response => {
-            console.log(response.data);
+          if(typeof response.data !== 'undefined' || response.data.length !== 0 )
+          {
+            console.log("res "+JSON.stringify(response.data));
             setAppointments(response.data);
+          }
           //  addNotify("Success", JSON.stringify(response));
         }).catch(error => {
            // addNotify("Error", JSON.stringify(error));
@@ -66,6 +69,35 @@ export default function Dashboard() {
  
 
 
+const appoinmentAction= async(id,state,timeid)=>{
+const data = {
+
+            "id": id,
+            "status":state,
+            "timeid":timeid
+        
+            };
+
+  await axios.put('http://localhost:5000/api/professional/updatePaymentSheduled', data, {
+            "headers": {
+                'Content-Type': 'application/json',
+                Authorization: 'Bearer ' + localStorage.getItem("token")
+            }
+        }).then(response => {
+          if(typeof response.data !== 'undefined' || response.data.length !== 0 )
+          {
+            getAppointments();
+            console.log("res "+JSON.stringify(response.data));
+           
+          }
+          //  addNotify("Success", JSON.stringify(response));
+        }).catch(error => {
+           // addNotify("Error", JSON.stringify(error));
+            console.log(error.response);
+            // console.log(error.response.status);
+            // console.log(error.response.headers);
+        });
+}
  
   
 
@@ -76,6 +108,9 @@ export default function Dashboard() {
         <Headers/>
         <Sidebar active="dashboard"/>
         <div>
+       {appointments.length !==0 ?
+              
+             
         <Centerdiv>
     
     {viewUserAs.viewas==="2" ?
@@ -95,12 +130,13 @@ export default function Dashboard() {
 
   <tbody>
       
+      
                {appointments.map((name)=>
                <tr key={name.id}>
                     <td>{name.userId}</td>
                     <td>{name.sheduledDate}</td>
                     <td>{name.time}</td>
-                    <td><button className="btn btn-danger">Accept</button></td>
+                    <td><button onClick={(id,state,timeid)=>appoinmentAction(name.id,1,name.timeid)} className="btn btn-success">Accept</button><button className="btn btn-danger"  onClick={(id,state,timeid)=>appoinmentAction(name.id,99,name.timeid)}>Reject</button></td>
                    </tr>
                )}
              
@@ -136,6 +172,8 @@ export default function Dashboard() {
          </Table>
         </div>}
         </Centerdiv>
+          :"No Data Available"
+              }
         </div>
 
         </>

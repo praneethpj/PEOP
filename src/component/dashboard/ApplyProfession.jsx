@@ -68,8 +68,9 @@ export default function ApplyProfession() {
                 Authorization: 'Bearer ' + localStorage.getItem("token")
             }
         }).then(response => {
-            console.log(response.data);
+            console.log("profilehistory "+response.data);
             setProfilehistory(response.data);
+            dispatch(loadingVisibility({visibility: "false"}));
           //  addNotify("Success", JSON.stringify(response));
         }).catch(error => {
            // addNotify("Error", JSON.stringify(error));
@@ -582,7 +583,7 @@ export default function ApplyProfession() {
             <Sidebar active="applyprofession"/>
             <>
 
-                {profilehistory!=null?<ProfileHistory details={profilehistory}/>:
+                {profilehistory.length !==0 ?<ProfileHistory details={profilehistory}/>:
                 <Centerdiv>
                     <form className="login_form"
                         onSubmit={
