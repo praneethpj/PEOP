@@ -19,7 +19,8 @@ import Dashboard from './component/dashboard/Appinments';
 import DashboardProfile from './component/dashboard/DashboardProfile';
 import DashboardHistory from './component/dashboard/DashboardHistory';
 import ApplyProfession from './component/dashboard/ApplyProfession';
- 
+ import NextCalls from './component/dashboard/NextCalls';
+
 function App() {
   return (
     <div className="App">
@@ -40,12 +41,12 @@ function App() {
         </nav>
 
         {/* A <Switch> looks through its children <Route>s and
-            renders the first one that matches the current URL. */}
+            renders the first one that matches the current URL.  <Route path="/makecall/:id">*/}
         <Switch>
           <Route path="/payment">
             <PaymentPay />
           </Route>
-          <Route path="/makecall/:id">
+          <Route path="/makecall">
             <VideoCallMainPage />
           </Route>
           <Route path="/profile/:id">
@@ -65,6 +66,9 @@ function App() {
             </Route>
             <Route path="/applyprofession">
             <ApplyProfession/>
+            </Route>
+              <Route path="/calls">
+            <NextCalls/>
             </Route>
           <Route path="/r/:room" component={Room} />
 				{/* <Route path="*" component={NotFound} /> */}

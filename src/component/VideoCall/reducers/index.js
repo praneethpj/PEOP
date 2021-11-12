@@ -7,6 +7,7 @@ import userActivityReducer from '../../../features/userActivities';
 import authenticationActivities from '../../../features/authenticationActivities';
 import   configurationActivity   from '../../../features/configurationsActivity';
 import profileActivities from '../../../features/profileActivities';
+import readyCallActivities from '../../../features/readyCallActivities';
 
 // Combine Reducers
 const reducers = combineReducers({
@@ -17,5 +18,6 @@ const reducers = combineReducers({
   authActivity:authenticationActivities,
   configActivity:configurationActivity,
   profileActivity:profileActivities,
+  readyCallActivities:readyCallActivities,
 });
 export default reducers;

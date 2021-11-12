@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux';
 
 export function VideoCallMainPage () {
   const selectUser=useSelector((state)=>state.userActivity.value);
-
+   const callActivity=useSelector((state)=>state.readyCallActivities.value)
   console.log("userid "+selectUser.userid);
    
     // this.defaultRoomId = String(new Date() - new Date().setHours(0, 0, 0, 0));
@@ -21,7 +21,8 @@ export function VideoCallMainPage () {
     return (
       <VideoCallMain
         defaultRoomId={selectUser.userid}
-        roomId={selectUser.userid}
+        roomId={callActivity.roomid}
+        username={callActivity.username}
         // handleChange={()=>this.handleChange}
       />
     );
