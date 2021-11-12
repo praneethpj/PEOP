@@ -1,13 +1,7 @@
 package com.peop.backend.service;
 
-import com.peop.backend.model.ProfessionalProfile;
-import com.peop.backend.model.TimeFields;
-import com.peop.backend.model.TimeSlot;
-import com.peop.backend.model.WeekDays;
-import com.peop.backend.repository.ProfessionRepository;
-import com.peop.backend.repository.TimeFieldRepository;
-import com.peop.backend.repository.UserRepository;
-import com.peop.backend.repository.WeekDaysRepository;
+import com.peop.backend.model.*;
+import com.peop.backend.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,6 +20,8 @@ public class ProfessionService {
     @Autowired
     UserRepository userRepository;
 
+    @Autowired
+    PaymentRepository paymentRepository;
 
 
     public ProfessionalProfile getProfessionProfile(String userid){
@@ -33,6 +29,19 @@ public class ProfessionService {
             return professionRepository.findByName(userid);
         }
         return null;
+    }
+    public List<PaymentSheduled> getPaymentSheduled(String userid){
+        if(professionRepository.existsByName(userid)){
+            ProfessionalProfile professionalProfile=professionRepository.findByName(userid);
+            return paymentRepository.findByProfessionId(professionalProfile.getUserid());
+        }
+        return null;
+    }
+    public List<PaymentSheduled> getPaymentSheduled(Long userid){
+
+
+            return paymentRepository.findByUserId(userid);
+
     }
 
     public ProfessionalProfile registerNewProfession(ProfessionalProfile professionalProfile){

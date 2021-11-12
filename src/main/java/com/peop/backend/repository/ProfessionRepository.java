@@ -21,6 +21,7 @@ public interface ProfessionRepository extends JpaRepository<ProfessionalProfile,
     Boolean existsByName(String name);
 
 
+
     ProfessionalProfile findByName(String name);
 
 

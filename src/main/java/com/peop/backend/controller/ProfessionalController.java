@@ -1,11 +1,13 @@
 package com.peop.backend.controller;
 
+import com.peop.backend.model.PaymentSheduled;
 import com.peop.backend.model.ProfessionalProfile;
 import com.peop.backend.model.TimeSlot;
 import com.peop.backend.model.User;
 import com.peop.backend.payload.ApiResponse;
 import com.peop.backend.payload.RegisterProfession;
 import com.peop.backend.payload.UserDetails;
+import com.peop.backend.repository.PaymentRepository;
 import com.peop.backend.repository.ProfessionRepository;
 import com.peop.backend.security.CurrentUser;
 import com.peop.backend.security.UserPrincipal;
@@ -20,6 +22,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 /**
  * @author Praneethpj
@@ -29,7 +32,8 @@ import javax.validation.Valid;
 public class ProfessionalController {
 
 
-
+    @Autowired
+    PaymentRepository paymentRepository;
 
     @Autowired
     ProfessionRepository professionRepository;
@@ -83,5 +87,18 @@ public class ProfessionalController {
     public ProfessionalProfile getProfession(@CurrentUser UserPrincipal currentUser, @Valid @RequestBody UserDetails userid) {
 
         return professionService.getProfessionProfile(userid.getUserid());
+    }
+
+    @PostMapping("/getAllAppoinmentsByProfessionId")
+    @PreAuthorize("hasRole('USER')")
+    public List<PaymentSheduled> getAllAppoinmentsByProfessionId(@CurrentUser UserPrincipal currentUser, @Valid @RequestBody UserDetails userid) {
+
+        return professionService.getPaymentSheduled(userid.getUserid());
+    }
+    @PostMapping("/getAllAppoinmentsByUserId")
+    @PreAuthorize("hasRole('USER')")
+    public List<PaymentSheduled> getAllAppoinmentsByUserId(@CurrentUser UserPrincipal currentUser) {
+
+        return professionService.getPaymentSheduled(currentUser.getId());
     }
     }
