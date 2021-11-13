@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef,useEffect } from 'react';
 import { PropTypes } from 'prop-types';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
@@ -15,6 +15,14 @@ function VideoCallMain(props) {
     const [granted,setGranted]=React.useState(false);
     const  dispatch = useDispatch();
         const history = useHistory();
+        const ref = useRef(null);
+
+        useEffect(() => {
+    setTimeout(() => {
+      ref.current.click();
+    }, 100); //miliseconds
+  }, []);
+
 const handleJoin=()=>{
   videoCallInit();
 
@@ -77,7 +85,7 @@ return(
       <h1 itemProp="headline">Ready to Join with {props.username}?</h1>
       {/* <p>Please enter a room name.</p> */}
       {/* <input type="text" name="room" value={ props.roomId } onChange={props.handleChange} pattern="^\w+$" maxLength="10" required autoFocus title="Room name should only contain letters or numbers."/> */}
-      <button className="primary-button" onClick={()=>handleJoin()}  >Join</button>
+      <button ref={ref} className="primary-button" onClick={handleJoin}  >Join</button>
       
       {/* <Link className="primary-button" to={ '/r/' + props.defaultRoomId }>Random</Link> */}
       {/* { props.rooms.length !== 0 && <div>Recently used rooms:</div> } */}

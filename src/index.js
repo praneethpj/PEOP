@@ -10,7 +10,9 @@ import userActivityReducer from './features/userActivities';
 import { Provider } from 'react-redux';
 import store from './store';
 import axios from 'axios';
-
+import $ from 'jquery';
+import Popper from 'popper.js';
+ 
 // const store =configureStore({
 //   reducer:{
 //     userActivity:userActivityReducer,

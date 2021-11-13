@@ -12,6 +12,8 @@ const Headers = ()=> {
     const selectUser=useSelector((state)=>state.authActivity.user)
     const viewUserAs=useSelector((state)=>state.profileActivity.viewas)
 
+
+
     const  dispatch = useDispatch();
   const handleLogout=()=>{
         dispatch(logout({}));
@@ -20,7 +22,9 @@ const Headers = ()=> {
         
   }
 
-
+  const handleHome=()=>{
+    history.push(`/`)
+}
   const handleLogin=()=>{
     history.push(`/signin`)
 }
@@ -41,13 +45,20 @@ const Headers = ()=> {
   </div>
 </div>
                  <header className="section-header">
+                 
                <section className="header-main border-bottom">
-                   <div className="container">
+               
+                   <div className="container-fluid">
+                     <div className="widgets-wrap float-md-left">
+  <div className="widget-header  mr-3">
+                               <a href="#" onClick={()=>{ handleHome()}} className="icon icon-sm rounded-circle border"><i className="fa fa-home"></i></a>
+                               
+                           </div>
+                          
+                   </div>
                <div className="row align-items-center">
                    <div className="col-lg-2 col-4">
-                       <a href="#" onClick={()=>{history.push(`/`)}} className="brand-wrap">
-                         Company Name
-                       </a> 
+                    
                    </div>
                    <div className="col-lg-6 col-sm-12">
                        <form action="#" className="search">
@@ -62,32 +73,52 @@ const Headers = ()=> {
                        </form> 
                    </div> 
                    <div className="col-lg-4 col-sm-6 col-12">
+                 
                        <div className="widgets-wrap float-md-right">
-                           <div className="widget-header  mr-3">
-                               <a href="#" className="icon icon-sm rounded-circle border"><i className="fa fa-shopping-cart"></i></a>
-                               <span className="badge badge-pill badge-danger notify">0</span>
-                           </div>
+                         
                            <div className="widget-header icontext">
-                               <a href="#" className="icon icon-sm rounded-circle border"><i className="fa fa-user"></i></a>
+                              
                                <div className="text">
                                    {/* <span className="text-muted">Welcome!</span> */}
                                      
                                        {   
                                           ((localStorage.getItem("token")!=null) && (selectUser!=null ))?
                                       
-                                          <div>Hi <a href="#"  onClick={()=>{ handleDashboard()}}>{selectUser.user}</a> 
-                                          <Button className="btn btn-danger" onClick={()=>{handleLogout()}}>Log out</Button>
-                                          {viewUserAs.viewas=="1"?      <Button className="btn btn-warning" onClick={()=>{handleView("2")}}>View as Professional</Button>:      <Button className="btn btn-warning" onClick={()=>{handleView("1")}}>View as User</Button>}
-                                    
-                                          </div>:<Button  onClick={()=>{ handleLogin()}}>Sign in</Button>  
+                                          <div >
+                                          <div class="dropdown">
+  <button class="icon icon-sm rounded-circle border" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    {/* Hi  {selectUser.user}  */}
+  </button>
+  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+    <a class="dropdown-item" href="#" onClick={()=>{ handleDashboard()}}>Dashboard</a>
+     {viewUserAs.viewas=="1"?     <a class="dropdown-item" href="#"  onClick={()=>{handleView("2")}}>View as Professional</a>:    
+                           <a class="dropdown-item" href="#"  onClick={()=>{handleView("1")}}>View as User</a>}
+    <a class="dropdown-item" href="#" onClick={()=>{handleLogout()}}>Log out</a>
+    
+  </div>
+</div>
+                                           
+                                          </div>:  <div className="widgets-wrap float-md-right"><Button className="btn btn-secondary" onClick={()=>{ handleLogin()}}>Sign in</Button>  </div>
                                        
                                     }
                                    
                                </div>
+                                  <div className="col-lg-4 col-sm-6 col-12">
+                                <div className="widgets-wrap float-md-right">
+                              <div className="widget-header  mr-3">
+                               <a href="#" className="icon icon-sm rounded-circle border"><i className="fa fa-bell"></i></a>
+                               <span className="badge badge-pill badge-danger notify">0</span>
                            </div>
+                               </div>
+                           </div>
+                           </div>
+                          
                        </div> 
+                       
                    </div> 
+                   
                </div> 
+               
                    </div> 
                </section>
                </header> 

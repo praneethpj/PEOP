@@ -38,8 +38,8 @@ const Communication = props =>
     <div className="request-access">
       <p><span className="you-left">You hung up.&nbsp;</span>Send an invitation to join the room.</p>
       <form onSubmit={props.send}>
-        <input type="text" autoFocus onChange={props.handleInput} data-ref="message"  maxLength="30" required value="Please Approve" />
-        <button className="primary-button">Send</button>
+        <input type="hidden" autoFocus onChange={props.handleInput} data-ref="message"  maxLength="30" required value="Please Approve" />
+        <button className="primary-button">Click me if you are, ready</button>
       </form>
     </div>
     <div className="grant-access">

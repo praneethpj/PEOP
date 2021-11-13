@@ -100,6 +100,7 @@ class MediaBridge extends Component {
     // when our browser gets a candidate, send it to the peer
     this.pc.onicecandidate = e => {
         console.log(e, 'onicecandidate');
+          console.log( 'onicecandidate');
         if (e.candidate) {
             this.props.socket.send({
                 type: 'candidate',

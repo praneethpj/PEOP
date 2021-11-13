@@ -20,8 +20,9 @@ export default function DashboardProfile() {
         <Centerdiv>
          <form>
 
-            <input type="text" className="form-control" placeholder="name"/>
 
+            <input type="text" className="form-control" placeholder="name"/>
+            
          </form>
          </Centerdiv>
       
