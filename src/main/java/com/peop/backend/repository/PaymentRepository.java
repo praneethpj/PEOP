@@ -25,6 +25,8 @@ public interface PaymentRepository extends JpaRepository<PaymentSheduled,Long> {
     @Query("SELECT e from PaymentSheduled e where e.professionId =:professionId AND e.status=1")
     List<PaymentSheduled> getAllAvailableSheduledProfession(Long professionId);
 
-    @Query("SELECT e from PaymentSheduled e where e.userId =:userid AND e.status=1")
+    @Query("SELECT e from PaymentSheduled e where e.userId =:userid")
     List<PaymentSheduled> getAllAvailableSheduledUser(Long userid);
+
+    Boolean existsByIdAndProfessionIdAndUserIdAndStatus(Long id,Long professionid,Long userid,int status);
 }
