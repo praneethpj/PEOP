@@ -2,20 +2,23 @@ import React, { Component } from 'react'
 import { PropTypes } from 'prop-types';
  
 import VideoCallMain from '../VideoCallMain';
-import { useSelector } from 'react-redux';
+import { useSelector,useDispatch } from 'react-redux';
+import {setCalldetails} from '../../../features/readyCallActivities';
 
 export function VideoCallMainPage () {
   const selectUser=useSelector((state)=>state.userActivity.value);
    const callActivity=useSelector((state)=>state.readyCallActivities.value)
-  console.log("userid "+selectUser.userid);
-   
+  
     // this.defaultRoomId = String(new Date() - new Date().setHours(0, 0, 0, 0));
     // this.state = { roomId: this.defaultRoomId };
 //   this.handleChange = this.handleChange.bind(this);
-    
+    console.log("userid "+selectUser.userid);
+   const  dispatch = useDispatch();
   
-  const handleChange=(e)=>{
+  const handleChange=()=>{
 //    this.setState({ roomId: e.target.value });
+  dispatch(setCalldetails({status:true}));
+  console.log("call act"+callActivity)
   }
  
     return (
@@ -23,7 +26,7 @@ export function VideoCallMainPage () {
         defaultRoomId={selectUser.userid}
         roomId={callActivity.roomid}
         username={callActivity.username}
-        // handleChange={()=>this.handleChange}
+    
       />
     );
   }

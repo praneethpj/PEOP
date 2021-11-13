@@ -5,6 +5,8 @@ import { connect } from 'react-redux'
  
 import io from 'socket.io-client'
 import store from '../../../store';
+import { useSelector,useDispatch } from 'react-redux'
+import {setCalldetails} from '../../../features/readyCallActivities';
 
 class RoomPage extends Component {
   constructor(props) {
@@ -15,8 +17,15 @@ class RoomPage extends Component {
     }).catch(e => alert('getUserMedia() error: ' + e.name))
     this.socket = io.connect();
   }
+  handleStatus = ()  => { 
+      //const callActivity=useSelector((state)=>state.readyCallActivities.value)
+    const { dispatch } = this.props;                
+      dispatch(setCalldetails({roomstatus:"true"}));
+}
+
   componentDidMount() {
     this.props.addRoom();
+   // this.handleStatus();
   }
   render(){
     return (

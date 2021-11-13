@@ -19,7 +19,7 @@ export default function NextCalls() {
     const viewUserAs=useSelector((state)=>state.profileActivity.viewas)
       const callActivity=useSelector((state)=>state.readyCallActivities.value)
    const  dispatch = useDispatch();
-
+   console.log("call act "+callActivity.roomstatus)
       const Centerdiv = styled.div `
     margin: auto;
  width: 50%;
@@ -35,7 +35,8 @@ export default function NextCalls() {
 
 
 const makeCall=(id,name)=>{
-  dispatch(setCalldetails({roomid:id,username:name}))
+  dispatch(setCalldetails({roomid:id,username:name,roomstatus:"false"}));
+ console.log("call act "+callActivity.roomstatus)
     let path = `/makecall`; 
     history.push(path);
 }
@@ -50,7 +51,7 @@ const makeCall=(id,name)=>{
         
             };
 
-            console.log(selectUser.user);
+            console.log("user "+selectUser.user);
 
             
 
@@ -175,7 +176,7 @@ const data = {
                     <td>{name.name}</td>
                     <td>{name.sheduledDate}</td>
                     <td>{name.time}</td>
-                    <td><button onClick={()=>makeCall(name.id,name.name)} className="btn btn-success">Join</button></td>
+                    <td><button onClick={()=>makeCall(name.id,name.name)} className="btn btn-success">Start</button></td>
                    </tr>
                )}
              
@@ -203,7 +204,7 @@ const data = {
                   <td>{name.name}</td>
                   <td>{name.sheduledDate}</td>
                   <td>{name.time}</td>
-                <td><button onClick={()=>makeCall(name.id,name.name)} className="btn btn-success">Join</button></td>
+                <td>{name.callStatus=="1"?<button onClick={()=>makeCall(name.id,name.name)} className="btn btn-success">Join</button>:"Not Started Yet"}</td>
 
                  </tr>
              )}

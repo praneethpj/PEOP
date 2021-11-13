@@ -1,6 +1,6 @@
 import {createSlice} from '@reduxjs/toolkit'
 
-const initialStateValue={roomid:"",username:""};
+const initialStateValue={roomid:"",username:"",roomstatus:"false"};
 export const readyCallActivitySlice=createSlice({
     name:"readyCallActivities",
     initialState:{value:initialStateValue},
