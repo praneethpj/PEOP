@@ -6,10 +6,12 @@ import { useSelector,useDispatch } from 'react-redux'
 import {setCalldetails} from '../../features/readyCallActivities';
 import { useHistory } from 'react-router';
 import axios from 'axios';
+import {viewProfileAs} from '../../features/profileActivities';
 
 function VideoCallMain(props) {
   const callActivity=useSelector((state)=>state.readyCallActivities.value);
      const selectUser=useSelector((state)=>state.authActivity.user)
+       const viewUserAs=useSelector((state)=>state.profileActivity.viewas)
     const [granted,setGranted]=React.useState(false);
     const  dispatch = useDispatch();
         const history = useHistory();
@@ -21,6 +23,10 @@ const handleJoin=()=>{
 }
 
 const videoCallInit= async()=>{
+     if(viewUserAs.viewas=="1"){
+                history.push('/r/' + props.roomId )
+  console.log("callActivity.roomstatus "+callActivity.roomstatus);
+            }else{
   let roomid=callActivity.roomid;
   let professionid=selectUser.user;
   let userid=callActivity.username ;
@@ -45,7 +51,8 @@ const data = {
            // getAppointments();
            
            setGranted(JSON.stringify(response.data));
-            console.log("res from: "+granted+" "+response.data);
+            console.log("res from: "+granted+" "+response.data+" "+viewUserAs.viewas);
+         
              if(response.data==true){
   dispatch(setCalldetails({...callActivity,roomstatus:"true"}));
   history.push('/r/' + props.roomId )
@@ -61,6 +68,7 @@ const data = {
             // console.log(error.response.status);
             // console.log(error.response.headers);
         });
+            }
 }
 return(
   <div className="home">

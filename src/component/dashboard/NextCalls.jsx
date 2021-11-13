@@ -155,7 +155,7 @@ const data = {
     
     {viewUserAs.viewas==="2" ?
     <div>
-             <h4>Your Next Appointments</h4>
+             <h1 class="display-6">Your Next Appointments</h1>
         <Table stripped bordered hover size="sm"  >
             <thead>
     <tr>
@@ -184,7 +184,7 @@ const data = {
            </Table>
           </div>
            : <div>
-           <h4>My Available Appointments</h4>
+          <h1 class="display-6">My Available Appointments</h1>
       <Table stripped bordered hover size="sm"  >
           <thead>
   <tr>
