@@ -68,6 +68,7 @@ export const ADropdown =()=> {
   
       
       return (
+        <div> 
         <div className="dropdown" onClick={()=>toggleOpen()}>
           <img
             className="icon icon-sm rounded-circle border"
@@ -75,7 +76,7 @@ export const ADropdown =()=> {
             id="dropdownMenuButton"
             data-toggle="dropdown"
             aria-haspopup="true"
-            src={`data:image/png;base64,${profileImg}`||"https://i.pinimg.com/474x/8c/70/8b/8c708b478e0e71f7599b75b9cc108ddf.jpg"}  
+            src={ "/assets/profileImg/"+profileImg ||"https://i.pinimg.com/474x/8c/70/8b/8c708b478e0e71f7599b75b9cc108ddf.jpg"}  
            
            />
           <div className={`dropdown-menu${isOpen ? " show" : ""}`} aria-labelledby="dropdownMenuButton">
@@ -86,6 +87,8 @@ export const ADropdown =()=> {
     <a class="dropdown-item" href="#" onClick={()=>{handleLogout()}}>Log out</a>
     
           </div>
+        </div>
+
         </div>
       );
     

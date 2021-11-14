@@ -28,8 +28,8 @@ const Headers = ()=> {
   const handleLogin=()=>{
     history.push(`/signin`)
 }
-  const handleDashboard=()=>{
-    history.push(`/dashboard`)
+  const handleNotification=()=>{
+    history.push(`/notification`)
   }
   const handleView=(type)=>{
        
@@ -91,22 +91,26 @@ const Headers = ()=> {
                               <div className="widget-header  mr-3">
                               <ADropdown>
                                               </ADropdown>
+                                              
                            </div>
+                           
                                </div>
                            </div>
-                                          </div>:  <div className="widgets-wrap float-md-right"><Button className="btn btn-secondary" onClick={()=>{ handleLogin()}}>Sign in</Button>  </div>
+                                          </div>:  <div className="widgets-wrap float-md-right"><Button className="btn btn-secondary " onClick={()=>{ handleLogin()}}>Sign in</Button>  </div>
                                        
                                     }
                                    
                                </div>
+                              {((localStorage.getItem("token")!=null) && (selectUser!=null ))?
                                   <div className="col-lg-4 col-sm-6 col-12">
                                 <div className="widgets-wrap float-md-right">
-                              <div className="widget-header  mr-3">
-                               <a href="#" className="icon icon-sm rounded-circle border"><i className="fa fa-bell"></i></a>
+                                <div className="widget-header  mr-3">
+                               <a href="#"  onClick={()=>{ handleNotification()}} className="icon icon-sm rounded-circle border"><i className="fa fa-bell"></i></a>
                                <span className="badge badge-pill badge-danger notify">0</span>
                            </div>
                                </div>
                            </div>
+:""}
                            </div>
                           
                        </div> 
