@@ -86,6 +86,7 @@ public class ProfessionService {
             paymentSheduledDetails.setStatus(paymentSheduled1.getStatus());
             paymentSheduledDetails.setProfessionId(paymentSheduled1.getProfessionId());
             paymentSheduledDetails.setTime(paymentSheduled1.getTime());
+            paymentSheduledDetails.setCallStatus(paymentSheduled1.getCallStatus());
             paymentSheduledDetails.setName(userRepository.getById(paymentSheduled1.getProfessionId()).getName());
             paymentSheduledDetailsList.add(paymentSheduledDetails);
         }

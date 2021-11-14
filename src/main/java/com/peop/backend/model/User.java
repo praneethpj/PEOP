@@ -44,6 +44,17 @@ public class User extends DateAudit {
     @Size(max = 100)
     private String password;
 
+    @Size(max = 100)
+    public String getProfileImage() {
+        return profileImage;
+    }
+
+    public void setProfileImage(String profileImage) {
+        this.profileImage = profileImage;
+    }
+
+    private String profileImage;
+
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "user_roles",
