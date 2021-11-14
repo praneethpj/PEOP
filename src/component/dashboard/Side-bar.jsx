@@ -22,6 +22,9 @@ export default function Sidebar(props) {
          const handleCalls=()=>{
         history.push(`/calls`)
       }
+      const handleNotifications=()=>{
+        history.push(`/notification`)
+      }
 
   //     {if(viewUserAs.viewas=="1"){
   //       return (
@@ -43,6 +46,7 @@ export default function Sidebar(props) {
   <a class={props.active=="dashboard"?"active":""} onClick={()=>handleDashboard()}>Appoinments</a>
     <a   class={props.active=="calls"?"active":""}  onClick={()=>handleCalls()}>Calls</a>
   <a   class={props.active=="history"?"active":""}  onClick={()=>handleHistory()}>History</a>
+  <a   class={props.active=="notification"?"active":""}  onClick={()=>handleNotifications()}>My Notification</a>
   <a   class={props.active=="profile"?"active":""}  onClick={()=>handleProfile()}>My Profile</a>
   <a   class={props.active=="applyprofession"?"active":""}  onClick={()=>handleApplyProfile()}>Profession</a>
   {/* <a href="#profile">My Profile</a> */}

@@ -20,6 +20,7 @@ import DashboardProfile from './component/dashboard/DashboardProfile';
 import DashboardHistory from './component/dashboard/DashboardHistory';
 import ApplyProfession from './component/dashboard/ApplyProfession';
  import NextCalls from './component/dashboard/NextCalls';
+ import Notification from './component/dashboard/Notification';
 
 function App() {
   return (
@@ -82,11 +83,15 @@ function App() {
               <Route path="/calls">
             <NextCalls/>
             </Route>
-          <Route path="/r/:room" component={Room} />
-				{/* <Route path="*" component={NotFound} /> */}
-          <Route path="/">
-            <MainHome />
+             <Route path="/notification">
+            <Notification/>
+       
+         
           </Route>
+          
+          <Route path="/">
+            <MainHome/>
+            </Route>
         </Switch>
       </div>
     </Router>

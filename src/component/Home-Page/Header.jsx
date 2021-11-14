@@ -6,7 +6,7 @@ import { useHistory } from 'react-router';
 import { logout } from '../../features/authenticationActivities';
 import {viewProfileAs} from '../../features/profileActivities';
 import Loading from './Loading';
-
+import { ADropdown } from './sub/ADropdown';
 const Headers = ()=> {
     const history = useHistory();
     const selectUser=useSelector((state)=>state.authActivity.user)
@@ -85,19 +85,15 @@ const Headers = ()=> {
                                           ((localStorage.getItem("token")!=null) && (selectUser!=null ))?
                                       
                                           <div >
-                                          <div class="dropdown">
-  <button class="icon icon-sm rounded-circle border" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    {/* Hi  {selectUser.user}  */}
-  </button>
-  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-    <a class="dropdown-item" href="#" onClick={()=>{ handleDashboard()}}>Dashboard</a>
-     {viewUserAs.viewas=="1"?     <a class="dropdown-item" href="#"  onClick={()=>{handleView("2")}}>View as Professional</a>:    
-                           <a class="dropdown-item" href="#"  onClick={()=>{handleView("1")}}>View as User</a>}
-    <a class="dropdown-item" href="#" onClick={()=>{handleLogout()}}>Log out</a>
-    
-  </div>
-</div>
-                                           
+                                            
+                                              <div className="col-lg-4 col-sm-6 col-12">
+                                <div className="widgets-wrap float-md-right">
+                              <div className="widget-header  mr-3">
+                              <ADropdown>
+                                              </ADropdown>
+                           </div>
+                               </div>
+                           </div>
                                           </div>:  <div className="widgets-wrap float-md-right"><Button className="btn btn-secondary" onClick={()=>{ handleLogin()}}>Sign in</Button>  </div>
                                        
                                     }
