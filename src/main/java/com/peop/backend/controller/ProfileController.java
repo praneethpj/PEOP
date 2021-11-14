@@ -45,7 +45,7 @@ public class ProfileController {
     public ResponseEntity<FileResponse> uploadFile(@CurrentUser UserPrincipal currentUser, @RequestParam("file") MultipartFile file){
         String fileName = fileStorageService.storeFile(file,""+currentUser.getId()+".png");
         String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
-                .path("/profile/pics/")
+                .path("/FuturePlan/PeoProp/popprep/public/assets/profileImg/")
                 .path(fileName)
                 .toUriString();
 
@@ -59,7 +59,7 @@ public class ProfileController {
     }
 
     @GetMapping("/{fileName}")
-    public ResponseEntity<Resource> downloadFile(@PathVariable("fileName") String fileName, HttpServletRequest request){
+    public ResponseEntity<String> downloadFile(@PathVariable("fileName") String fileName, HttpServletRequest request) throws IOException {
 
         Optional<User> user=userRepository.findByUsername(fileName);
 
@@ -79,8 +79,8 @@ public class ProfileController {
         }
 
         return ResponseEntity.ok()
-                .contentType(MediaType.parseMediaType(contentType))
-                .body(resource);
+
+                .body(resource.getFile().getName());
     }
 
 }
