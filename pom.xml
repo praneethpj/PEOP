@@ -107,6 +107,7 @@
                 </configuration>
             </plugin>
         </plugins>
+        <finalName>peop-java</finalName>
     </build>
 
 </project>

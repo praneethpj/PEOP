@@ -1,21 +1,36 @@
+#version: 0.2
+#
+#phases:
+#  install:
+#    runtime-versions:
+#      java: corretto11
+#  build:
+#    commands:
+#      - echo Build started on `date`
+#      - mvn install
+#  post_build:
+#    commands:
+#      - echo Build completed
+##      - mvn package
+#artifacts:
+#  files:
+#    - build/libs/*.jar
+#    - scripts/*.sh
+#    - appspec.yml
+#  #com/mycompany/app/HelloWorld.java, specifying yes will place this file in /HelloWorld.java
+#  discard-paths: yes
+
 version: 0.2
 
 phases:
-  install:
-    runtime-versions:
-      java: corretto11
   build:
     commands:
-      - echo Build started on `date`
-      - mvn install
+      - echo Entered the build phase...
+      - mvn clean package
   post_build:
     commands:
-      - echo Build completed
-#      - mvn package
+      - echo Build completed successfully
 artifacts:
   files:
-    - build/libs/*.jar
-    - scripts/*.sh
-    - appspec.yml
-  #com/mycompany/app/HelloWorld.java, specifying yes will place this file in /HelloWorld.java
+    - target/peop-java.jar
   discard-paths: yes
