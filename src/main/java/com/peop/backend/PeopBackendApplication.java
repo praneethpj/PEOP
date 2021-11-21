@@ -15,9 +15,9 @@ import java.util.TimeZone;
         PeopBackendApplication.class,
         Jsr310JpaConverters.class
 })
-@EnableConfigurationProperties({
-        FileStorageProperties.class
-})
+//@EnableConfigurationProperties({
+//        FileStorageProperties.class
+//})
 public class PeopBackendApplication {
     @PostConstruct
     void init() {
