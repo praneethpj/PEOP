@@ -1,6 +1,6 @@
 package com.peop.backend.controller;
 
-import com.peop.backend.fileupload.FileResponse;
+//import com.peop.backend.fileupload.FileResponse;
 //import com.peop.backend.fileupload.FileStorageService;
 import com.peop.backend.model.User;
 import com.peop.backend.repository.UserRepository;
@@ -40,24 +40,24 @@ public class ProfileController {
 //    private FileStorageService fileStorageService;
 
 
-    @PutMapping(value = "/profileupload", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    @PreAuthorize("hasRole('USER')")
-    public ResponseEntity<FileResponse> uploadFile(@CurrentUser UserPrincipal currentUser, @RequestParam("file") MultipartFile file){
-      //  String fileName = fileStorageService.storeFile(file,""+currentUser.getId()+".png");
-        String fileName =  "";
-        String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
-                .path("/FuturePlan/PeoProp/popprep/public/assets/profileImg/")
-                .path(fileName)
-                .toUriString();
-
-
-
-        FileResponse fileResponse = new FileResponse(fileName, fileDownloadUri, file.getContentType(), file.getSize());
-        Optional<User> user=userRepository.findById(currentUser.getId());
-        user.get().setProfileImage(fileResponse.getFileDownloadUri());
-        userRepository.save(user.get());
-        return new ResponseEntity<FileResponse>(fileResponse,HttpStatus.OK);
-    }
+//    @PutMapping(value = "/profileupload", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+//    @PreAuthorize("hasRole('USER')")
+//    public ResponseEntity<FileResponse> uploadFile(@CurrentUser UserPrincipal currentUser, @RequestParam("file") MultipartFile file){
+//      //  String fileName = fileStorageService.storeFile(file,""+currentUser.getId()+".png");
+//        String fileName =  "";
+//        String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
+//                .path("/FuturePlan/PeoProp/popprep/public/assets/profileImg/")
+//                .path(fileName)
+//                .toUriString();
+//
+//
+//
+//        FileResponse fileResponse = new FileResponse(fileName, fileDownloadUri, file.getContentType(), file.getSize());
+//        Optional<User> user=userRepository.findById(currentUser.getId());
+//        user.get().setProfileImage(fileResponse.getFileDownloadUri());
+//        userRepository.save(user.get());
+//        return new ResponseEntity<FileResponse>(fileResponse,HttpStatus.OK);
+//    }
 
     @GetMapping("/{fileName}")
     public ResponseEntity<String> downloadFile(@PathVariable("fileName") String fileName, HttpServletRequest request) throws IOException {
