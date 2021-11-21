@@ -22,7 +22,7 @@ import org.springframework.web.multipart.MultipartFile;
 /**
  * @author Praneethpj
  */
-@Service
+//@Service
 public class FileStorageService {
 
 
