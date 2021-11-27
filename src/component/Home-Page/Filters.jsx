@@ -1,6 +1,7 @@
 
 
 import React, { Component } from 'react'
+import { Carousel } from 'react-bootstrap';
 import Headers from './Header';
 import Products from './Products';
  
@@ -10,42 +11,60 @@ export class Filters extends Component {
         return (
             <div classNameName="App">
            
-               <section className="section-pagetop bg">
-               <div className="container">
-                   <h2 className="title-page">Category products</h2>
-                   <nav>
-                   <ol className="breadcrumb text-white">
-                       <li className="breadcrumb-item"><a href="#">Home</a></li>
-                       <li className="breadcrumb-item"><a href="#">Best category</a></li>
-                       <li className="breadcrumb-item active" aria-current="page">Great articles</li>
-                   </ol>  
-                   </nav>
-               </div> 
-               </section>
+           <Carousel fade>
+  <Carousel.Item>
+    <img
+      className="d-block w-100"
+      src="https://img.indiefolio.com/fit-in/1100x0/filters:format(webp):fill(transparent)/project/body/560691cf8037ca3458f959d3454508a9.jpg"
+      alt="First slide"
+    />
+    <Carousel.Caption>
+      <h3>First slide label</h3>
+      <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+    </Carousel.Caption>
+  </Carousel.Item>
+  <Carousel.Item>
+    <img
+      className="d-block w-100"
+      src="https://img.indiefolio.com/fit-in/1100x0/filters:format(webp):fill(transparent)/project/body/b47508f71e213ff92ad4bd122647e1fb.jpg"
+      alt="Second slide"
+    />
+
+    <Carousel.Caption>
+      <h3>Second slide label</h3>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+    </Carousel.Caption>
+  </Carousel.Item>
+  <Carousel.Item>
+    <img
+      className="d-block w-100"
+      src="https://img.indiefolio.com/fit-in/1100x0/filters:format(webp):fill(transparent)/project/body/4b74020d028c7286d24c604a7399b84e.jpg"
+      alt="Third slide"
+    />
+
+    <Carousel.Caption>
+      <h3>Third slide label</h3>
+      <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
+    </Carousel.Caption>
+  </Carousel.Item>
+</Carousel>
              
                <section className="section-content padding-y">
                <div className="container">
                <div className="row">
-                   <aside className="col-md-3">
+                   <aside className="">
                        
-               <div className="card">
+               {/* <div className="card">
                    <article className="filter-group">
                        <header className="card-header">
                            <a href="#" data-toggle="collapse" data-target="#collapse_1" aria-expanded="true" className="">
                                <i className="icon-control fa fa-chevron-down"></i>
-                               <h6 className="title">Product type</h6>
+                               <h6 className="title">Professionals</h6>
                            </a>
                        </header>
                        <div className="filter-content collapse show" id="collapse_1">
                            <div className="card-body">
-                               <form className="pb-3">
-                               <div className="input-group">
-                                 <input type="text" className="form-control" placeholder="Search" />
-                                 <div className="input-group-append">
-                                   <button className="btn btn-light" type="button"><i className="fa fa-search"></i></button>
-                                 </div>
-                               </div>
-                               </form>
+                          
                                
                                <ul className="list-menu">
                                <li><a href="#">People  </a></li>
@@ -177,7 +196,7 @@ export class Filters extends Component {
                        </div>
                        
                    </article> 
-               </div> 
+               </div>  */}
                
                    </aside> 
                

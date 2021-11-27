@@ -41,7 +41,7 @@ export const ADropdown =()=> {
           {
             let base64ImageString = Buffer.from(response.data, 'binary').toString('base64')
             setProfile(response.data);
-            console.log("profile "+profileImg);
+            console.log("profile "+selectUser.user);
             //setAppointments(response.data);
           }
           //  addNotify("Success", JSON.stringify(response));
@@ -76,7 +76,7 @@ export const ADropdown =()=> {
             id="dropdownMenuButton"
             data-toggle="dropdown"
             aria-haspopup="true"
-            src={ "/assets/profileImg/"+profileImg ||"https://i.pinimg.com/474x/8c/70/8b/8c708b478e0e71f7599b75b9cc108ddf.jpg"}  
+            src={ profileImg!=""?"/assets/profileImg/"+profileImg :"https://i.pinimg.com/474x/8c/70/8b/8c708b478e0e71f7599b75b9cc108ddf.jpg"}  
            
            />
           <div className={`dropdown-menu${isOpen ? " show" : ""}`} aria-labelledby="dropdownMenuButton">

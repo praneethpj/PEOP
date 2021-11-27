@@ -497,7 +497,7 @@ export default function ApplyProfession() {
             "chargesperHour": details.chargesperHour,
             "timeSlot": {
 
-                "timeWeekDays": [
+                "timeSlot": [
                     {
                         "dayname": "0",//[JSON.parse(sundayTime[0])]
                         "times":JSON.parse(`[`+sundayTime+`]`),
@@ -593,12 +593,8 @@ export default function ApplyProfession() {
                             value={
                                 details.professionName
                             }
-                            onChange={
-                                (e) => setDetails({
-                                    ...details,
-                                    professionName: e.target.value
-                                })
-                            }/>
+                            onChange={(e)=>setDetails({...details,professionName: e.target.value})}
+                           />
                         <input className="form-control" type="text" placeholder="description" name="description" id="description"
                             value={
                                 details.description

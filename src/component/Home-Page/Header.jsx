@@ -63,12 +63,15 @@ const Headers = ()=> {
                    <div className="col-lg-6 col-sm-12">
                        <form action="#" className="search">
                            <div className="input-group w-100">
-                               <input type="text" className="form-control" placeholder="Search" />
-                               <div className="input-group-append">
-                                 <button className="btn btn-primary" type="submit">
-                                   <i className="fa fa-search"></i>
-                                 </button>
-                               </div>
+                           <div className="input-group col-md-12">
+                <input className="form-control py-2 border-right-0 border" type="search" defaultValue="search" placeholder="I want a Mechaniery" id="example-search-input" />
+                <span className="input-group-append">
+                <div className="btn btn-outline-secondary border-left-0 border">
+                <i className="fa fa-search"></i>
+                </div>
+                </span>
+            </div>
+
                            </div>
                        </form> 
                    </div> 
