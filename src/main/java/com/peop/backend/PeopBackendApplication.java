@@ -1,6 +1,7 @@
 package com.peop.backend;
 
 
+import com.peop.backend.fileupload.FileStorageProperties;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
@@ -15,9 +16,9 @@ import java.util.TimeZone;
         PeopBackendApplication.class,
         Jsr310JpaConverters.class
 })
-//@EnableConfigurationProperties({
-//        FileStorageProperties.class
-//})
+@EnableConfigurationProperties({
+        FileStorageProperties.class
+})
 public class PeopBackendApplication {
     @PostConstruct
     void init() {

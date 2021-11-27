@@ -2,6 +2,8 @@ package com.peop.backend.controller;
 
 //import com.peop.backend.fileupload.FileResponse;
 //import com.peop.backend.fileupload.FileStorageService;
+import com.peop.backend.fileupload.FileResponse;
+import com.peop.backend.fileupload.FileStorageService;
 import com.peop.backend.model.User;
 import com.peop.backend.repository.UserRepository;
 import com.peop.backend.security.CurrentUser;
@@ -36,28 +38,28 @@ public class ProfileController {
     @Autowired
     UserRepository userRepository;
 
-//    @Autowired
-//    private FileStorageService fileStorageService;
+    @Autowired
+    private FileStorageService fileStorageService;
 
 
-//    @PutMapping(value = "/profileupload", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-//    @PreAuthorize("hasRole('USER')")
-//    public ResponseEntity<FileResponse> uploadFile(@CurrentUser UserPrincipal currentUser, @RequestParam("file") MultipartFile file){
-//      //  String fileName = fileStorageService.storeFile(file,""+currentUser.getId()+".png");
-//        String fileName =  "";
-//        String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
-//                .path("/FuturePlan/PeoProp/popprep/public/assets/profileImg/")
-//                .path(fileName)
-//                .toUriString();
-//
-//
-//
-//        FileResponse fileResponse = new FileResponse(fileName, fileDownloadUri, file.getContentType(), file.getSize());
-//        Optional<User> user=userRepository.findById(currentUser.getId());
-//        user.get().setProfileImage(fileResponse.getFileDownloadUri());
-//        userRepository.save(user.get());
-//        return new ResponseEntity<FileResponse>(fileResponse,HttpStatus.OK);
-//    }
+    @PutMapping(value = "/profileupload", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    @PreAuthorize("hasRole('USER')")
+    public ResponseEntity<FileResponse> uploadFile(@CurrentUser UserPrincipal currentUser, @RequestParam("file") MultipartFile file){
+      //  String fileName = fileStorageService.storeFile(file,""+currentUser.getId()+".png");
+        String fileName =  "";
+        String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
+                .path("/FuturePlan/PeoProp/popprep/public/assets/profileImg/")
+                .path(fileName)
+                .toUriString();
+
+
+
+        FileResponse fileResponse = new FileResponse(fileName, fileDownloadUri, file.getContentType(), file.getSize());
+        Optional<User> user=userRepository.findById(currentUser.getId());
+        user.get().setProfileImage(fileResponse.getFileDownloadUri());
+        userRepository.save(user.get());
+        return new ResponseEntity<FileResponse>(fileResponse,HttpStatus.OK);
+    }
 
     @GetMapping("/{fileName}")
     public ResponseEntity<String> downloadFile(@PathVariable("fileName") String fileName, HttpServletRequest request) throws IOException {
@@ -65,26 +67,26 @@ public class ProfileController {
         Optional<User> user=userRepository.findByUsername(fileName);
 
 
-//        Resource resource = fileStorageService.loadFileAsResource(""+user.get().getId()+".png");
-//
-//        String contentType = null;
-//
-//        try {
-//            contentType = request.getServletContext().getMimeType(resource.getFile().getAbsolutePath());
-//        }catch(IOException ex) {
-//            System.out.println("Could not determine fileType");
-//        }
-//
-//        if(contentType==null) {
-//            contentType = "application/octet-stream";
-//        }
+        Resource resource = fileStorageService.loadFileAsResource(""+user.get().getId()+".png");
 
-//        return ResponseEntity.ok()
-//
-//                .body(resource.getFile().getName());
+        String contentType = null;
+
+        try {
+            contentType = request.getServletContext().getMimeType(resource.getFile().getAbsolutePath());
+        }catch(IOException ex) {
+            System.out.println("Could not determine fileType");
+        }
+
+        if(contentType==null) {
+            contentType = "application/octet-stream";
+        }
+
         return ResponseEntity.ok()
 
-                .body("tt");
+                .body(resource.getFile().getName());
+//        return ResponseEntity.ok()
+//
+//                .body("tt");
     }
 
 }
