@@ -13,7 +13,8 @@ import moment from 'moment';
 import Loading from '../Home-Page/Loading';
 import  { useEffect } from "react";
 import ProfileHistory from './appoinment-sub/ProfileHistory';
-
+import Popup from 'reactjs-popup';
+import { Table } from 'react-bootstrap';
 export default function ApplyProfession() {
     const [details, setDetails] = useState({professionName: "", description: "", chargesperHour: ""})
     const history = useHistory();
@@ -42,7 +43,7 @@ export default function ApplyProfession() {
    const [sundayTime, setSundayTime] = useState([]);
    const [profilehistory,setProfilehistory]=useState([]);
    //let sundayTime=new Object();
-   
+   const [basic, setBasic] = useState(true);
     let next = false;
     let nextwedneday = false;
 
@@ -50,6 +51,8 @@ export default function ApplyProfession() {
     //      "Paris", "Marseille", "Lille", "Lyon",
 
     // ];
+
+
 
     useEffect(() => {
         const getProfession = {
@@ -585,16 +588,25 @@ export default function ApplyProfession() {
 
                 {profilehistory.length !==0 ?<ProfileHistory details={profilehistory}/>:
                 <Centerdiv>
+                    
                     <form className="login_form"
                         onSubmit={
                             (e) => registernewprofession(e)
                     }>
-                        <input className="form-control" type="text" placeholder="professionName" name="professionName"
+
+                        {basic==true?
+                        <div className="mt-5 mb-5">
+                                <div className="form-group">
+                    <label>What is your Profession</label>
+ <input className="form-control" type="text" placeholder="professionName" name="professionName"
                             value={
                                 details.professionName
                             }
                             onChange={(e)=>setDetails({...details,professionName: e.target.value})}
                            />
+                           </div>
+                           <div className="form-group">
+                    <label>Briefly Describe about it</label>
                         <input className="form-control" type="text" placeholder="description" name="description" id="description"
                             value={
                                 details.description
@@ -605,6 +617,9 @@ export default function ApplyProfession() {
                                     description: e.target.value
                                 })
                             }/>
+                            </div>
+                            <div className="form-group">
+                    <label>How much charge you per hour</label>
                         <input className="form-control" type="text" placeholder="chargesperHour" name="chargesperHour" id="chargesperHour"
                             value={
                                 details.chargesperHour
@@ -617,7 +632,16 @@ export default function ApplyProfession() {
                             }/>
 
 
-                        <select className="form-control"
+                            </div>
+                            <div className="form-group">
+                            <input type="button" className="btn btn-success" value="Next Step" onClick={()=>setBasic(false)}/>
+                           </div>
+                            </div>
+                        :
+                        <div className="mt-5 mb-5">
+                            <div className="form-group">
+                            <label>Select a day</label>
+                             <select className="form-control"
                             onChange={changeDay}>
                             <option selected={
                                     selectday === "Sunday"
@@ -657,9 +681,12 @@ export default function ApplyProfession() {
                                 key="6"
                                 value="Saturday">Saturday</option>
                         </select>
+</div>
 
-
-                        <div>
+<div className="form-group">
+<label>Select Call duration</label>
+</div>
+                            <div>
                             <input type="radio" value="5" name="gender" id="5"
                                 checked={
                                     timegap === "5"
@@ -709,8 +736,10 @@ export default function ApplyProfession() {
                                 onChange={changeTimegap}/>
                             60 Minitues
                         </div>
-
-
+                      
+                        <div className="form-group">
+<label>Select Time Range</label>
+</div>
                         <select className="form-control"
                             onChange={handleSelectTime}>
 
@@ -723,14 +752,21 @@ export default function ApplyProfession() {
                                     {v} </option>
                             ))
                         } </select>
+                        <div className="form-group">
+ 
+</div>
                         <button type="button" className="btn btn-success"
                             onClick={handleTimes}>
-                            Add
+                            Add to Table
                         </button>
+
+                                     <div className="form-group">
+ 
+</div>  
                         {/* <input className="form-control" type="text" disabled placeholder="" name="times"
                             value={times}
                             onChange={setTimes}/> */}
-                        <table>
+                        <Table stripped bordered hover size="sm" >
                             <thead>
                                 <tr>
                                     <th>ID</th>
@@ -859,12 +895,32 @@ export default function ApplyProfession() {
                                     </tr>
                                 ))
                             } </tbody>
-                        </table>
+                        </Table>
+                        <div className="form-group">
+ 
 
+                        <input type="button" className="btn btn-success" value="Back to basic details" onClick={()=>setBasic(true)}/>
+                        
                         <button type="submit" className="btn btn-success" >
-                            Submit
+                            Apply to Profession
                         </button>
+                        </div>
+                            </div>}
+                       
+
+
+                       
                     </form>
+                    {/* <Popup trigger={<button>Trigger</button>} position="top left">
+    {close => (
+      <div>
+        Content here
+        <a className="close" onClick={close}>
+          &times;
+        </a>
+      </div>
+    )}
+  </Popup> */}
                 </Centerdiv>
                 }
             </>
