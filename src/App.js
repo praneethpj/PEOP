@@ -15,6 +15,7 @@ import PaymentPay from './component/Profiles/PaymentPay';
 import Room from './component/VideoCall/Containers/RoomPage'
 import { VideoCallMainPage } from './component/VideoCall/Containers/VideoCallMainPage';
 import SignIn from './component/authentication/SignIn';
+import Signup from './component/authentication/Signup';
 import Dashboard from './component/dashboard/Appinments';
 import DashboardProfile from './component/dashboard/DashboardProfile';
 import DashboardHistory from './component/dashboard/DashboardHistory';
@@ -67,6 +68,9 @@ function App() {
           </Route>
           <Route path="/signin">
             <SignIn />
+          </Route>
+          <Route path="/signup">
+            <Signup />
           </Route>
           <Route path="/dashboard">
             <Dashboard/>

@@ -11,9 +11,12 @@ import Loading from '../Home-Page/Loading';
 import ReactNotification from 'react-notifications-component'
 import 'react-notifications-component/dist/theme.css'
 import { store } from 'react-notifications-component';
+import "../../styles/Auth.css";
+import { Carousel } from 'react-bootstrap';
+ 
 
 export default function SignIn() {
-
+     
     const [details,setDetails]=useState({name:"",username:"",email:"",password:""})
  
     const [login,setLogin]=useState({username:"",password:""})
@@ -28,7 +31,13 @@ export default function SignIn() {
         history.push(`/dashboard`);
     }
     
+    const onCallSignup=()=>{
+        
+        let path = `/signup`; 
+        history.push(path);
+//alert(pid);
 
+     }
     const addNotify=(t,e)=> {
         store.addNotification({
             title: t,
@@ -86,42 +95,6 @@ useEffect(async () => {
          dispatch(loadingVisibility({visibility:"false"}));
  }
 
-    const handleSubmit=(e)=>{
-       e.preventDefault();
-       dispatch(loadingVisibility({visibility:"true"}));
-
- 
-       const signUp={
-      
-        "name":details.name,
-        "username":details.username,
-        "email":details.email,
-        "password":details.password
-    };
-    console.log("signUp "+signUp);
-    axios.post('http://localhost:5000/api/auth/signup', signUp,{
-        "headers": {
-          'Content-Type': 'application/json',
-        }})
-        .then(response => {console.log(response);addNotify("Success",JSON.stringify(response.data.message));})
-        .catch(error => {
-             addNotify("Error",JSON.stringify(error.response.data.message));
-            console.log(error.response.data);
-            // console.log(error.response.status);
-            // console.log(error.response.headers);
-        });
-    
-    
- 
-
-        // dispatch(signedUser({
-        //     user:"praneeth" 
-        // }));
-
-        
-        dispatch(loadingVisibility({visibility:"false"}));
-        // console.log(selectUser);
-    }
 
     
 
@@ -130,38 +103,47 @@ useEffect(async () => {
         <Headers/>
         <ReactNotification />
         <Loading />
-        <div className="login">
+        <div class="divider"  >
+   
+</div>
+        <div className="container mt-5 mb-5">
         <div class="d-flex p-2">
-        <div className="col-md-8 ">
+        <div className="col-md-12 center-block">
             <div className="row">
                 <div className="col-md-6">
-               
-                <form className="login_form" onSubmit={(e)=>handleLoginSubmit(e)}>
-           
-                <input className="form-control" type="text" placeholder="Username" name="lusername" value={login.username} onChange={(e)=>setLogin({...details,username:e.target.value})}/>
-   
-                <input className="form-control" type="password" placeholder="Password" name="lpassword" id="lpassword" value={login.password} onChange={(e)=>setLogin({...login,password:e.target.value})}/>
+                <div class="jumbotron">
+  <h2 class="display-4">Hi Folk Back Again</h2>
+  <p>
+   We are glad to see you again.
+</p>
 
-<button type="submit" className="btn btn-success" >
+</div>
+                </div>
+                <div className="col-md-6">
+                <div class="col-md-12 col-sm-12 col-xs-12 ">
+                <form className="login_form" onSubmit={(e)=>handleLoginSubmit(e)}>
+                <div className="form-group">
+                    <label>Username</label>
+                    <input className="form-control"  type="text" placeholder="Enter Your Username" name="lusername" value={login.username} onChange={(e)=>setLogin({...details,username:e.target.value})}/>
+                </div>
+                <div className="form-group">
+                    <label>Password</label>
+                   
+                    <input className="form-control"  placeholder="Enter password" type="password" placeholder="Enter your Password" name="lpassword" id="lpassword" value={login.password} onChange={(e)=>setLogin({...login,password:e.target.value})}/>
+                </div>
+   
+                
+
+<button type="submit" className="btn btn-primary btn-block" >
 Submit
 </button>
+<p className="forgot-password text-right">
+                    Dont have Account? <a href="#" onClick={()=>onCallSignup()}>sign up</a>
+                </p>
             </form>
                     </div>
-                    <div className="col-md-6">
-       
-            <form className="login_form" onSubmit={(e)=>handleSubmit(e)}>
-                <input className="form-control" type="text" placeholder="Name" name="name" value={details.name} onChange={(e)=>setDetails({...details,name:e.target.value})}/>
-                <input className="form-control" type="text" placeholder="Username" name="username" id="username" value={details.username} onChange={(e)=>setDetails({...details,username:e.target.value})}/>
-                <input className="form-control" type="text" placeholder="Email" name="email" id="email" value={details.email} onChange={(e)=>setDetails({...details,email:e.target.value})}/>
-                <input className="form-control" type="password" placeholder="Password" name="password" id="password" value={details.password} onChange={(e)=>setDetails({...details,password:e.target.value})}/>
-
-<button type="submit" className="btn btn-success" >
-Submit
-</button>
-            </form>
-            
-      
-        </div>
+                    </div>
+          
         </div>
         </div>
         </div>

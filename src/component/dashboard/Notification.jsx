@@ -6,7 +6,7 @@ import Headers from '../Home-Page/Header';
  
 import Sidebar from './Side-bar';
 
-const SOCKET_URL = 'http://localhost:5000/ws-message';
+const SOCKET_URL = 'http://localhost:5000/topic/messages';
 export default function Notification() {
     const [message, setMessage] = useState('You server message here.');
 
