@@ -52,7 +52,7 @@ export default function ApplyProfession() {
 
     // ];
 
-
+  
 
     useEffect(() => {
         const getProfession = {
@@ -554,9 +554,9 @@ export default function ApplyProfession() {
             }
         }).then(response => {
             console.log(response);
-          //  addNotify("Success", JSON.stringify(response));
+          addNotify("Success", "You have been applied");
         }).catch(error => {
-           // addNotify("Error", JSON.stringify(error));
+           addNotify("Error", JSON.stringify(error));
             console.log(error.response.data);
             // console.log(error.response.status);
             // console.log(error.response.headers);
@@ -598,11 +598,11 @@ export default function ApplyProfession() {
                         <div className="mt-5 mb-5">
                                 <div className="form-group">
                     <label>What is your Profession</label>
- <input className="form-control" type="text" placeholder="professionName" name="professionName"
+ <input className="form-control" type="text" placeholder="professionName" name="professionName" id="professionName"
                             value={
                                 details.professionName
                             }
-                            onChange={(e)=>setDetails({...details,professionName: e.target.value})}
+                  
                            />
                            </div>
                            <div className="form-group">

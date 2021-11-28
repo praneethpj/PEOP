@@ -55,7 +55,7 @@ const Products =() =>{
         return (
             
                  
-                <main className="col-md-12">
+                <main className="col-md-12" >
                        <Loading />
                <header className="border-bottom mb-4 pb-3">
                        <div className="form-inline">
@@ -80,15 +80,15 @@ const Products =() =>{
                {data.map((d) =>  
               
               <div className="col-md-4">
-              <figure className="card card-product-grid">
+              <figure className="card card-product-grid" style={{backgroundColor:"#282c34"}}>
                   <div className="img-wrap"> 
-                      <span className="badge badge-danger"> NEW </span>
+                      {/* <span className="badge badge-danger"> NEW </span> */}
                       <img src="assets/images/items/1.jpg" />
                       {/* <a className="btn-overlay" href="#"><i className="fa fa-search-plus"></i> Quick view</a> */}
                   </div> 
-                  <figcaption className="info-wrap">
+                  <figcaption className="info-wrap" style={{textAlign:'left'}}>
                       <div className="fix-height">
-                          <a href="#" className="title">{d.name||"No Name"}</a>
+                          <a href="#" className="title" style={{color:'white'}}>{d.name||"No Name"}</a>
                           <div className="price-wrap mt-2">
                              <span className="price-old">{d.profession_name}</span>
                               <br/>

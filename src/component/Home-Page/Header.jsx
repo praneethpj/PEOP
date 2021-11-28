@@ -44,7 +44,7 @@ const Headers = ()=> {
  
   </div>
 </div>
-                 <header className="section-header">
+                 <header className="section-header"  style={{backgroundColor:"#282c34",color:"white"}}>
                  
                <section className="header-main border-bottom">
                

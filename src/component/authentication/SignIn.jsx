@@ -103,7 +103,7 @@ useEffect(async () => {
         <Headers/>
         <ReactNotification />
         <Loading />
-        <div class="divider"  >
+        <div className="divider"  >
    
 </div>
         <div className="container mt-5 mb-5">

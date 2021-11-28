@@ -9,7 +9,7 @@ import Products from './Products';
 export class Filters extends Component {
     render() {
         return (
-            <div classNameName="App">
+            <div classNameName="App" style={{backgroundColor:"#282c34"}}>
            
            <Carousel fade>
   <Carousel.Item>
