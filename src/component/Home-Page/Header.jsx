@@ -44,9 +44,9 @@ const Headers = ()=> {
  
   </div>
 </div>
-                 <header className="section-header"  style={{backgroundColor:"#282c34",color:"white"}}>
+                 <header className="section-header"  style={{backgroundColor:"rgb(16, 16, 16)",color:"white"}}>
                  
-               <section className="header-main border-bottom">
+               <section className="header-main ">
                
                    <div className="container-fluid">
                      <div className="widgets-wrap float-md-left">

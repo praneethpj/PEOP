@@ -57,9 +57,9 @@ const Products =() =>{
                  
                 <main className="col-md-12" >
                        <Loading />
-               <header className="border-bottom mb-4 pb-3">
+               <header className="mb-4 pb-3">
                        <div className="form-inline">
-                           <span className="mr-md-auto">Newly Professions</span>
+                           <span className="mr-md-auto"><h2>Newly Professions</h2></span>
                            {/* <select className="mr-2 form-control">
                                <option>Latest items</option>
                                <option>Trending</option>
@@ -76,21 +76,26 @@ const Products =() =>{
                </header>
                <div className="row">
 
+                
               
                {data.map((d) =>  
               
-              <div className="col-md-4">
-              <figure className="card card-product-grid" style={{backgroundColor:"#282c34"}}>
+              <div className="col-md-3 col-sm-6" onClick={()=>onCallHandler(d.id)} style={{cursor:'pointer'}}>
+                    <div class="product-grid">
+              <figure className="card card-product-grid" style={{backgroundColor:"rgb(16, 16, 16)"}}>
                   <div className="img-wrap"> 
+                  <div class="product-image">
                       {/* <span className="badge badge-danger"> NEW </span> */}
-                      <img src="assets/images/items/1.jpg" />
+                      <img src="assets/images/items/1.jpg" style={{position:'relative'}} />
                       {/* <a className="btn-overlay" href="#"><i className="fa fa-search-plus"></i> Quick view</a> */}
                   </div> 
+                  </div>
+                  <div class="product-content">
                   <figcaption className="info-wrap" style={{textAlign:'left'}}>
                       <div className="fix-height">
-                          <a href="#" className="title" style={{color:'white'}}>{d.name||"No Name"}</a>
+                      <h3 class="title">{d.name||"No Name"}</h3>
                           <div className="price-wrap mt-2">
-                             <span className="price-old">{d.profession_name}</span>
+                          <h4 class="title"> <span className="price-old">{d.profession_name}</span></h4>
                               <br/>
                               <span className="price">{d.chargesperHour}</span>
                              
@@ -98,7 +103,9 @@ const Products =() =>{
                       </div>
                       <Button  onClick={()=>onCallHandler(d.id)} className="btn btn-block btn-primary">Call</Button>
                   </figcaption>
+                  </div>
               </figure>
+              </div>
           </div> 
 
        )}
