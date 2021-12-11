@@ -86,7 +86,7 @@ const Products =() =>{
                   <div className="img-wrap"> 
                   <div class="product-image">
                       {/* <span className="badge badge-danger"> NEW </span> */}
-                      <img src="assets/images/items/1.jpg" style={{position:'relative'}} />
+                      <img src="assets/images/items/1.jpg" style={{position:'relative'}} class="zoom"/>
                       {/* <a className="btn-overlay" href="#"><i className="fa fa-search-plus"></i> Quick view</a> */}
                   </div> 
                   </div>
@@ -101,7 +101,7 @@ const Products =() =>{
                              
                           </div>
                       </div>
-                      <Button  onClick={()=>onCallHandler(d.id)} className="btn btn-block btn-primary">Call</Button>
+                      {/* <Button  onClick={()=>onCallHandler(d.id)} className="btn btn-block btn-primary">Call</Button> */}
                   </figcaption>
                   </div>
               </figure>
