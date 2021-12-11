@@ -77,27 +77,37 @@ const Products =() =>{
                <div className="row">
 
                 
-              
+              {  console.log(data)}
                {data.map((d) =>  
-              
+            
               <div className="col-md-3 col-sm-6" onClick={()=>onCallHandler(d.id)} style={{cursor:'pointer'}}>
                     <div class="product-grid">
               <figure className="card card-product-grid" style={{backgroundColor:"rgb(16, 16, 16)"}}>
                   <div className="img-wrap"> 
                   <div class="product-image">
                       {/* <span className="badge badge-danger"> NEW </span> */}
-                      <img src="assets/images/items/1.jpg" style={{position:'relative'}} class="zoom"/>
+                      {/* <img src="assets/images/items/1.jpg" style={{position:'relative'}} class="zoom"/> */}
+                        <img
+            className="zoom"
+            type="button"
+            id="dropdownMenuButton"
+            data-toggle="dropdown"
+            aria-haspopup="true"
+          
+            src={ d[4]!=null?"/assets/profileImg/"+d[0]+".png" :"https://i.pinimg.com/474x/8c/70/8b/8c708b478e0e71f7599b75b9cc108ddf.jpg"}  
+            
+           />
                       {/* <a className="btn-overlay" href="#"><i className="fa fa-search-plus"></i> Quick view</a> */}
                   </div> 
                   </div>
                   <div class="product-content">
                   <figcaption className="info-wrap" style={{textAlign:'left'}}>
                       <div className="fix-height">
-                      <h3 class="title">{d.name||"No Name"}</h3>
+                      <h3 class="title">{d[1]||"No Name"}</h3>
                           <div className="price-wrap mt-2">
-                          <h4 class="title"> <span className="price-old">{d.profession_name}</span></h4>
+                          <h4 class="title"> <span className="price-old">{d[3]}</span></h4>
                               <br/>
-                              <span className="price">{d.chargesperHour}</span>
+                              <span className="price">{d[3]}</span>
                              
                           </div>
                       </div>
