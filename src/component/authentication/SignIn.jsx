@@ -12,7 +12,7 @@ import ReactNotification from 'react-notifications-component'
 import 'react-notifications-component/dist/theme.css'
 import { store } from 'react-notifications-component';
 import "../../styles/Auth.css";
-import { Carousel } from 'react-bootstrap';
+import { Carousel, Col, Toast, ToastContainer } from 'react-bootstrap';
  
 
 export default function SignIn() {
@@ -26,6 +26,10 @@ export default function SignIn() {
     const history=useHistory();
 
     const  dispatch = useDispatch();
+
+    const [show, setShow] = useState(false);
+
+    const [alertBody,setalertBody]=useState("");
 
     if(localStorage.getItem("token")!=null && selectUser!=null){
         history.push(`/dashboard`);
@@ -87,8 +91,18 @@ useEffect(async () => {
         }));
         })
          .catch(error => {
+            if (error.response) {
+                // console.log(error.response.data);
+                // console.log(error.response.status);
+                // console.log(error.response.headers);
+                console.log("error "+error.response.data.error);
+                if(error.response.status===401){
+                    setalertBody("Invalid Username or Password");
+                    setShow(true);
+                }
+                 
+              }
       
-             console.log(error.response);
              // console.log(error.response.status);
              // console.log(error.response.headers);
          });
@@ -103,8 +117,24 @@ useEffect(async () => {
         <Headers/>
         <ReactNotification />
         <Loading />
+        <ToastContainer className="p-1" position="top-end">
+             
+             <Toast onClose={() => setShow(false)} show={show} delay={3000} autohide>
+               {/* <Toast.Header> */}
+                 {/* <img
+                   src="holder.js/20x20?text=%20"
+                   className="rounded me-2"
+                   alt=""
+                 /> */}
+                 {/* <strong className="me-auto">Error</strong> */}
+                 {/* <small>11 mins ago</small> */}
+               {/* </Toast.Header> */}
+               <Toast.Body className="Danger" style={{color:"black"}}>{alertBody}</Toast.Body>
+             </Toast>
+          
+           </ToastContainer>
         <div className="divider"  >
-   
+       
 </div>
         <div className="container mt-5 mb-5">
         <div class="d-flex p-2">
@@ -118,8 +148,11 @@ useEffect(async () => {
 </p>
 
 </div>
+
                 </div>
+                
                 <div className="col-md-6">
+    
                 <div class="col-md-12 col-sm-12 col-xs-12 ">
                 <form className="login_form" onSubmit={(e)=>handleLoginSubmit(e)}>
                 <div className="form-group">
