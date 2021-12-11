@@ -80,7 +80,7 @@ const Products =() =>{
               {  console.log(data)}
                {data.map((d) =>  
             
-              <div className="col-md-3 col-sm-6" onClick={()=>onCallHandler(d.id)} style={{cursor:'pointer'}}>
+              <div className="col-md-3 col-sm-6" onClick={()=>onCallHandler(d[0])} style={{cursor:'pointer'}}>
                     <div class="product-grid">
               <figure className="card card-product-grid" style={{backgroundColor:"rgb(16, 16, 16)"}}>
                   <div className="img-wrap"> 
