@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from 'react'
 import Headers from '../Home-Page/Header'
 import queryString from 'query-string';
@@ -15,6 +16,7 @@ import { useDispatch } from 'react-redux';
 import { loadingVisibility } from '../../features/configurationsActivity';
  
 export default function ProfileView() {
+    
     const [date, setDate] = useState(new Date());
     const [time,SetTime]= useState("");
     const [submit,setSubmit]=useState(false)
@@ -26,7 +28,7 @@ export default function ProfileView() {
     const[avtime,setAvtime]=useState(false);
 
     const selectUser=useSelector((state)=>state.userActivity.value)
-
+    const loggeduser=useSelector((state)=>state.authActivity.user)
     console.log("userid "+selectUser.userid);
 
     const dispatch = useDispatch();
@@ -117,6 +119,14 @@ const makeCall=()=>{
     history.push(path);
 }
 
+const showUserLogin=()=>{
+  
+    history.push('/signin');
+}
+const showUserSignup=()=>{
+  
+    history.push('/signup');
+}
 // const options = [
 //     { value: '8.00', label: '8.00',disabled: true },
 //     { value: '10.00', label: '10.00' },
@@ -150,8 +160,10 @@ const makeCall=()=>{
       <Select  options={options}  isOptionDisabled={(option) => option.disabled} onChange={t=>SetTime(t)} />
      :"Please Select Difirent date"}
      <div className='mt-5'>
+     {((localStorage.getItem("token")!=null) && (loggeduser!=null ))?
      <Button className="btn btn-success" onClick={()=>paymentBtnHandler()}>Make Sheduled</Button>
-     <Button className="btn btn-danger" onClick={()=>makeCall()}>Call Now</Button>
+         : <div>  <Button className="btn btn-success" onClick={()=>showUserLogin()}>Login</Button> <Button className="btn btn-success" onClick={()=>showUserSignup()}>Sign up</Button></div>}
+     {/* <Button className="btn btn-danger" onClick={()=>makeCall()}>Call Now</Button> */}
          </div>
   </div>
 </div>

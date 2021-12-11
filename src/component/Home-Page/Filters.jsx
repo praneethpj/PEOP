@@ -1,5 +1,3 @@
-
-
 import React, { Component } from 'react'
 import { Carousel } from 'react-bootstrap';
 import Headers from './Header';
@@ -12,10 +10,12 @@ export class Filters extends Component {
     render() {
         return (
             <div classNameName="App" style={{backgroundColor:"rgb(16, 16, 16)"}}>
-                <div className="container">
+              
+                <div class="tcb-bs-fullscreen">
+         
            <Carousel fade>
   <Carousel.Item>
-  <div className="img-gradient">
+  <div className="img-gradient carousel slide carousel-bg">
     <img
       className="d-block w-100"
       src="https://img.indiefolio.com/fit-in/1100x0/filters:format(webp):fill(transparent)/project/body/560691cf8037ca3458f959d3454508a9.jpg"
