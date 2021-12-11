@@ -3,12 +3,10 @@ package com.peop.backend.controller;
 import com.peop.backend.notification.dto.Message;
 import com.peop.backend.service.WSService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
+@RequestMapping("/api/msg")
 public class WSController {
 
     @Autowired

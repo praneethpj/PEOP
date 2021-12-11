@@ -39,7 +39,8 @@ public class ProfessionalController {
 
     @GetMapping("/")
     public ResponseEntity<?> getAllProfessions(){
-        return ResponseEntity.ok().body(professionRepository.findAll());
+
+        return ResponseEntity.ok().body(professionRepository.getAllProfessionalUser());
     }
     @GetMapping("/get/{uid}")
     public ResponseEntity<?> getOneProfessions(@Valid @PathVariable  Long uid){
