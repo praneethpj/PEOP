@@ -10,6 +10,9 @@ import com.peop.backend.security.CurrentUser;
 import com.peop.backend.security.UserPrincipal;
 import com.peop.backend.service.ProfessionService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -36,11 +39,18 @@ public class ProfessionalController {
     @Autowired
     ProfessionService professionService;
 
+    @GetMapping("/allcount")
+    public ResponseEntity<?> getAllProfessionsCount(){
 
-    @GetMapping("/")
-    public ResponseEntity<?> getAllProfessions(){
+        // Pageable pageableWithSort = PageRequest.of(page, 10, Sort.by("updated_at"));
+        return ResponseEntity.ok().body(professionRepository.findAll().size());
+    }
 
-        return ResponseEntity.ok().body(professionRepository.getAllProfessionalUser());
+    @GetMapping("/{page}/{size}")
+    public ResponseEntity<?> getAllProfessions(@PathVariable int page,@PathVariable int size){
+        Pageable pageableWithSort = PageRequest.of(page, size);
+       // Pageable pageableWithSort = PageRequest.of(page, 10, Sort.by("updated_at"));
+        return ResponseEntity.ok().body(professionRepository.getAllProfessionalUser(pageableWithSort));
     }
     @GetMapping("/get/{uid}")
     public ResponseEntity<?> getOneProfessions(@Valid @PathVariable  Long uid){
