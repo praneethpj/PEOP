@@ -38,7 +38,7 @@ const Products =() =>{
         dispatch(loadingVisibility({visibility:"true"}));
  
        
-        let result=await fetch("http://localhost:5000/api/professional/"+n+"/"+perPage);
+        let result=await fetch(process.env.HOST+"/api/professional/"+n+"/"+perPage);
 
     
         
