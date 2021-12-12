@@ -143,7 +143,7 @@ const showUserSignup=()=>{
           
             <div className='container mt-5'>
             <div className="row">
-  <div className="col">                 <img
+  <div className="col-6">                 <img
         
             type="button"
             id="dropdownMenuButton"
@@ -153,24 +153,29 @@ const showUserSignup=()=>{
             src={ data.ProfileImage!=null?"/assets/profileImg/"+data.id+".png" :"https://i.pinimg.com/474x/8c/70/8b/8c708b478e0e71f7599b75b9cc108ddf.jpg"}  
             
            /></div>
-  <div className="col">
-  <div className='mt-5'>
-        <h5>Hi I am,</h5><h2>{data.name}</h2><h5>I am a </h5><h2>Professional {data.profession_name}</h2>
-        <section>
+  <div className="col-6 bar">
+ 
+  <div className="col mt-5 ">
+      <div className="mt-5">
+      <h5 className="small-title">Hi I am,</h5><div className="large-title">{data.name}</div><h5 className="small-title">I am a </h5><h2> {data.profession_name}</h2>
+        <section className="small-title">
             {data.description}
         </section>
       </div>
-  </div>
-  <div className="col mt-5">
-      Select My Available Time
+      </div>
+  <div className="mt-2">
+      Choose a  date
       <DatePicker  className="form-control" selected={date} onChange={date => dateChange(date)} />
-      
+      </div>
       {avtime==true?
+        <div className="mt-2">
+              Choose a time slot
       <Select  options={options}  isOptionDisabled={(option) => option.disabled} onChange={t=>SetTime(t)} />
-     :"Please Select Difirent date"}
+      </div>
+     :"Please Select another date"}
      <div className='mt-5'>
      {((localStorage.getItem("token")!=null) && (loggeduser!=null ))?
-     <Button className="btn btn-success" onClick={()=>paymentBtnHandler()}>Make Sheduled</Button>
+     <Button className="btn-lg btn-danger btn-block" onClick={()=>paymentBtnHandler()}>Make a schedule</Button>
          : <div>  <Button className="btn btn-success" onClick={()=>showUserLogin()}>Login</Button> <Button className="btn btn-success" onClick={()=>showUserSignup()}>Sign up</Button></div>}
      {/* <Button className="btn btn-danger" onClick={()=>makeCall()}>Call Now</Button> */}
          </div>
