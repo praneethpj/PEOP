@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router';
 import ProductList from './ProductList'
 import {selectUser} from '../../features/userActivities'
- 
+import _ from "lodash";
 import Loading from './Loading';
 import  { loadingVisibility } from '../../features/configurationsActivity';
 const Products =() =>{
@@ -13,6 +13,10 @@ const Products =() =>{
     const [data, setData] = useState([]);
     const history = useHistory();
     const dispatch = useDispatch();
+
+    const [offset,setOffset]=useState(0);
+    const [perPage,setPerpage]=useState(10);
+    const [pageCount,setPagecount]=useState([]);
 
     const details={
          name:"praneeth",
@@ -29,14 +33,37 @@ const Products =() =>{
     //     });
     //     };
 
+   const getMore=async(n)=>{
+    try{
+        dispatch(loadingVisibility({visibility:"true"}));
+ 
+       
+        let result=await fetch("http://localhost:5000/api/professional/"+n+"/"+perPage);
+
+    
+        
+        result = await result.json();
+     
+        setData(result);
+        dispatch(loadingVisibility({visibility:false}));
+       }catch(e){
+        console.log(e);
+       }
+   }
      useEffect(async () => {
         //getAllData();
        try{
         dispatch(loadingVisibility({visibility:"true"}));
+
+        let allCount=await fetch("http://localhost:5000/api/professional/allcount");
+        setPagecount(Math.ceil(allCount.length/perPage));
        
-        let result=await fetch("http://localhost:5000/api/professional/");
+        let result=await fetch("http://localhost:5000/api/professional/"+offset+"/"+perPage);
+
+    
         
         result = await result.json();
+        console.log("len "+Math.ceil(result.length/perPage));
         setData(result);
         dispatch(loadingVisibility({visibility:false}));
        }catch(e){
@@ -122,15 +149,23 @@ const Products =() =>{
                    
                     
                </div> 
+               {pageCount>=10?
                <nav className="mt-4" aria-label="Page navigation sample">
                  <ul className="pagination">
                    <li className="page-item disabled"><a className="page-link" href="#">Previous</a></li>
-                   <li className="page-item active"><a className="page-link" href="#">1</a></li>
+                   {/* <li className="page-item active"><a className="page-link" href="#">1</a></li>
                    <li className="page-item"><a className="page-link" href="#">2</a></li>
-                   <li className="page-item"><a className="page-link" href="#">3</a></li>
+                   <li className="page-item"><a className="page-link" href="#">3</a></li> */}
+                   {
+                        _.times(pageCount, (i) => (
+                            <li key={i} className="page-item" onClick={()=>getMore(i)}><a className="page-link" href="#">{i}</a></li>
+                          ))
+                
+                   }
                    <li className="page-item"><a className="page-link" href="#">Next</a></li>
                  </ul>
                </nav>
+   :""}
                    </main>
           
            
