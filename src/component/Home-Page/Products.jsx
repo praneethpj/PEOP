@@ -8,8 +8,10 @@ import {selectUser} from '../../features/userActivities'
 import _ from "lodash";
 import Loading from './Loading';
 import  { loadingVisibility } from '../../features/configurationsActivity';
-const Products =() =>{
+ 
 
+const Products =() =>{
+    
     const [data, setData] = useState([]);
     const history = useHistory();
     const dispatch = useDispatch();
