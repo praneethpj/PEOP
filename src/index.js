@@ -22,8 +22,8 @@ import Popper from 'popper.js';
 //   }
 // });
 
-//axios.defaults.baseURL='http://localhost:5000/';
-axios.defaults.baseURL='https://peop-back.herokuapp.com/';
+axios.defaults.baseURL='http://localhost:5000/';
+//axios.defaults.baseURL='https://peop-back.herokuapp.com/';
 
 ReactDOM.render(
   <React.StrictMode>

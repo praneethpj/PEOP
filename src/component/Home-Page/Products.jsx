@@ -57,10 +57,10 @@ const Products =() =>{
        try{
         dispatch(loadingVisibility({visibility:"true"}));
 
-        let allCount=await fetch("https://peop-back.herokuapp.com/api/professional/allcount");
+        let allCount=await fetch("http://localhost:5000/api/professional/allcount");
         setPagecount(Math.ceil(allCount.length/perPage));
        
-        let result=await fetch("https://peop-back.herokuapp.com/api/professional/"+offset+"/"+perPage);
+        let result=await fetch("http://localhost:5000/api/professional/"+offset+"/"+perPage);
 
     
         

@@ -23,6 +23,7 @@ import DashboardHistory from './component/dashboard/DashboardHistory';
 import ApplyProfession from './component/dashboard/ApplyProfession';
  import NextCalls from './component/dashboard/NextCalls';
  import Notification from './component/dashboard/Notification';
+import RoomPage from './component/VideoCall/Containers/RoomPage';
 
 function App() {
   return (
@@ -85,15 +86,15 @@ function App() {
             <Route path="/applyprofession">
             <ApplyProfession/>
             </Route>
-              <Route path="/calls">
-            <NextCalls/>
-            </Route>
+            <Route path="/r/:room" component={Room} />
              <Route path="/notification">
             <Notification/>
        
          
           </Route>
-          
+          <Route path="/calls">
+            <NextCalls/>
+            </Route>
           <Route path="/">
             <MainHome/>
             </Route>

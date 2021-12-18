@@ -14,7 +14,8 @@ import Loading from '../Home-Page/Loading';
 import  { useEffect } from "react";
 import ProfileHistory from './appoinment-sub/ProfileHistory';
 import Popup from 'reactjs-popup';
-import { Table } from 'react-bootstrap';
+import { Table, Toast, ToastContainer } from 'react-bootstrap';
+import AlertToast from '../Home-Page/AlertToast';
 export default function ApplyProfession() {
     const [details, setDetails] = useState({professionName: "", description: "", chargesperHour: ""})
     const history = useHistory();
@@ -52,36 +53,12 @@ export default function ApplyProfession() {
 
     // ];
 
-  
-
-    useEffect(() => {
-        const getProfession = {
-
-            "userid": selectUser.user,
-        
-            
-        
-            };
-
-            console.log(selectUser.user);
-
-        axios.post('http://localhost:5000/api/professional/getProfession', getProfession, {
-            "headers": {
-                'Content-Type': 'application/json',
-                Authorization: 'Bearer ' + localStorage.getItem("token")
-            }
-        }).then(response => {
-            console.log("profilehistory "+response.data);
-            setProfilehistory(response.data);
-            dispatch(loadingVisibility({visibility: "false"}));
-          //  addNotify("Success", JSON.stringify(response));
-        }).catch(error => {
-           // addNotify("Error", JSON.stringify(error));
-            console.log(error.response);
-            // console.log(error.response.status);
-            // console.log(error.response.headers);
-        });
-    }, [])
+    const [alertShow, setAlertShow] = useState(false);
+    const [alertBody,setalertBody]=useState("");
+    
+    // useEffect(() => {
+      
+    // }, [])
 
     const dispatch = useDispatch();
     const changeDay = (e) => {
@@ -109,6 +86,41 @@ export default function ApplyProfession() {
         setDay(e.target.value);
 
 
+    }
+
+    const applyProfessionalProfile=()=>{
+        const getProfession = {
+
+            "userid": selectUser.user,
+        
+            
+        
+            };
+
+            console.log(selectUser.user);
+
+        axios.post('http://localhost:5000/api/professional/getProfession', getProfession, {
+            "headers": {
+                'Content-Type': 'application/json',
+                Authorization: 'Bearer ' + localStorage.getItem("token")
+            }
+        }).then(response => {
+            // console.log("profilehistory "+response.status);
+            setProfilehistory(response.data);
+            dispatch(loadingVisibility({visibility: "false"}));
+          //  addNotify("Success", JSON.stringify(response));
+          setalertBody(JSON.stringify(response));
+          setAlertShow(true);
+         // setAlertShow(false);
+        }).catch(error => {
+           // addNotify("Error", JSON.stringify(error));
+            console.log(error.response);
+            setalertBody( JSON.stringify(error));
+            setAlertShow(true);
+           // setAlertShow(false);
+            // console.log(error.response.status);
+            // console.log(error.response.headers);
+        });
     }
     const changeTimegap = (e) => {
         console.log("timegap " + e.target.value)
@@ -554,9 +566,9 @@ export default function ApplyProfession() {
             }
         }).then(response => {
             console.log(response);
-          addNotify("Success", "You have been applied");
+        //  addNotify("Success", "You have been applied");
         }).catch(error => {
-           addNotify("Error", JSON.stringify(error));
+           //addNotify("Error", JSON.stringify(error));
             console.log(error.response.data);
             // console.log(error.response.status);
             // console.log(error.response.headers);
@@ -583,6 +595,22 @@ export default function ApplyProfession() {
         <div>
             <Headers/>
             <Loading/>
+            <ToastContainer className="p-1" position="top-end">
+             
+             <Toast onClose={() => setAlertShow(false)} show={alertShow} delay={3000} autohide>
+               {/* <Toast.Header> */}
+                 {/* <img
+                   src="holder.js/20x20?text=%20"
+                   className="rounded me-2"
+                   alt=""
+                 /> */}
+                 {/* <strong className="me-auto">Error</strong> */}
+                 {/* <small>11 mins ago</small> */}
+               {/* </Toast.Header> */}
+               <Toast.Body className="Danger" style={{color:"black"}}>{alertBody}</Toast.Body>
+             </Toast>
+          
+           </ToastContainer>
             <Sidebar active="applyprofession"/>
             <>
 
@@ -602,7 +630,12 @@ export default function ApplyProfession() {
                             value={
                                 details.professionName
                             }
-                  
+                            onChange={
+                                (e) => setDetails({
+                                    ...details,
+                                    professionName: e.target.value
+                                })
+                            }
                            />
                            </div>
                            <div className="form-group">
@@ -901,7 +934,7 @@ export default function ApplyProfession() {
 
                         <input type="button" className="btn btn-success" value="Back to basic details" onClick={()=>setBasic(true)}/>
                         
-                        <button type="submit" className="btn btn-success" >
+                        <button type="submit" className="btn btn-success" onClick={()=>applyProfessionalProfile()}>
                             Apply to Profession
                         </button>
                         </div>
