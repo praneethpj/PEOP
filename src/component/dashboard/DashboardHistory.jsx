@@ -129,7 +129,7 @@ export default function DashboardHistory() {
              </tbody>
            </Table>
           </div>
-           : <div>
+           :appointmentsuser.length>0? <div>
            <h4>My Appointments Status</h4>
       <Table stripped bordered hover size="sm"  >
           <thead>
@@ -156,7 +156,10 @@ export default function DashboardHistory() {
            
            </tbody>
          </Table>
-        </div>}
+        </div>: <div class="jumbotron"><h1 class="display-6">No records Available !</h1> 
+          
+          <p class="lead">Once a appointaments recived we will let you know soon as possible</p>
+          </div>  }
         </Centerdiv>
           :"No Data Available"
               }

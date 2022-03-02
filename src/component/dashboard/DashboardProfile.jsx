@@ -6,8 +6,10 @@ import axios from 'axios';
 import Dropzone, { useDropzone } from "react-dropzone";
 import { Card } from 'react-bootstrap';
 import Button from '@restart/ui/esm/Button';
+import { useState } from 'react';
 
 export default function DashboardProfile() {
+  const [details, setDetails] = useState({name: "", password: "", confirmpassword: ""})
 
  
 
@@ -183,8 +185,92 @@ const onDrop = React.useCallback((acceptedFiles) => {
               {file && (<Button onClick={()=>uploadFile()}>Upload</Button>)}
              
          </Centerdiv>
-      
+         <Centerdiv>
+            
+         <div className="mt-5 mb-5">
+                                <div className="form-group">
+                    <label>Your name</label>
+ <input className="form-control" type="text" placeholder="professionName" name="professionName" id="professionName"
+                            value={
+                                details.professionName
+                            }
+                            onChange={
+                                (e) => setDetails({
+                                    ...details,
+                                    professionName: e.target.value
+                                })
+                            }
+                           />
+                           </div>
+                           </div> 
+                           <div className="mt-5 mb-5">
+                                <div className="form-group">
+                    <label>Username</label>
+ <input className="form-control" type="text" placeholder="userName" name="userName" id="userName"
+                            value={
+                                details.professionName
+                            }
+                            onChange={
+                                (e) => setDetails({
+                                    ...details,
+                                    professionName: e.target.value
+                                })
+                            }
+                           />
+                           </div>
+                           </div> 
 
+                           <div className="mt-5 mb-5">
+                                <div className="form-group">
+                    <label>Current Password</label>
+ <input className="form-control" type="password" placeholder="currentpassword" name="currentPassword" id="currentPassword"
+                            value={
+                                details.professionName
+                            }
+                            onChange={
+                                (e) => setDetails({
+                                    ...details,
+                                    professionName: e.target.value
+                                })
+                            }
+                           />
+                           </div>
+                           </div> 
+
+                           <div className="mt-5 mb-5">
+                                <div className="form-group">
+                    <label>New Password</label>
+ <input className="form-control" type="password" placeholder="newpassword" name="newPassword" id="newPassword"
+                            value={
+                                details.professionName
+                            }
+                            onChange={
+                                (e) => setDetails({
+                                    ...details,
+                                    professionName: e.target.value
+                                })
+                            }
+                           />
+                           </div>
+                           </div> 
+
+                           <div className="mt-5 mb-5">
+                                <div className="form-group">
+                    <label>Confirm Password</label>
+ <input className="form-control" type="password" placeholder="newpassword" name="newPassword" id="newPassword"
+                            value={
+                                details.professionName
+                            }
+                            onChange={
+                                (e) => setDetails({
+                                    ...details,
+                                    professionName: e.target.value
+                                })
+                            }
+                           />
+                           </div>
+                           </div> 
+         </Centerdiv>
         </>
      
     )

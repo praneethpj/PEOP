@@ -183,7 +183,7 @@ const data = {
              </tbody>
            </Table>
           </div>
-           : <div>
+           : appointmentsuser.length>0? <div>
           <h1 class="display-6">My Available Appointments</h1>
       <Table stripped bordered hover size="sm"  >
           <thead>
@@ -211,7 +211,10 @@ const data = {
            
            </tbody>
          </Table>
-        </div>}
+        </div>:  <div class="jumbotron"><h1 class="display-6">New Calles not Available !</h1> 
+          
+          <p class="lead">Once a appointaments recived we will let you know soon as possible</p>
+          </div> }
         </Centerdiv>
           :"No Data Available"
               }

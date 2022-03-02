@@ -173,10 +173,10 @@ const data = {
          </Table>
         </div>}
         </Centerdiv>
-          :  <div class="jumbotron"><h1 class="display-6">New Appointments not Available !</h1> 
+          : <Centerdiv> <div class="jumbotron"><h1 class="display-6">New Appointments not Available !</h1> 
           
           <p class="lead">Once a appointaments recived we will let you know soon as possible</p>
-          </div>
+          </div> </Centerdiv>
               }
 </div>
         </div>

@@ -1,17 +1,26 @@
 import Button from '@restart/ui/esm/Button';
-import React, { Component } from 'react'
+import axios from 'axios';
+import React, { Component, useEffect, useState } from 'react'
 import { Spinner } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
 import { logout } from '../../features/authenticationActivities';
 import {viewProfileAs} from '../../features/profileActivities';
+import Notification from '../dashboard/Notification';
 import Loading from './Loading';
 import { ADropdown } from './sub/ADropdown';
+import { NotificationDropdown } from './sub/NotificationDropdown';
 const Headers = ()=> {
     const history = useHistory();
     const selectUser=useSelector((state)=>state.authActivity.user)
     const viewUserAs=useSelector((state)=>state.profileActivity.viewas)
 
+    const [bellCount,setBellCount]=useState(0);
+    const [amessage,setMessage]=useState("");
+
+ 
+
+    
 
 
     const  dispatch = useDispatch();
@@ -22,15 +31,14 @@ const Headers = ()=> {
         
   }
 
+
   const handleHome=()=>{
     history.push(`/`)
 }
   const handleLogin=()=>{
     history.push(`/signin`)
 }
-  const handleNotification=()=>{
-    history.push(`/notification`)
-  }
+
   const handleView=(type)=>{
        
     dispatch(viewProfileAs({viewas:type}));
@@ -38,7 +46,7 @@ const Headers = ()=> {
 
         return (
             <div>
-               
+               {/* <Notification/> */}
                 <div class="clearfix">
   <div   role="status">
  
@@ -108,8 +116,8 @@ const Headers = ()=> {
                                   <div className="col-lg-4 col-sm-6 col-12">
                                 <div className="widgets-wrap float-md-right">
                                 <div className="widget-header  mr-3">
-                               <a href="#"  onClick={()=>{ handleNotification()}} className="icon icon-sm rounded-circle border"><i className="fa fa-bell"></i></a>
-                               <span className="badge badge-pill badge-danger notify">0</span>
+                                <NotificationDropdown message={amessage.data}/>
+                               
                            </div>
                                </div>
                            </div>
