@@ -12,6 +12,7 @@ import axios from 'axios';
 import Table from 'react-bootstrap/Table'
 import styled from 'styled-components';
 import {viewProfileAs} from '../../features/profileActivities';
+import { useState } from 'react';
 
 export default function DashboardHistory() {
 
@@ -19,7 +20,9 @@ export default function DashboardHistory() {
     const history=useHistory();
     const [appointments,setAppointments]=React.useState([]);
       const [appointmentsuser,setAppointmentsUser]=React.useState([]);
-    const viewUserAs=useSelector((state)=>state.profileActivity.viewas)
+    const viewUserAs=useSelector((state)=>state.profileActivity.viewas);
+
+       const [pdet, setPdet] = useState({pname1: ""})
 
     const Centerdiv = styled.div `
     margin: auto;
@@ -90,6 +93,17 @@ export default function DashboardHistory() {
  
   return (
         <>
+         <input className="form-control" type="text" placeholder="professionName" name="professionName" id="professionName"
+                            value={
+                                pdet.pname1
+                            }
+                            onChange={
+                                (e) => setPdet({
+                                    ...pdet,
+                                    pname1: e.target.value
+                                })
+                            }
+                           />
         <Headers/>
         <Sidebar active="history"/>
         <div>
@@ -99,6 +113,7 @@ export default function DashboardHistory() {
         <Centerdiv>
     
     {viewUserAs.viewas==="2"?
+    appointments.length>0?
     <div>
              <h4> Updated Appointments Status</h4>
         <Table stripped bordered hover size="sm"  >
@@ -128,6 +143,9 @@ export default function DashboardHistory() {
              
              </tbody>
            </Table>
+          </div>
+          :<div class="jumbotron"><h1 class="display-6">New Calles not Available !</h1> 
+      
           </div>
            :appointmentsuser.length>0? <div>
            <h4>My Appointments Status</h4>

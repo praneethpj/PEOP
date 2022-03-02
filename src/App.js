@@ -24,7 +24,7 @@ import ApplyProfession from './component/dashboard/ApplyProfession';
  import NextCalls from './component/dashboard/NextCalls';
  import Notification from './component/dashboard/Notification';
 import RoomPage from './component/VideoCall/Containers/RoomPage';
-
+import ProfileEdit from './component/dashboard/ProfileEdit';
 function App() {
   return (
     <div className="App">
@@ -79,6 +79,9 @@ function App() {
             </Route>
             <Route path="/profile">
             <DashboardProfile/>
+            </Route>
+                 <Route path="/editprofile">
+            <ProfileEdit/>
             </Route>
             <Route path="/history">
             <DashboardHistory/>

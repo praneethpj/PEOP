@@ -12,7 +12,7 @@ export default function PaymentPay(props) {
   const history=useHistory();
   const [paymentdata,SetPaymentdata]=useState({"profession":"","time":"","date":"","timeid":""});
   const selectUser=useSelector((state)=>state.userActivity.value)
-    const  dispatch = useDispatch();
+  const  dispatch = useDispatch();
     
   //console.log("userid "+selectUser.userid);
     console.log(props.Submitdata)

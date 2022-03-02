@@ -154,6 +154,7 @@ const data = {
         <Centerdiv>
     
     {viewUserAs.viewas==="2" ?
+    appointmentsprofession.length>0?
     <div>
              <h1 class="display-6">Your Next Appointments</h1>
         <Table stripped bordered hover size="sm"  >
@@ -182,6 +183,9 @@ const data = {
              
              </tbody>
            </Table>
+          </div>
+          :<div class="jumbotron"><h1 class="display-6">New Calles not Available !</h1> 
+      
           </div>
            : appointmentsuser.length>0? <div>
           <h1 class="display-6">My Available Appointments</h1>

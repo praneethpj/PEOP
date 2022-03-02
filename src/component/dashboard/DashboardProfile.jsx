@@ -9,7 +9,7 @@ import Button from '@restart/ui/esm/Button';
 import { useState } from 'react';
 
 export default function DashboardProfile() {
-  const [details, setDetails] = useState({name: "", password: "", confirmpassword: ""})
+  const [details, setDetails] = useState({userName: "",professionName:"", password: "", confirmpassword: ""})
 
  
 
@@ -22,7 +22,13 @@ export default function DashboardProfile() {
 
     `;
  
+      const Centerdiv1 = styled.div `
+    margin: auto;
+ width: 50%;
+  
+ padding: 10px;
 
+    `;
  
   const dropzoneContainer =styled.div  `
     height: 300;
@@ -158,8 +164,9 @@ const onDrop = React.useCallback((acceptedFiles) => {
        <>
         <Headers/>
         <Sidebar active="profile"/>
-      
-        <Centerdiv>
+{/*       
+        <Centerdiv> */}
+        <div style={{margin:'auto',padding: '10px',width:'50%'}}>
          <form>
 
  
@@ -184,8 +191,7 @@ const onDrop = React.useCallback((acceptedFiles) => {
               />
               {file && (<Button onClick={()=>uploadFile()}>Upload</Button>)}
              
-         </Centerdiv>
-         <Centerdiv>
+       
             
          <div className="mt-5 mb-5">
                                 <div className="form-group">
@@ -208,12 +214,12 @@ const onDrop = React.useCallback((acceptedFiles) => {
                     <label>Username</label>
  <input className="form-control" type="text" placeholder="userName" name="userName" id="userName"
                             value={
-                                details.professionName
+                                details.userName
                             }
                             onChange={
                                 (e) => setDetails({
                                     ...details,
-                                    professionName: e.target.value
+                                    userName: e.target.value
                                 })
                             }
                            />
@@ -225,12 +231,12 @@ const onDrop = React.useCallback((acceptedFiles) => {
                     <label>Current Password</label>
  <input className="form-control" type="password" placeholder="currentpassword" name="currentPassword" id="currentPassword"
                             value={
-                                details.professionName
+                                details.currentPassword
                             }
                             onChange={
                                 (e) => setDetails({
                                     ...details,
-                                    professionName: e.target.value
+                                    currentPassword: e.target.value
                                 })
                             }
                            />
@@ -270,7 +276,8 @@ const onDrop = React.useCallback((acceptedFiles) => {
                            />
                            </div>
                            </div> 
-         </Centerdiv>
+         {/* </Centerdiv> */}
+     </div>
         </>
      
     )
