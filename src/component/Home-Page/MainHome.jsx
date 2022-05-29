@@ -8,7 +8,7 @@ export default class MainHome extends Component {
     render() {
         return (
              <>
-              <Headers/>
+              {/* <Headers/> */}
               <Filters/>
              
              </>
