@@ -37,7 +37,7 @@ export default function ProfileView() {
         //getAllData();
         dispatch(loadingVisibility({visibility:"true"}));
       
-        let result=await fetch("http://localhost:5000/api/professional/get/"+selectUser.userid);
+        let result=await fetch("https://peop-backend-app.herokuapp.com/api/professional/get/"+selectUser.userid);
         
         result = await result.json();
         setData(result);

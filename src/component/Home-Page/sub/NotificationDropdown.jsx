@@ -45,7 +45,7 @@ export const NotificationDropdown =()=> {
 
         const checkNotification=()=>{
         //console.log("sdsd");
-           axios.get('http://localhost:5000/api/notification/getLatest', {
+           axios.get('https://peop-backend-app.herokuapp.com/api/notification/getLatest', {
              "headers": {
                  'Content-Type': 'application/json',
                  Authorization: 'Bearer ' + localStorage.getItem("token")

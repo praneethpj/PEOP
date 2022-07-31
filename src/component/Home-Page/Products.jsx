@@ -41,12 +41,12 @@ const Products = () => {
       dispatch(loadingVisibility({ visibility: "true" }));
 
       let allCount = await fetch(
-        "http://localhost:5000/api/professional/allcount"
+        "https://peop-backend-app.herokuapp.com/api/professional/allcount"
       );
       setPagecount(Math.ceil(allCount.length / perPage));
 
       let result = await fetch(
-        "http://localhost:5000/api/professional/" + offset + "/" + perPage
+        "https://peop-backend-app.herokuapp.com/api/professional/" + offset + "/" + perPage
       );
 
       result = await result.json();

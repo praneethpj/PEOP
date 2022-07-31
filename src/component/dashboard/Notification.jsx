@@ -7,7 +7,7 @@ import Headers from '../Home-Page/Header';
  
 import Sidebar from './Side-bar';
 
-const SOCKET_URL = 'http://localhost:5000';
+const SOCKET_URL = 'https://peop-backend-app.herokuapp.com';
 export default function Notification() {
     const [message, setMessage] = useState('You server message here.');
     const loggeduser=useSelector((state)=>state.authActivity.user)

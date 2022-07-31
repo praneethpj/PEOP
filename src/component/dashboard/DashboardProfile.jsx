@@ -77,7 +77,7 @@ const getAppointments= async (data)=>{
         
        
 
-   await axios.post('http://localhost:5000/api/profile/profileupload', data, {
+   await axios.post('https://peop-backend-app.herokuapp.com/api/profile/profileupload', data, {
        "headers": {
            'Content-Type': 'application/json',
            Authorization: 'Bearer ' + localStorage.getItem("token")
@@ -139,7 +139,7 @@ const onDrop = React.useCallback((acceptedFiles) => {
      setLoading(true);
      const formData = new FormData();
      formData.append("file", file);
-     const API_URL = "http://localhost:5000/api/profile/profileupload";
+     const API_URL = "https://peop-backend-app.herokuapp.com/api/profile/profileupload";
      const response = await axios.put(API_URL, formData, { "headers": {
       'Content-Type': 'application/json',
       Authorization: 'Bearer ' + localStorage.getItem("token")

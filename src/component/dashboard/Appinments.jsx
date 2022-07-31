@@ -43,7 +43,7 @@ export default function Dashboard() {
 
             
 
-        await axios.post('http://localhost:5000/api/professional/getAllAppoinmentsByProfessionId', getProfession, {
+        await axios.post('https://peop-backend-app.herokuapp.com/api/professional/getAllAppoinmentsByProfessionId', getProfession, {
             "headers": {
                 'Content-Type': 'application/json',
                 Authorization: 'Bearer ' + localStorage.getItem("token")
@@ -78,7 +78,7 @@ const data = {
         
             };
 
-  await axios.put('http://localhost:5000/api/professional/updatePaymentSheduled', data, {
+  await axios.put('https://peop-backend-app.herokuapp.com/api/professional/updatePaymentSheduled', data, {
             "headers": {
                 'Content-Type': 'application/json',
                 Authorization: 'Bearer ' + localStorage.getItem("token")

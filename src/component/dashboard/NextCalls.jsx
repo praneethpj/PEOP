@@ -55,7 +55,7 @@ const makeCall=(id,name)=>{
 
             
 
-        await axios.post('http://localhost:5000/api/professional/getAllAvailableAppoinmentsByProfessionId',getProfession, {
+        await axios.post('https://peop-backend-app.herokuapp.com/api/professional/getAllAvailableAppoinmentsByProfessionId',getProfession, {
             "headers": {
                 'Content-Type': 'application/json',
                 Authorization: 'Bearer ' + localStorage.getItem("token")
@@ -80,7 +80,7 @@ const makeCall=(id,name)=>{
 
             
 
-        await axios.get('http://localhost:5000/api/professional/getAllAvailableAppoinmentsByUserId', {
+        await axios.get('https://peop-backend-app.herokuapp.com/api/professional/getAllAvailableAppoinmentsByUserId', {
             "headers": {
                 'Content-Type': 'application/json',
                 Authorization: 'Bearer ' + localStorage.getItem("token")
@@ -118,7 +118,7 @@ const data = {
         
             };
 
-  await axios.put('http://localhost:5000/api/professional/updatePaymentSheduled', data, {
+  await axios.put('https://peop-backend-app.herokuapp.com/api/professional/updatePaymentSheduled', data, {
             "headers": {
                 'Content-Type': 'application/json',
                 Authorization: 'Bearer ' + localStorage.getItem("token")
