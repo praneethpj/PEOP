@@ -40,7 +40,7 @@ export default function DashboardHistory() {
     const getAppointments= async ()=>{
       
 
-        await axios.get('http://localhost:5000/api/professional/getAllUpdatedAppoinmentsByProfession', {
+        await axios.get('https://peop-backend-app.herokuapp.com/api/professional/getAllUpdatedAppoinmentsByProfession', {
             "headers": {
                 'Content-Type': 'application/json',
                 Authorization: 'Bearer ' + localStorage.getItem("token")
@@ -63,7 +63,7 @@ export default function DashboardHistory() {
     const getAppointmentsUser= async ()=>{
       
 
-        await axios.get('http://localhost:5000/api/professional/getAllUpdatedAppoinmentsByUser', {
+        await axios.get('https://peop-backend-app.herokuapp.com/api/professional/getAllUpdatedAppoinmentsByUser', {
             "headers": {
                 'Content-Type': 'application/json',
                 Authorization: 'Bearer ' + localStorage.getItem("token")

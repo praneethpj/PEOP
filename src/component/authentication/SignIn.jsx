@@ -80,7 +80,7 @@ useEffect(async () => {
      }
 
      console.log("login "+loginData);
-     axios.post('http://localhost:5000/api/auth/signin', loginData,{
+     axios.post('https://peop-backend-app.herokuapp.com/api/auth/signin', loginData,{
          "headers": {
            'Content-Type': 'application/json',
          }})

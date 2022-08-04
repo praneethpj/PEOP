@@ -68,7 +68,7 @@ useEffect(async () => {
 //      }
 
 //      console.log("login "+loginData);
-//      axios.post('http://localhost:5000/api/auth/signin', loginData,{
+//      axios.post('https://peop-backend-app.herokuapp.com/api/auth/signin', loginData,{
 //          "headers": {
 //            'Content-Type': 'application/json',
 //          }})
@@ -100,7 +100,7 @@ useEffect(async () => {
         "password":details.password
     };
     console.log("signUp "+signUp);
-    axios.post('http://localhost:5000/api/auth/signup', signUp,{
+    axios.post('https://peop-backend-app.herokuapp.com/api/auth/signup', signUp,{
         "headers": {
           'Content-Type': 'application/json',
         }})

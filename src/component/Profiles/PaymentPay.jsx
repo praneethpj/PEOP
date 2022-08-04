@@ -60,7 +60,7 @@ export default function PaymentPay(props) {
     }
 
     console.log("paymentBody "+paymentBody);
-    axios.post('http://localhost:5000/api/payment/payment', paymentBody, config)
+    axios.post('https://peop-backend-app.herokuapp.com/api/payment/payment', paymentBody, config)
         .then(response =>  {
           console.log(response);
         //  addNotify("Success","Success")

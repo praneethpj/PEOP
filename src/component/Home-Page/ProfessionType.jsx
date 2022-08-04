@@ -46,7 +46,7 @@ const ProfessionType = () => {
       dispatch(loadingVisibility({ visibility: "true" }));
 
       let result = await fetch(
-        "http://localhost:5000/api/professional/getAllProfessionType"
+        "https://peop-backend-app.herokuapp.com/api/professional/getAllProfessionType"
       );
 
       result = await result.json();
