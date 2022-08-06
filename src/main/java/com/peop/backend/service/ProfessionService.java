@@ -34,6 +34,13 @@ public class ProfessionService {
         }
         return null;
     }
+
+    public List<String> getProfessionalType(){
+
+            return professionRepository.getAllByProfession_name();
+
+    }
+
     public List<PaymentSheduled> getPaymentSheduled(String userid){
         if(professionRepository.existsByName(userid)){
             ProfessionalProfile professionalProfile=professionRepository.findByName(userid);

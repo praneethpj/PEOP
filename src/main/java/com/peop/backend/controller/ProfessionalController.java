@@ -46,6 +46,14 @@ public class ProfessionalController {
         return ResponseEntity.ok().body(professionRepository.findAll().size());
     }
 
+    @GetMapping("/getAllProfessionType")
+    public ResponseEntity<?> getAllProfessionType(){
+
+        // Pageable pageableWithSort = PageRequest.of(page, 10, Sort.by("updated_at"));
+        return ResponseEntity.ok().body(professionRepository.getAllByProfession_name());
+    }
+
+
     @GetMapping("/{page}/{size}")
     public ResponseEntity<?> getAllProfessions(@PathVariable int page,@PathVariable int size){
         Pageable pageableWithSort = PageRequest.of(page, size);
