@@ -51,6 +51,7 @@ public class ProfessionalController {
 
         // Pageable pageableWithSort = PageRequest.of(page, 10, Sort.by("updated_at"));
         return ResponseEntity.ok().body(professionRepository.getAllByProfession_name());
+
     }
 
 
