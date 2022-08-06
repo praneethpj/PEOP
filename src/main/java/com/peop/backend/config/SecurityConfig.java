@@ -1,7 +1,7 @@
 package com.peop.backend.config;
 
 /**
- * @author Praneethpj
+ * @author Praneethpj ss
  */
 
 import com.peop.backend.security.CustomUserDetailsService;
