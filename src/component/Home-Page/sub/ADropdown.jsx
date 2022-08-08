@@ -21,9 +21,9 @@ export const ADropdown =()=> {
 
         
   }
-  useEffect(() => {
-    loadProfileImg();
-  })
+  // useEffect(() => {
+  //   loadProfileImg();
+  // })
 
   const loadProfileImg=async()=>{
     

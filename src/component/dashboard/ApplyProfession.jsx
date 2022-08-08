@@ -1,23 +1,26 @@
-import React, {useState} from 'react'
-import {useSelector} from 'react-redux';
-import {useDispatch} from 'react-redux';
-import {useHistory} from 'react-router';
+import React, { useState } from 'react'
+import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router';
 import Headers from '../Home-Page/Header'
 import Sidebar from './Side-bar'
 import axios from 'axios';
-import {loadingVisibility} from '../../features/configurationsActivity';
-import {store} from 'react-notifications-component';
+import { loadingVisibility } from '../../features/configurationsActivity';
+import { store } from 'react-notifications-component';
 import styled from 'styled-components'
-import {InputTags} from 'react-bootstrap-tagsinput'
+import { InputTags } from 'react-bootstrap-tagsinput'
 import moment from 'moment';
-import Loading from '../Home-Page/Loading';
-import  { useEffect } from "react";
+// import Loading from '../Home-Page/Loading';
+import { useEffect } from "react";
 import ProfileHistory from './appoinment-sub/ProfileHistory';
 import Popup from 'reactjs-popup';
 import { Table, Toast, ToastContainer } from 'react-bootstrap';
 import AlertToast from '../Home-Page/AlertToast';
+import BasicDetailsForm from './applyprofession/BasicDetailsForm';
 export default function ApplyProfession() {
-    const [details, setDetails] = useState({professionName: "", description: "", chargesperHour: ""})
+    const [details, setDetails] = useState({ professionName: "", description: "", chargesperHour: "" })
+    const [professionName, setProfessionName] = useState('');
+
     const history = useHistory();
     const selectUser = useSelector((state) => state.authActivity.user)
     const [timegap, setTimegap] = useState(5);
@@ -41,10 +44,10 @@ export default function ApplyProfession() {
     const [thursedayTime, setThursedayTime] = useState([]);
     const [fridayTime, setFridayTime] = useState([]);
     const [saturdayTime, setSaturdayTime] = useState([]);
-   const [sundayTime, setSundayTime] = useState([]);
-   const [profilehistory,setProfilehistory]=useState([]);
-   //let sundayTime=new Object();
-   const [basic, setBasic] = useState(true);
+    const [sundayTime, setSundayTime] = useState([]);
+    const [profilehistory, setProfilehistory] = useState([]);
+    //let sundayTime=new Object();
+    const [basic, setBasic] = useState(true);
     let next = false;
     let nextwedneday = false;
 
@@ -54,10 +57,10 @@ export default function ApplyProfession() {
     // ];
 
     const [alertShow, setAlertShow] = useState(false);
-    const [alertBody,setalertBody]=useState("");
-    
+    const [alertBody, setalertBody] = useState("");
+
     // useEffect(() => {
-      
+
     // }, [])
 
     const dispatch = useDispatch();
@@ -88,16 +91,16 @@ export default function ApplyProfession() {
 
     }
 
-    const applyProfessionalProfile=()=>{
+    const applyProfessionalProfile = () => {
         const getProfession = {
 
             "userid": selectUser.user,
-        
-            
-        
-            };
 
-            console.log(selectUser.user);
+
+
+        };
+
+        console.log(selectUser.user);
 
         axios.post('https://peop-backend-app.herokuapp.com/api/professional/getProfession', getProfession, {
             "headers": {
@@ -107,17 +110,17 @@ export default function ApplyProfession() {
         }).then(response => {
             // console.log("profilehistory "+response.status);
             setProfilehistory(response.data);
-            dispatch(loadingVisibility({visibility: "false"}));
-          //  addNotify("Success", JSON.stringify(response));
-          setalertBody(JSON.stringify(response));
-          setAlertShow(true);
-         // setAlertShow(false);
-        }).catch(error => {
-           // addNotify("Error", JSON.stringify(error));
-            console.log(error.response);
-            setalertBody( JSON.stringify(error));
+            dispatch(loadingVisibility({ visibility: "false" }));
+            //  addNotify("Success", JSON.stringify(response));
+            setalertBody(JSON.stringify(response));
             setAlertShow(true);
-           // setAlertShow(false);
+            // setAlertShow(false);
+        }).catch(error => {
+            // addNotify("Error", JSON.stringify(error));
+            console.log(error.response);
+            setalertBody(JSON.stringify(error));
+            setAlertShow(true);
+            // setAlertShow(false);
             // console.log(error.response.status);
             // console.log(error.response.headers);
         });
@@ -171,14 +174,14 @@ export default function ApplyProfession() {
         // currentSelect,setCurrentSelect
         if (selectId == 0) {
             console.log("details " + sundayTime + " " + selecttime + " " + selectday + " " + selectId)
-            
-            //Object.assign(sundayTime, {"time":selecttime,"availability":true});
-       // console.log(JSON.parse('[{"name":"Pizza","price":"10","quantity":"7"}, {"name":"Cerveja","price":"12","quantity":"5"}, {"name":"Hamburguer","price":"10","quantity":"2"}, {"name":"Fraldas","price":"6","quantity":"2"}]'));
-        
-           sundayTime.push(`{"time":"`+selecttime+`"}`);
 
-          //sundayTime.set(...sundayTime,"time",selecttime);
-          //Object.assign(sundayTime, {"time": selecttime});
+            //Object.assign(sundayTime, {"time":selecttime,"availability":true});
+            // console.log(JSON.parse('[{"name":"Pizza","price":"10","quantity":"7"}, {"name":"Cerveja","price":"12","quantity":"5"}, {"name":"Hamburguer","price":"10","quantity":"2"}, {"name":"Fraldas","price":"6","quantity":"2"}]'));
+
+            sundayTime.push(`{"time":"` + selecttime + `"}`);
+
+            //sundayTime.set(...sundayTime,"time",selecttime);
+            //Object.assign(sundayTime, {"time": selecttime});
             // setSundayTime({"time":selecttime,"availability":true})
             // setCurrentSelect(selectId);
 
@@ -212,7 +215,7 @@ export default function ApplyProfession() {
         } else if (selectId == 1) {
             console.log("details " + sundayTime + " " + selecttime + " " + selectday + " " + selectId)
             //mondayTime.push("{time:"+selecttime + ",availability:true},");
-            mondayTime.push(`{"time":"`+selecttime+`"}`);
+            mondayTime.push(`{"time":"` + selecttime + `"}`);
             // setSundayTime(...sundayTime,selecttime)
             // setCurrentSelect(selectId);
 
@@ -246,7 +249,7 @@ export default function ApplyProfession() {
         } else if (selectId == 2) {
             console.log("details " + tuesdayTime + " " + selecttime + " " + selectday + " " + selectId)
             //tuesdayTime.push(selecttime + ",");
-            tuesdayTime.push(`{"time":"`+selecttime+`"}`);
+            tuesdayTime.push(`{"time":"` + selecttime + `"}`);
             // setSundayTime(...sundayTime,selecttime)
             // setCurrentSelect(selectId);
 
@@ -283,7 +286,7 @@ export default function ApplyProfession() {
         if (selectId == 3) {
 
             //wednsedayTime.push(selecttime + ",");
-            wednsedayTime.push(`{"time":"`+selecttime+`"}`);
+            wednsedayTime.push(`{"time":"` + selecttime + `"}`);
             console.log("details " + wednsedayTime + " " + selecttime + " " + selectday + " " + selectId)
             // setSundayTime(...sundayTime,selecttime)
             // setCurrentSelect(selectId);
@@ -306,8 +309,8 @@ export default function ApplyProfession() {
 
         if (selectId == 4) {
             console.log("details " + sundayTime + " " + selecttime + " " + selectday + " " + selectId)
-           // thursedayTime.push(selecttime + ",");
-            thursedayTime.push(`{"time":"`+selecttime+`"}`);
+            // thursedayTime.push(selecttime + ",");
+            thursedayTime.push(`{"time":"` + selecttime + `"}`);
             // setSundayTime(...sundayTime,selecttime)
             // setCurrentSelect(selectId);
 
@@ -344,7 +347,7 @@ export default function ApplyProfession() {
         if (selectId == 5) {
             console.log("details " + sundayTime + " " + selecttime + " " + selectday + " " + selectId)
             //fridayTime.push(selecttime + ",");
-            fridayTime.push(`{"time":"`+selecttime+`"}`);
+            fridayTime.push(`{"time":"` + selecttime + `"}`);
             // setSundayTime(...sundayTime,selecttime)
             // setCurrentSelect(selectId);
 
@@ -379,8 +382,8 @@ export default function ApplyProfession() {
 
         if (selectId == 6) {
             console.log("details " + sundayTime + " " + selecttime + " " + selectday + " " + selectId)
-           // saturdayTime.push(selecttime + ",");
-           saturdayTime.push(`{"time":"`+selecttime+`"}`);
+            // saturdayTime.push(selecttime + ",");
+            saturdayTime.push(`{"time":"` + selecttime + `"}`);
             // setSundayTime(...sundayTime,selecttime)
             // setCurrentSelect(selectId);
 
@@ -479,15 +482,15 @@ export default function ApplyProfession() {
     function toObject(arr) {
         var rv = {};
         for (var i = 0; i < arr.length; ++i)
-          rv[i] = arr[i];
+            rv[i] = arr[i];
         return rv;
-      }
+    }
 
-      function update(obj, key, newVal) {
-        for(var i in obj) {
-            if(typeof obj[i] == 'object') {
+    function update(obj, key, newVal) {
+        for (var i in obj) {
+            if (typeof obj[i] == 'object') {
                 update(obj[i], key, newVal);
-            } else if(i === key) {
+            } else if (i === key) {
                 obj[i] = newVal;
             }
         }
@@ -495,16 +498,16 @@ export default function ApplyProfession() {
     }
     const registernewprofession = (e) => {
         e.preventDefault();
-        dispatch(loadingVisibility({visibility: "true"}));
+        dispatch(loadingVisibility({ visibility: "true" }));
 
         // var obj = Object.assign(...sundayTime.map(([key, val]) => ({[key]: val})))
         // console.log(obj);
-         let sunval = `[`+sundayTime.toString()+`]`;
-       
-       
-        
-       
-   //     let object = {...sundayTime};
+        let sunval = `[` + sundayTime.toString() + `]`;
+
+
+
+
+        //     let object = {...sundayTime};
         const registerProfession = {
 
             "professionName": details.professionName,
@@ -515,48 +518,49 @@ export default function ApplyProfession() {
                 "timeSlot": [
                     {
                         "dayname": "0",//[JSON.parse(sundayTime[0])]
-                        "times":JSON.parse(`[`+sundayTime+`]`),
+                        "times": JSON.parse(`[` + sundayTime + `]`),
                         "available": "true"
                     },
                     {
                         "dayname": "1",
-                        "times": JSON.parse(`[`+mondayTime+`]`),
+                        "times": JSON.parse(`[` + mondayTime + `]`),
                         "available": "true"
                     },
                     {
                         "dayname": "2",
-                        "times": JSON.parse(`[`+tuesdayTime+`]`),
+                        "times": JSON.parse(`[` + tuesdayTime + `]`),
                         "available": "true"
                     },
                     {
                         "dayname": "3",
-                        "times": JSON.parse(`[`+wednsedayTime+`]`),
+                        "times": JSON.parse(`[` + wednsedayTime + `]`),
                         "available": "true"
                     }, {
                         "dayname": "4",
-                        "times": JSON.parse(`[`+thursedayTime+`]`),
+                        "times": JSON.parse(`[` + thursedayTime + `]`),
                         "available": "true"
                     }, {
                         "dayname": "5",
-                        "times": JSON.parse(`[`+fridayTime+`]`),
+                        "times": JSON.parse(`[` + fridayTime + `]`),
                         "available": "true"
                     }, {
                         "dayname": "6",
-                        "times": JSON.parse(`[`+saturdayTime+`]`),
+                        "times": JSON.parse(`[` + saturdayTime + `]`),
                         "available": "true"
                     }
 
-                
-                ]}
+
+                ]
+            }
         };
         console.log(JSON.parse('[{"name":"Pizza","price":"10","quantity":"7"}, {"name":"Cerveja","price":"12","quantity":"5"}, {"name":"Hamburguer","price":"10","quantity":"2"}, {"name":"Fraldas","price":"6","quantity":"2"}]'));
- //sundayTime
+        //sundayTime
         //var parsedobj =  JSON.parse( JSON.stringify(registerProfession));
-         var level = "registerProfession.timeSlot.timeSlot.times";
+        var level = "registerProfession.timeSlot.timeSlot.times";
         //console.log("sun "+sundayTime[0]);
         // console.log("val "+JSON.stringify(update(registerProfession,"times",JSON.parse(sundayTime[0]))));
-//         var obj = JSON.parse(level);
-// obj['times'].push({"time":"10"});
+        //         var obj = JSON.parse(level);
+        // obj['times'].push({"time":"10"});
 
 
         axios.post('https://peop-backend-app.herokuapp.com/api/professional/addProfession', registerProfession, {
@@ -566,9 +570,9 @@ export default function ApplyProfession() {
             }
         }).then(response => {
             console.log(response);
-        //  addNotify("Success", "You have been applied");
+            //  addNotify("Success", "You have been applied");
         }).catch(error => {
-           //addNotify("Error", JSON.stringify(error));
+            //addNotify("Error", JSON.stringify(error));
             console.log(error.response.data);
             // console.log(error.response.status);
             // console.log(error.response.headers);
@@ -580,10 +584,10 @@ export default function ApplyProfession() {
         // }));
 
 
-        dispatch(loadingVisibility({visibility: "false"}));
+        dispatch(loadingVisibility({ visibility: "false" }));
         // console.log(selectUser);
     }
-    const Centerdiv = styled.div `
+    const Centerdiv = styled.div`
      margin: auto;
   width: 50%;
    
@@ -591,360 +595,368 @@ export default function ApplyProfession() {
 
      `;
 
+
+
     return (
         <div>
-            <Headers/>
-            <Loading/>
+            <Headers />
+            {/* <Loading /> */}
             <ToastContainer className="p-1" position="top-end">
-             
-             <Toast onClose={() => setAlertShow(false)} show={alertShow} delay={3000} autohide>
-               {/* <Toast.Header> */}
-                 {/* <img
+
+                <Toast onClose={() => setAlertShow(false)} show={alertShow} delay={3000} autohide>
+                    {/* <Toast.Header> */}
+                    {/* <img
                    src="holder.js/20x20?text=%20"
                    className="rounded me-2"
                    alt=""
                  /> */}
-                 {/* <strong className="me-auto">Error</strong> */}
-                 {/* <small>11 mins ago</small> */}
-               {/* </Toast.Header> */}
-               <Toast.Body className="Danger" style={{color:"black"}}>{alertBody}</Toast.Body>
-             </Toast>
-          
-           </ToastContainer>
-            <Sidebar active="applyprofession"/>
+                    {/* <strong className="me-auto">Error</strong> */}
+                    {/* <small>11 mins ago</small> */}
+                    {/* </Toast.Header> */}
+                    <Toast.Body className="Danger" style={{ color: "black" }}>{alertBody}</Toast.Body>
+                </Toast>
+
+            </ToastContainer>
+            <Sidebar active="applyprofession" />
             <>
 
-                {profilehistory.length !==0 ?<ProfileHistory details={profilehistory}/>:
-                <Centerdiv>
-                    
-                    <form className="login_form"
-                        onSubmit={
-                            (e) => registernewprofession(e)
-                    }>
+                {profilehistory.length !== 0 ? <ProfileHistory details={profilehistory} /> :
+                    <Centerdiv>
 
-                        {basic==true?
-                        <div className="mt-5 mb-5">
-                                <div className="form-group">
-                    <label>What is your Profession</label>
- <input className="form-control" type="text" placeholder="professionName" name="professionName" id="professionName"
-                            value={
-                                details.professionName
-                            }
-                            onChange={
-                                (e) => setDetails({
-                                    ...details,
-                                    professionName: e.target.value
-                                })
-                            }
-                           />
-                           </div>
-                           <div className="form-group">
-                    <label>Briefly Describe about it</label>
-                        <input className="form-control" type="text" placeholder="description" name="description" id="description"
-                            value={
-                                details.description
-                            }
-                            onChange={
-                                (e) => setDetails({
-                                    ...details,
-                                    description: e.target.value
-                                })
-                            }/>
-                            </div>
-                            <div className="form-group">
-                    <label>How much charge you per hour</label>
-                        <input className="form-control" type="text" placeholder="chargesperHour" name="chargesperHour" id="chargesperHour"
-                            value={
-                                details.chargesperHour
-                            }
-                            onChange={
-                                (e) => setDetails({
-                                    ...details,
-                                    chargesperHour: e.target.value
-                                })
-                            }/>
+                        <form className="login_form"
+                            onSubmit={
+                                (e) => registernewprofession(e)
+                            }>
+
+                            {basic == true ?
+
+                                <div className="mt-5 mb-5">
+
+                                    <div className="form-group">
+                                        <label>What is your Profession</label>
+                                        <input key="random1" className="form-control" type="text" placeholder="professionName" name="professionName" id="professionName1"
+                                            value={details.professionName}
+                                            onChange={e => setDetails({ professionName: e.target.value })}
 
 
-                            </div>
-                            <div className="form-group">
-                            <input type="button" className="btn btn-success" value="Next Step" onClick={()=>setBasic(false)}/>
-                           </div>
-                            </div>
-                        :
-                        <div className="mt-5 mb-5">
-                            <div className="form-group">
-                            <label>Select a day</label>
-                             <select className="form-control"
-                            onChange={changeDay}>
-                            <option selected={
-                                    selectday === "Sunday"
-                                }
-                                a-key={0}
-                                key="0"
-                                value="Sunday">Sunday</option>
-                            <option selected={
-                                    selectday === "Monday"
-                                }
-                                a-key={1}
-                                key="1"
-                                value="Monday">Monday</option>
-                            <option selected={
-                                    selectday === "Tuesday"
-                                }
-                                key="2"
-                                value="Tuesday">Tuesday</option>
-                            <option selected={
-                                    selectday === "Wednesday"
-                                }
-                                key="3"
-                                value="Wednesday">Wednesday</option>
-                            <option selected={
-                                    selectday === "Thursday"
-                                }
-                                key="4"
-                                value="Thursday">Thursday</option>
-                            <option selected={
-                                    selectday === "Friday"
-                                }
-                                key="5"
-                                value="Friday">Friday</option>
-                            <option selected={
-                                    selectday === "Saturday"
-                                }
-                                key="6"
-                                value="Saturday">Saturday</option>
-                        </select>
-</div>
+                                        />
 
-<div className="form-group">
-<label>Select Call duration</label>
-</div>
-                            <div>
-                            <input type="radio" value="5" name="gender" id="5"
-                                checked={
-                                    timegap === "5"
-                                }
-                                onChange={changeTimegap}/>
-                            5 Minitues
-                            <br/>
-                            <input type="radio" value="10" name="gender" id="10"
-                                checked={
-                                    timegap === "10"
-                                }
-                                onChange={changeTimegap}/>
-                            10 Minitues
-                            <br/>
-                            <input type="radio" value="15" name="gender"
-                                checked={
-                                    timegap === "15"
-                                }
-                                onChange={changeTimegap}/>
-                            15 Minitues
-                            <br/>
-                            <input type="radio" value="20" name="gender"
-                                checked={
-                                    timegap === "20"
-                                }
-                                onChange={changeTimegap}/>
-                            20 Minitues
-                            <br/>
-                            <input type="radio" value="30" name="gender"
-                                checked={
-                                    timegap === "30"
-                                }
-                                onChange={changeTimegap}/>
-                            30 Minitues
-                            <br/>
-                            <input type="radio" value="40" name="gender"
-                                checked={
-                                    timegap === "40"
-                                }
-                                onChange={changeTimegap}/>
-                            40 Minitues
-                            <br/>
-                            <input type="radio" value="60" name="gender"
-                                checked={
-                                    timegap === "60"
-                                }
-                                onChange={changeTimegap}/>
-                            60 Minitues
-                        </div>
-                      
-                        <div className="form-group">
-<label>Select Time Range</label>
-</div>
-                        <select className="form-control"
-                            onChange={handleSelectTime}>
+                                    </div>
 
-                            {/* <option value="">Select the Time slots</option> */}
-                            {
+                                    <div className="form-group">
+                                        <label>Briefly Describe about it</label>
 
-                            options.map((v) => (
-                                <option key={v}
-                                    value={v}>
-                                    {v} </option>
-                            ))
-                        } </select>
-                        <div className="form-group">
- 
-</div>
-                        <button type="button" className="btn btn-success"
-                            onClick={handleTimes}>
-                            Add to Table
-                        </button>
+                                        <input className="form-control" type="text" placeholder="description" name="description" id="description1"
+                                            value={
+                                                details.description
+                                            }
+                                            onChange={
+                                                (e) => setDetails({
+                                                    ...details,
+                                                    description: e.target.value
+                                                })
+                                            }
 
-                                     <div className="form-group">
- 
-</div>  
-                        {/* <input className="form-control" type="text" disabled placeholder="" name="times"
+                                            key="random2"
+                                        />
+
+                                    </div>
+                                    <div className="form-group">
+                                        <label>How much charge you per hour</label>
+                                        <input className="form-control" type="text" placeholder="chargesperHour" name="chargesperHour" id="chargesperHour1"
+                                            value={
+                                                details.chargesperHour
+                                            }
+                                            onChange={
+                                                (e) => setDetails({
+                                                    ...details,
+                                                    chargesperHour: e.target.value
+                                                })
+                                            }
+                                            key="random3"
+                                        />
+
+
+                                    </div>
+                                    <div className="form-group">
+                                        <input type="button" className="btn btn-success" value="Next Step" onClick={() => setBasic(false)} />
+                                    </div>
+                                </div>
+                                :
+                                <div className="mt-5 mb-5">
+                                    <div className="form-group">
+                                        <label>Select a day</label>
+                                        <select className="form-control"
+                                            onChange={changeDay}>
+                                            <option selected={
+                                                selectday === "Sunday"
+                                            }
+                                                a-key={0}
+                                                key="0"
+                                                value="Sunday">Sunday</option>
+                                            <option selected={
+                                                selectday === "Monday"
+                                            }
+                                                a-key={1}
+                                                key="1"
+                                                value="Monday">Monday</option>
+                                            <option selected={
+                                                selectday === "Tuesday"
+                                            }
+                                                key="2"
+                                                value="Tuesday">Tuesday</option>
+                                            <option selected={
+                                                selectday === "Wednesday"
+                                            }
+                                                key="3"
+                                                value="Wednesday">Wednesday</option>
+                                            <option selected={
+                                                selectday === "Thursday"
+                                            }
+                                                key="4"
+                                                value="Thursday">Thursday</option>
+                                            <option selected={
+                                                selectday === "Friday"
+                                            }
+                                                key="5"
+                                                value="Friday">Friday</option>
+                                            <option selected={
+                                                selectday === "Saturday"
+                                            }
+                                                key="6"
+                                                value="Saturday">Saturday</option>
+                                        </select>
+                                    </div>
+
+                                    <div className="form-group">
+                                        <label>Select Call duration</label>
+                                    </div>
+                                    <div>
+                                        <input type="radio" value="5" name="gender" id="5"
+                                            checked={
+                                                timegap === "5"
+                                            }
+                                            onChange={changeTimegap} />
+                                        5 Minitues
+                                        <br />
+                                        <input type="radio" value="10" name="gender" id="10"
+                                            checked={
+                                                timegap === "10"
+                                            }
+                                            onChange={changeTimegap} />
+                                        10 Minitues
+                                        <br />
+                                        <input type="radio" value="15" name="gender"
+                                            checked={
+                                                timegap === "15"
+                                            }
+                                            onChange={changeTimegap} />
+                                        15 Minitues
+                                        <br />
+                                        <input type="radio" value="20" name="gender"
+                                            checked={
+                                                timegap === "20"
+                                            }
+                                            onChange={changeTimegap} />
+                                        20 Minitues
+                                        <br />
+                                        <input type="radio" value="30" name="gender"
+                                            checked={
+                                                timegap === "30"
+                                            }
+                                            onChange={changeTimegap} />
+                                        30 Minitues
+                                        <br />
+                                        <input type="radio" value="40" name="gender"
+                                            checked={
+                                                timegap === "40"
+                                            }
+                                            onChange={changeTimegap} />
+                                        40 Minitues
+                                        <br />
+                                        <input type="radio" value="60" name="gender"
+                                            checked={
+                                                timegap === "60"
+                                            }
+                                            onChange={changeTimegap} />
+                                        60 Minitues
+                                    </div>
+
+                                    <div className="form-group">
+                                        <label>Select Time Range</label>
+                                    </div>
+                                    <select className="form-control"
+                                        onChange={handleSelectTime}>
+
+                                        {/* <option value="">Select the Time slots</option> */}
+                                        {
+
+                                            options.map((v) => (
+                                                <option key={v}
+                                                    value={v}>
+                                                    {v} </option>
+                                            ))
+                                        } </select>
+                                    <div className="form-group">
+
+                                    </div>
+                                    <button type="button" className="btn btn-success"
+                                        onClick={handleTimes}>
+                                        Add to Table
+                                    </button>
+
+                                    <div className="form-group">
+
+                                    </div>
+                                    {/* <input className="form-control" type="text" disabled placeholder="" name="times"
                             value={times}
                             onChange={setTimes}/> */}
-                        <Table stripped bordered hover size="sm" >
-                            <thead>
-                                <tr>
-                                    <th>ID</th>
-                                    <th>Day</th>
-                                    <th>Available Time</th>
-                                    <th>Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody> {
+                                    <Table stripped bordered hover size="sm" >
+                                        <thead>
+                                            <tr>
+                                                <th>ID</th>
+                                                <th>Day</th>
+                                                <th>Available Time</th>
+                                                <th>Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody> {
 
-                                sundayData.map((contact) => (
-                                    <tr>
-                                        <td>{
-                                            contact.id
-                                        }</td>
-                                        <td>{
-                                            contact.day
-                                        }</td>
-                                        <td>{
-                                            contact.available
-                                        }</td>
-                                        <td><input type="button" value="delete"/></td>
-                                    </tr>
-                                ))
-                            }
-                                {
+                                            sundayData.map((contact) => (
+                                                <tr>
+                                                    <td>{
+                                                        contact.id
+                                                    }</td>
+                                                    <td>{
+                                                        contact.day
+                                                    }</td>
+                                                    <td>{
+                                                        contact.available
+                                                    }</td>
+                                                    <td><input type="button" value="delete" /></td>
+                                                </tr>
+                                            ))
+                                        }
+                                            {
 
-                                mondayaData.map((contact) => (
-                                    <tr>
-                                        <td>{
-                                            contact.id
-                                        }</td>
-                                        <td>{
-                                            contact.day
-                                        }</td>
-                                        <td>{
-                                            contact.available
-                                        }</td>
-                                        <td><input type="button" value="delete"/></td>
-                                    </tr>
-                                ))
-                            }
+                                                mondayaData.map((contact) => (
+                                                    <tr>
+                                                        <td>{
+                                                            contact.id
+                                                        }</td>
+                                                        <td>{
+                                                            contact.day
+                                                        }</td>
+                                                        <td>{
+                                                            contact.available
+                                                        }</td>
+                                                        <td><input type="button" value="delete" /></td>
+                                                    </tr>
+                                                ))
+                                            }
 
-                                {
+                                            {
 
-                                tuedataData.map((contact) => (
-                                    <tr>
-                                        <td>{
-                                            contact.id
-                                        }</td>
-                                        <td>{
-                                            contact.day
-                                        }</td>
-                                        <td>{
-                                            contact.available
-                                        }</td>
-                                        <td><input type="button" value="delete"/></td>
-                                    </tr>
-                                ))
-                            }
-                                {
+                                                tuedataData.map((contact) => (
+                                                    <tr>
+                                                        <td>{
+                                                            contact.id
+                                                        }</td>
+                                                        <td>{
+                                                            contact.day
+                                                        }</td>
+                                                        <td>{
+                                                            contact.available
+                                                        }</td>
+                                                        <td><input type="button" value="delete" /></td>
+                                                    </tr>
+                                                ))
+                                            }
+                                            {
 
-                                wednesdayaData.map((contactw) => (
-                                    <tr>
-                                        <td>{
-                                            contactw.id
-                                        }</td>
-                                        <td>{
-                                            contactw.day
-                                        }</td>
-                                        <td>{
-                                            contactw.available
-                                        }</td>
-                                        <td><input type="button" value="delete"/></td>
-                                    </tr>
-                                ))
-                            }
-                                {
+                                                wednesdayaData.map((contactw) => (
+                                                    <tr>
+                                                        <td>{
+                                                            contactw.id
+                                                        }</td>
+                                                        <td>{
+                                                            contactw.day
+                                                        }</td>
+                                                        <td>{
+                                                            contactw.available
+                                                        }</td>
+                                                        <td><input type="button" value="delete" /></td>
+                                                    </tr>
+                                                ))
+                                            }
+                                            {
 
-                                thursedayData.map((contact) => (
-                                    <tr>
-                                        <td>{
-                                            contact.id
-                                        }</td>
-                                        <td>{
-                                            contact.day
-                                        }</td>
-                                        <td>{
-                                            contact.available
-                                        }</td>
-                                        <td><input type="button" value="delete"/></td>
-                                    </tr>
-                                ))
-                            }
-                                {
+                                                thursedayData.map((contact) => (
+                                                    <tr>
+                                                        <td>{
+                                                            contact.id
+                                                        }</td>
+                                                        <td>{
+                                                            contact.day
+                                                        }</td>
+                                                        <td>{
+                                                            contact.available
+                                                        }</td>
+                                                        <td><input type="button" value="delete" /></td>
+                                                    </tr>
+                                                ))
+                                            }
+                                            {
 
-                                fridayData.map((contact) => (
-                                    <tr>
-                                        <td>{
-                                            contact.id
-                                        }</td>
-                                        <td>{
-                                            contact.day
-                                        }</td>
-                                        <td>{
-                                            contact.available
-                                        }</td>
-                                        <td><input type="button" value="delete"/></td>
-                                    </tr>
-                                ))
-                            }
-                                {
+                                                fridayData.map((contact) => (
+                                                    <tr>
+                                                        <td>{
+                                                            contact.id
+                                                        }</td>
+                                                        <td>{
+                                                            contact.day
+                                                        }</td>
+                                                        <td>{
+                                                            contact.available
+                                                        }</td>
+                                                        <td><input type="button" value="delete" /></td>
+                                                    </tr>
+                                                ))
+                                            }
+                                            {
 
-                                saturdayData.map((contact) => (
-                                    <tr>
-                                        <td>{
-                                            contact.id
-                                        }</td>
-                                        <td>{
-                                            contact.day
-                                        }</td>
-                                        <td>{
-                                            contact.available
-                                        }</td>
-                                        <td><input type="button" value="delete"/></td>
-                                    </tr>
-                                ))
-                            } </tbody>
-                        </Table>
-                        <div className="form-group">
- 
-
-                        <input type="button" className="btn btn-success" value="Back to basic details" onClick={()=>setBasic(true)}/>
-                        
-                        <button type="submit" className="btn btn-success" onClick={()=>applyProfessionalProfile()}>
-                            Apply to Profession
-                        </button>
-                        </div>
-                            </div>}
-                       
+                                                saturdayData.map((contact) => (
+                                                    <tr>
+                                                        <td>{
+                                                            contact.id
+                                                        }</td>
+                                                        <td>{
+                                                            contact.day
+                                                        }</td>
+                                                        <td>{
+                                                            contact.available
+                                                        }</td>
+                                                        <td><input type="button" value="delete" /></td>
+                                                    </tr>
+                                                ))
+                                            } </tbody>
+                                    </Table>
+                                    <div className="form-group">
 
 
-                       
-                    </form>
-                    {/* <Popup trigger={<button>Trigger</button>} position="top left">
+                                        <input type="button" className="btn btn-success" value="Back to basic details" onClick={() => setBasic(true)} />
+
+                                        <button type="submit" className="btn btn-success" onClick={() => applyProfessionalProfile()}>
+                                            Apply to Profession
+                                        </button>
+                                    </div>
+                                </div>}
+
+
+
+
+                        </form>
+                        {/* <Popup trigger={<button>Trigger</button>} position="top left">
     {close => (
       <div>
         Content here
@@ -954,7 +966,7 @@ export default function ApplyProfession() {
       </div>
     )}
   </Popup> */}
-                </Centerdiv>
+                    </Centerdiv>
                 }
             </>
         </div>

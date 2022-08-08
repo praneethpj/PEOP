@@ -162,7 +162,7 @@ useEffect(async () => {
                 <div className="form-group">
                     <label>Password</label>
                    
-                    <input className="form-control"  placeholder="Enter password" type="password" placeholder="Enter your Password" name="lpassword" id="lpassword" value={login.password} onChange={(e)=>setLogin({...login,password:e.target.value})}/>
+                    <input className="form-control"  placeholder="Enter password" type="password"   name="lpassword" id="lpassword" value={login.password} onChange={(e)=>setLogin({...login,password:e.target.value})}/>
                 </div>
    
                 

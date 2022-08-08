@@ -88,7 +88,7 @@ const Products =() =>{
                        <Loading />
                <header className="mb-4 pb-3">
                        <div className="form-inline">
-                           <span className="mr-md-auto"><h2>Newly Professions</h2></span>
+                           <span className="mr-md-auto section-title"><h2>Newly Professions</h2></span>
                            {/* <select className="mr-2 form-control">
                                <option>Latest items</option>
                                <option>Trending</option>
@@ -111,7 +111,7 @@ const Products =() =>{
             
               <div className="col-md-3 col-sm-6" onClick={()=>onCallHandler(d[0])} style={{cursor:'pointer'}}>
                     <div class="product-grid">
-              <figure className="card card-product-grid" style={{backgroundColor:"rgb(16, 16, 16)"}}>
+              <figure className="card card-product-grid"  >
                   <div className="img-wrap"> 
                   <div class="product-image">
                       {/* <span className="badge badge-danger"> NEW </span> */}

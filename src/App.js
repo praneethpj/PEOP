@@ -25,6 +25,7 @@ import ApplyProfession from './component/dashboard/ApplyProfession';
  import Notification from './component/dashboard/Notification';
 import RoomPage from './component/VideoCall/Containers/RoomPage';
 import ProfileEdit from './component/dashboard/ProfileEdit';
+import Form from './component/dashboard/TestForm/Form';
 function App() {
   return (
     <div className="App">
@@ -89,6 +90,9 @@ function App() {
             <Route path="/applyprofession">
             <ApplyProfession/>
             </Route>
+            <Route path="/profession">
+            <Form />
+          </Route>
             <Route path="/r/:room" component={Room} />
              <Route path="/notification">
             <Notification/>
