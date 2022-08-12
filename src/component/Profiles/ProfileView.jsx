@@ -14,6 +14,7 @@ import { useSelector } from 'react-redux';
 import Loading from '../Home-Page/Loading';
 import { useDispatch } from 'react-redux';
 import { loadingVisibility } from '../../features/configurationsActivity';
+import './Profile.css'
 
 export default function ProfileView() {
 
@@ -142,31 +143,34 @@ export default function ProfileView() {
             {!submit ?
 
                 <div className='container mt-5' >
-                    <div className="row">
-                        <div className="col-6">                 <img
+                    <div className="row ">
+                        <div className="col-5 product-border ">                
+                         <img
 
                             type="button"
                             id="dropdownMenuButton"
                             data-toggle="dropdown"
                             aria-haspopup="true"
-
+                            style={{  border: "1px solid rgba(0,0,0,.125)",height:"80%"}}
                             src={data.ProfileImage != null ? "/assets/profileImg/" + data.id + ".png" : "https://i.pinimg.com/474x/8c/70/8b/8c708b478e0e71f7599b75b9cc108ddf.jpg"}
 
                         /></div>
-                        <div className="col-6 bar">
+                        <div className="col-5 bar">
 
-                            <div className="col mt-5 ">
-                                <div className="mt-5">
-                                    <h5 className="small-title">Hi I am,</h5><div className="large-title">{data.name}</div><h5 className="small-title">I am a </h5><h2> {data.profession_name}</h2>
+                            <div className="col">
+                                <div>
+                                    <h3 className="small-title">Hi I am,</h3><div className="large-title">{data.name}</div><h3 className="small-title"><br></br>My Profession is </h3><h2> {data.profession_name}</h2>
                                     <section className="small-title">
                                         {data.description}
                                     </section>
                                 </div>
                             </div>
+                            <br></br>
                             <div className="mt-2">
                                 Choose a  date
                                 <DatePicker className="form-control" selected={date} onChange={date => dateChange(date)} />
                             </div>
+                            <br></br>
                             {avtime == true ?
                                 <div className="mt-2">
                                     Choose a time slot

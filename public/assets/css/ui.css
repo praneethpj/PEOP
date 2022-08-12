@@ -424,7 +424,16 @@ p:last-child {
 .header-main {
   position: relative;
   padding-top: 1rem;
-  padding-bottom: 1rem;
+ 
+  /* background-color: #f8f9fa; */
+  border-bottom: 1px solid rgba(0,0,0,.125);
+  width: 100%;;
+  /* position: fixed; */
+  z-index: 11111;
+  position:  sticky;
+
+   
+
 }
 
 .brand-wrap .logo, .navbar-brand .logo {

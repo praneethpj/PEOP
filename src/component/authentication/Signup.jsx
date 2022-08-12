@@ -135,7 +135,7 @@ useEffect(async () => {
     return (
         <>
         <Headers/>
-        <ReactNotification />
+        
         <Loading />
         <div className="container mt-5 mb-5">
         <div class="d-flex p-2">
