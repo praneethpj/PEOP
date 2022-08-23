@@ -45,7 +45,7 @@ const ProfessionalBand = () => {
     try {
       dispatch(loadingVisibility({ visibility: "true" }));
 
-      let result = await fetch("https://peop-backend-app.herokuapp.com/api/professional/0/1");
+      let result = await fetch(process.env.REACT_APP_BACKEND_URL+"api/professional/0/1");
 
       result = await result.json();
       console.log("result " + result);

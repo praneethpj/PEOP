@@ -31,7 +31,7 @@ export const ADropdown =()=> {
 
             
 
-        await axios.get('https://peop-backend-app.herokuapp.com/api/profile/'+selectUser.user, {
+        await axios.get(process.env.REACT_APP_BACKEND_URL+'api/profile/'+selectUser.user, {
             "headers": {
                 'Content-Type': 'application/json',
                 Authorization: 'Bearer ' + localStorage.getItem("token")

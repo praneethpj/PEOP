@@ -6,6 +6,7 @@ import Products from './Products';
 import '../../styles/Filters.css'
 
 
+
 export class Filters extends Component {
   render() {
     return (
@@ -60,7 +61,8 @@ export class Filters extends Component {
             </Carousel.Item>
           </Carousel>
         </div> */}
-        <section className="section-content padding-y">
+        <br></br>
+        <section className="">
           <div className="container">
             <div className="row">
              

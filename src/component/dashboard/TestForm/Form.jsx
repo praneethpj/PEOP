@@ -119,7 +119,7 @@ function Form() {
     // obj['times'].push({"time":"10"});
 
 
-    axios.post('https://peop-backend-app.herokuapp.com/api/professional/addProfession', registerProfession, {
+    axios.post(process.env.REACT_APP_BACKEND_URL+'api/professional/addProfession', registerProfession, {
       "headers": {
         'Content-Type': 'application/json',
         Authorization: 'Bearer ' + localStorage.getItem("token")

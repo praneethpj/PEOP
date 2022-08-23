@@ -54,8 +54,8 @@ export default function NextCalls() {
     console.log("user " + selectUser.user);
 
 
-
-    await axios.post('https://peop-backend-app.herokuapp.com/api/professional/getAllAvailableAppoinmentsByProfessionId', getProfession, {
+//set room id here
+    await axios.post(process.env.REACT_APP_BACKEND_URL+'api/professional/getAllAvailableAppoinmentsByProfessionId', getProfession, {
       "headers": {
         'Content-Type': 'application/json',
         Authorization: 'Bearer ' + localStorage.getItem("token")
@@ -79,7 +79,7 @@ export default function NextCalls() {
 
 
 
-    await axios.get('https://peop-backend-app.herokuapp.com/api/professional/getAllAvailableAppoinmentsByUserId', {
+    await axios.get(process.env.REACT_APP_BACKEND_URL+'api/professional/getAllAvailableAppoinmentsByUserId', {
       "headers": {
         'Content-Type': 'application/json',
         Authorization: 'Bearer ' + localStorage.getItem("token")
@@ -116,7 +116,7 @@ export default function NextCalls() {
 
     };
 
-    await axios.put('https://peop-backend-app.herokuapp.com/api/professional/updatePaymentSheduled', data, {
+    await axios.put(process.env.REACT_APP_BACKEND_URL+'api/professional/updatePaymentSheduled', data, {
       "headers": {
         'Content-Type': 'application/json',
         Authorization: 'Bearer ' + localStorage.getItem("token")

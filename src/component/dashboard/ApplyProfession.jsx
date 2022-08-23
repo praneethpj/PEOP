@@ -102,7 +102,7 @@ export default function ApplyProfession() {
 
         console.log(selectUser.user);
 
-        axios.post('https://peop-backend-app.herokuapp.com/api/professional/getProfession', getProfession, {
+        axios.post(process.env.REACT_APP_BACKEND_URL+'api/professional/getProfession', getProfession, {
             "headers": {
                 'Content-Type': 'application/json',
                 Authorization: 'Bearer ' + localStorage.getItem("token")
@@ -563,7 +563,7 @@ export default function ApplyProfession() {
         // obj['times'].push({"time":"10"});
 
 
-        axios.post('https://peop-backend-app.herokuapp.com/api/professional/addProfession', registerProfession, {
+        axios.post(process.env.REACT_APP_BACKEND_URL+'api/professional/addProfession', registerProfession, {
             "headers": {
                 'Content-Type': 'application/json',
                 Authorization: 'Bearer ' + localStorage.getItem("token")

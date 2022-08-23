@@ -23,7 +23,7 @@ import Popper from 'popper.js';
 //   }
 // });
 
-axios.defaults.baseURL='https://peop-backend-app.herokuapp.com/';
+axios.defaults.baseURL=process.env.REACT_APP_BACKEND_URL+'';
 //axios.defaults.baseURL='https://peop-back.herokuapp.com/';
 
 ReactDOM.render(

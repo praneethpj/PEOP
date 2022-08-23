@@ -77,7 +77,7 @@ export default function DashboardProfile() {
 
 
 
-    await axios.post('https://peop-backend-app.herokuapp.com/api/profile/profileupload', data, {
+    await axios.post(process.env.REACT_APP_BACKEND_URL+'api/profile/profileupload', data, {
       "headers": {
         'Content-Type': 'application/json',
         Authorization: 'Bearer ' + localStorage.getItem("token")
@@ -138,7 +138,7 @@ export default function DashboardProfile() {
       setLoading(true);
       const formData = new FormData();
       formData.append("file", file);
-      const API_URL = "https://peop-backend-app.herokuapp.com/api/profile/profileupload";
+      const API_URL = process.env.REACT_APP_BACKEND_URL+"api/profile/profileupload";
       const response = await axios.put(API_URL, formData, {
         "headers": {
           'Content-Type': 'application/json',

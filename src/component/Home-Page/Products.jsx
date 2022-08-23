@@ -10,8 +10,12 @@ import Loading from './Loading';
 import { loadingVisibility } from '../../features/configurationsActivity';
 import '../../styles/Homecomponent.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-
+import { FaBeer } from 'react-icons/fa';
+import { VscLaw } from "react-icons/vsc";
+import { MdOutlinePsychology } from "react-icons/md";
 import { faStethoscope } from '@fortawesome/fontawesome-free-solid'
+import ContentLoader, { Facebook } from 'react-content-loader'
+import { Code } from 'react-content-loader'
 
 const Products = () => {
 
@@ -60,10 +64,10 @@ const Products = () => {
         try {
             dispatch(loadingVisibility({ visibility: "true" }));
 
-            let allCount = await fetch("https://peop-backend-app.herokuapp.com/api/professional/allcount");
+            let allCount = await fetch(process.env.REACT_APP_BACKEND_URL+"api/professional/allcount");
             setPagecount(Math.ceil(allCount.length / perPage));
 
-            let result = await fetch("https://peop-backend-app.herokuapp.com/api/professional/" + offset + "/" + perPage);
+            let result = await fetch(process.env.REACT_APP_BACKEND_URL+"api/professional/" + offset + "/" + perPage);
 
 
 
@@ -87,25 +91,57 @@ const Products = () => {
     return (
 
         <div>
+            <Loading count={5} />
             <main className="col col-md-12" >
-                <Loading />
+                
                 <div>
 
                     <div className="buttonRoller">
                         <div className='contents'>
 
-                        <div className="inside">
-                           <div className='insidebody'>
-                                <FontAwesomeIcon icon={faStethoscope} />
-                         
-                            <span>
-                                Doctors
-                            </span>
+                            <div className="inside">
+                                <div className='insidebody'>
+                                    <div>
+                                        <FontAwesomeIcon icon={faStethoscope} />
+                                    </div>
+                                    <span>
+                                        Doctors
+                                    </span>
+                                </div>
                             </div>
-                        </div>
-                        <div className="inside">B</div>
-                        <div className="inside">C</div>
-                        <div className="inside">D</div>
+                            <div className="inside">
+                                <div className='insidebody'>
+                                    <div>
+                                        <FaBeer />
+                                    </div>
+
+                                    <span>
+                                        Teachers
+                                    </span>
+                                </div>
+                            </div>
+                            <div className="inside">
+                                <div className='insidebody'>
+                                    <div>
+                                        <VscLaw />
+                                    </div>
+
+                                    <span>
+                                        Lawyers
+                                    </span>
+                                </div>
+                            </div>
+                            <div className="inside">
+                                <div className='insidebody'>
+                                    <div>
+                                        <MdOutlinePsychology />
+                                    </div>
+
+                                    <span>
+                                        Lawyers
+                                    </span>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -115,6 +151,8 @@ const Products = () => {
 
 
                     {console.log(data)}
+                   
+                   
                     {data.map((d) =>
 
                         <div className="col-md-3 col-sm-6" onClick={() => onCallHandler(d[0])} style={{ cursor: 'pointer' }}>

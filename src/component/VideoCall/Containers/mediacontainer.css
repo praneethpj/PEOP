@@ -1,0 +1,11 @@
+.chatbox{
+    position: absolute;
+    /* margin: auto; */
+    z-index: 11111111;
+    background-color: gray;
+    color: white;
+    align-items: start;
+    margin-left: 70%;
+    height: 50%;
+    width: 30%;
+}

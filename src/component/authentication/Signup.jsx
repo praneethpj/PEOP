@@ -68,7 +68,7 @@ useEffect(async () => {
 //      }
 
 //      console.log("login "+loginData);
-//      axios.post('https://peop-backend-app.herokuapp.com/api/auth/signin', loginData,{
+//      axios.post(process.env.REACT_APP_BACKEND_URL+'api/auth/signin', loginData,{
 //          "headers": {
 //            'Content-Type': 'application/json',
 //          }})
@@ -100,7 +100,7 @@ useEffect(async () => {
         "password":details.password
     };
     console.log("signUp "+signUp);
-    axios.post('https://peop-backend-app.herokuapp.com/api/auth/signup', signUp,{
+    axios.post(process.env.REACT_APP_BACKEND_URL+'api/auth/signup', signUp,{
         "headers": {
           'Content-Type': 'application/json',
         }})

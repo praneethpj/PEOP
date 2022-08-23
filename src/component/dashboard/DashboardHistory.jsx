@@ -40,7 +40,7 @@ export default function DashboardHistory() {
   const getAppointments = async () => {
 
 
-    await axios.get('https://peop-backend-app.herokuapp.com/api/professional/getAllUpdatedAppoinmentsByProfession', {
+    await axios.get(process.env.REACT_APP_BACKEND_URL+'api/professional/getAllUpdatedAppoinmentsByProfession', {
       "headers": {
         'Content-Type': 'application/json',
         Authorization: 'Bearer ' + localStorage.getItem("token")
@@ -62,7 +62,7 @@ export default function DashboardHistory() {
   const getAppointmentsUser = async () => {
 
 
-    await axios.get('https://peop-backend-app.herokuapp.com/api/professional/getAllUpdatedAppoinmentsByUser', {
+    await axios.get(process.env.REACT_APP_BACKEND_URL+'api/professional/getAllUpdatedAppoinmentsByUser', {
       "headers": {
         'Content-Type': 'application/json',
         Authorization: 'Bearer ' + localStorage.getItem("token")
@@ -91,7 +91,7 @@ export default function DashboardHistory() {
 
   return (
     <>
-      <input className="form-control" type="text" placeholder="professionName" name="professionName" id="professionName"
+      {/* <input className="form-control" type="text" placeholder="professionName" name="professionName" id="professionName"
         value={
           pdet.pname1
         }
@@ -101,7 +101,7 @@ export default function DashboardHistory() {
             pname1: e.target.value
           })
         }
-      />
+      /> */}
       <Headers />
       <Sidebar active="history" />
       <div>

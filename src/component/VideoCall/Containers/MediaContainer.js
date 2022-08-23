@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import { PropTypes } from 'prop-types';
+import './mediacontainer.css'
+import ChatRoom from './ChatRoom';
+
 
 class MediaBridge extends Component {
   constructor(props) {
@@ -18,7 +21,9 @@ class MediaBridge extends Component {
     this.init = this.init.bind(this);
     this.setDescription = this.setDescription.bind(this);
   }
+
   componentDidMount() {
+    console.log("Roomid3 "+this.props.roomid);
     this.props.media(this);
     this.props.getUserMedia
       .then(stream => this.localVideo.srcObject = this.localStream = stream);
@@ -137,6 +142,9 @@ class MediaBridge extends Component {
   render(){
     return (
       <div className={`media-bridge ${this.state.bridge}`}>
+        <div className='chatbox'>
+          <ChatRoom id ={this.props.roomid}/>
+        </div>
         <video className="remote-video" ref={(ref) => this.remoteVideo = ref} autoPlay></video>
         <video className="local-video" ref={(ref) => this.localVideo = ref} autoPlay muted></video>
       </div>

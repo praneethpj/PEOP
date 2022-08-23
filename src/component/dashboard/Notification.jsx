@@ -6,6 +6,7 @@ import SockJsClient from 'react-stomp';
 import Headers from '../Home-Page/Header';
  
 import Sidebar from './Side-bar';
+import '../../styles/Notification.css'
 
 const SOCKET_URL = 'http://localhost:5000';
 export default function Notification() {
@@ -33,7 +34,7 @@ export default function Notification() {
         onMessage={msg => onMessageReceived(msg)}
         debug={false}
       /> */}
-      <div>{message}</div>
+      <div className='main-header'>{message}</div>
       
     </div>
     )

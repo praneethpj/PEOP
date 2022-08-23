@@ -7,8 +7,11 @@ import io from 'socket.io-client'
 import store from '../../../store';
 import { useSelector,useDispatch } from 'react-redux'
 import {setCalldetails} from '../../../features/readyCallActivities';
+ 
+
 
 class RoomPage extends Component {
+   query = new URLSearchParams(this.props.location.search);
   constructor(props) {
     super(props);
     this.getUserMedia = navigator.mediaDevices.getUserMedia({
@@ -25,12 +28,13 @@ class RoomPage extends Component {
 
   componentDidMount() {
     this.props.addRoom();
+    
    // this.handleStatus();
   }
   render(){
     return (
       <div>
-        <MediaContainer media={media => this.media = media} socket={this.socket} getUserMedia={this.getUserMedia} />
+        <MediaContainer roomid={this.props.match.params.room} media={media => this.media = media} socket={this.socket} getUserMedia={this.getUserMedia} />
         <CommunicationContainer socket={this.socket} media={this.media} getUserMedia={this.getUserMedia} />
       </div>
     );

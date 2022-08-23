@@ -7,6 +7,7 @@ import ReactNotification from 'react-notifications-component'
 import 'react-notifications-component/dist/theme.css'
 import { store } from 'react-notifications-component';
 import { useDispatch } from 'react-redux';
+import { Breadcrumb } from 'react-bootstrap';
 
 export default function PaymentPay(props) {
   const history=useHistory();
@@ -60,7 +61,7 @@ export default function PaymentPay(props) {
     }
 
     console.log("paymentBody "+paymentBody);
-    axios.post('https://peop-backend-app.herokuapp.com/api/payment/payment', paymentBody, config)
+    axios.post(process.env.REACT_APP_BACKEND_URL+'api/payment/payment', paymentBody, config)
         .then(response =>  {
           console.log(response);
         //  addNotify("Success","Success")
@@ -78,7 +79,14 @@ export default function PaymentPay(props) {
      
        <div className="container mt-5">
       
-
+      <Breadcrumb>
+                        <Breadcrumb.Item href="/">Home</Breadcrumb.Item>
+                        <Breadcrumb.Item href='/'>
+                            Profile
+                        </Breadcrumb.Item>
+                        <Breadcrumb.Item >{props.Submitdata.name}</Breadcrumb.Item>
+                        <Breadcrumb.Item active>Payment</Breadcrumb.Item>
+                    </Breadcrumb>
       <div className="row">
           <div className="col">
           <PaymentDetails>
