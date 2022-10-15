@@ -1,10 +1,16 @@
-# Getting Started with Create React App
+# Open Source Professional Meeting Platform :grinning:
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+### This app is working but may be buggy :confused: I need your contributions
 
-## Available Scripts
+## https://peop-frontend-app.herokuapp.com/
+### (Please refresh the link if not working in first click)
 
-In the project directory, you can run:
+###  What I did so far and this repo contain 3 app
+:spoon: Developed Backend Using Spring Boot (Authentication, Shedule Mangement)
+:spoon: Developed Frontend that supported to the Backend
+:spoon: Developed a Nodejs app to realtime video call
+ 
+
 
 ### `yarn start`
 
