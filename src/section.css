@@ -2,4 +2,6 @@
     /* background-color: rgb(255, 255, 255); */
     margin: 0 auto;
     display: table;
+    flex: 1;
+    background-color: azure;
 }
