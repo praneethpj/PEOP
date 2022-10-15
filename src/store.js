@@ -1,7 +1,7 @@
 import { createStore } from 'redux';
 import reducers from './component/VideoCall/reducers';
 
-
+//This is stored the data
 const mapStoreToStorage = () =>
 	localStorage.setItem('reduxState', JSON.stringify(store.getState()));
 const persistedState = localStorage.getItem('reduxState')
